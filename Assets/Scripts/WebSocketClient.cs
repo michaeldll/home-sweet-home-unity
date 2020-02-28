@@ -2,14 +2,11 @@
 using System.Collections;
 using UnityEngine;
 using WebSocketSharp;
-using TMPro;
 
 public class WebSocketClient : MonoBehaviour
 {
 	[SerializeField] private string url = "ws://localhost:8080";
 	[SerializeField] private bool showLog = false;
-	[SerializeField] private bool isStartScreen = false;
-	[SerializeField] private TMP_Text beginScreenText = null;
 
 	private int _id;
 	private WebSocket _webSocket;
@@ -17,10 +14,7 @@ public class WebSocketClient : MonoBehaviour
 	public static WebSocketClient Instance;
 
 	public delegate void MessageAction(WebSocketMessage webSocketMessage);
-	public static event MessageAction OnMessageReceived;
-	public GameObject toGameObject;
-	private float _rotateAngleX = 0.0f;
-	private bool _isConnected = false;
+	// public static event MessageAction OnMessageReceived;
 
 	private void Awake()
 	{
@@ -32,11 +26,7 @@ public class WebSocketClient : MonoBehaviour
 		_id = gameObject.GetInstanceID();
 
 		_webSocket = new WebSocket(url);
-		ConnectClient();
-	}
 
-	private void ConnectClient()
-	{
 		_webSocket.OnOpen += OnOpen;
 		_webSocket.OnClose += OnClose;
 		_webSocket.OnError += OnError;
@@ -49,7 +39,7 @@ public class WebSocketClient : MonoBehaviour
      * Events
      */
 
-	private void OnOpen(object sender, EventArgs e)
+	private void OnOpen(object sender, System.EventArgs e)
 	{
 		if (showLog) Debug.Log("WebSocketClient - OnOpen");
 	}
@@ -62,6 +52,8 @@ public class WebSocketClient : MonoBehaviour
 		_webSocket.OnClose -= OnClose;
 		_webSocket.OnError -= OnError;
 		_webSocket.OnMessage -= OnMessage;
+
+		GameManager.isPhoneConnected = false;
 	}
 
 	private void OnError(object sender, ErrorEventArgs e)
@@ -75,22 +67,13 @@ public class WebSocketClient : MonoBehaviour
 
 		if (showLog)
 		{
-			Debug.Log("WebSocketClient - OnMessage : " + e.Data);
-			Debug.Log(webSocketMessage.type);
+			// Debug.Log("WebSocketClient - OnMessage : " + e.Data);
+			// Debug.Log(webSocketMessage.type);
 			Debug.Log(webSocketMessage.message);
 		}
-		_isConnected = true;
-		_rotateAngleX = webSocketMessage.message;
-	}
 
-	void Update()
-	{
-		if (_isConnected)
-			if (!isStartScreen)
-			{
-				toGameObject.transform.Rotate(_rotateAngleX / 10, 0.0f, 0.0f, Space.Self);
-			}
-			else StartCoroutine(BeginGame());
+		GameManager.isPhoneConnected = true;
+		GameManager.gyroAngleX = webSocketMessage.message;
 	}
 
 	/*
@@ -99,12 +82,5 @@ public class WebSocketClient : MonoBehaviour
 	private WebSocketMessage ProcessMessage(string data)
 	{
 		return WebSocketMessage.Parse(data);
-	}
-
-	private IEnumerator BeginGame()
-	{
-		beginScreenText.text = "Connected !";
-		yield return new WaitForSeconds(1.0f);
-		SceneTransitioner.Instance.LoadScene(1);
 	}
 }

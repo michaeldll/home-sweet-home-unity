@@ -1,19 +1,11 @@
 using UnityEngine;
-using TMPro;
 
-public class GameManager : MonoBehaviour
+public static class GameManager
 {
-	[SerializeField] public TMP_Text beginScreenText = null;
-
-	private StateMachine _stateMachine = new StateMachine();
-
-	public void Start()
-	{
-		_stateMachine.ChangeState(new StartState(this));
-	}
-
-	// void Update()
-	// {
-	// 	stateMachine.Update();
-	// }
+	public static bool isPhoneConnected = false;
+	public static bool hasFirstIntroEnded = false;
+	public static bool hasSecondIntroEnded = false;
+	public static float gyroAngleX = 90.0f;
+	public static float gyroAngleY = 0.0f;
+	public static float gyroAngleZ = 0.0f;
 }

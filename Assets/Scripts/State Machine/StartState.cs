@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class StartState : IState
 {
-	GameManager owner;
+	MoveDown owner; //replace this with something elsewa
 
-	public StartState(GameManager owner) { this.owner = owner; }
+	public StartState(MoveDown owner) { this.owner = owner; }
 
 	public void Enter()
 	{

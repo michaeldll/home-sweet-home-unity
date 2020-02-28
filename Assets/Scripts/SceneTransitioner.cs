@@ -67,7 +67,7 @@ public class SceneTransitioner : MonoBehaviour
 
 			if (operation.progress >= 0.9f)
 			{
-				while (Time.realtimeSinceStartup - startTime < 5f)
+				while (Time.realtimeSinceStartup - startTime < 2f)
 				{
 					yield return null;
 				}

@@ -7,7 +7,7 @@ public class LoadingScript : MonoBehaviour
 	[SerializeField] private TMP_Text progressText = null;
 	[SerializeField] private Canvas canvas = null;
 	[SerializeField] private CanvasGroup canvasGroup = null;
-	private float animSpeed = 0.5f;
+	private float animSpeed = 3.0f;
 
 	private void Start()
 	{
@@ -20,12 +20,12 @@ public class LoadingScript : MonoBehaviour
 
 		SceneTransitioner.OnProgressUpdated += f =>
 		{
-			progressText.text = $"{(f * 100f)}%";
+			// progressText.text = $"{(f * 100f)}%";
 		};
+
 		SceneTransitioner.OnDone += () =>
 		{
 			StartCoroutine(FadeOut());
-			SceneTransitioner.Finish();
 		};
 	}
 	private IEnumerator FadeIn()
@@ -53,5 +53,6 @@ public class LoadingScript : MonoBehaviour
 		}
 		canvasGroup.alpha = 0f;
 		canvas.gameObject.SetActive(false);
+		SceneTransitioner.Finish();
 	}
 }
