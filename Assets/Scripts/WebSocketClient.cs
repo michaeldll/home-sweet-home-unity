@@ -64,16 +64,22 @@ public class WebSocketClient : MonoBehaviour
 	private void OnMessage(object sender, MessageEventArgs e)
 	{
 		var webSocketMessage = ProcessMessage(e.Data);
+		var webSocketMessageContent = ProcessMessageContent(webSocketMessage.message);
 
 		if (showLog)
 		{
 			// Debug.Log("WebSocketClient - OnMessage : " + e.Data);
 			// Debug.Log(webSocketMessage.type);
-			Debug.Log(webSocketMessage.message);
+			// Debug.Log(webSocketMessageContent.alpha);
+			// Debug.Log(webSocketMessageContent.beta);
+			Debug.Log(webSocketMessageContent.gamma);
 		}
 
 		GameManager.isPhoneConnected = true;
-		GameManager.gyroAngleX = webSocketMessage.message;
+
+		GameManager.gyroAngleX = webSocketMessageContent.beta;
+		GameManager.gyroAngleY = webSocketMessageContent.gamma;
+		GameManager.gyroAngleZ = webSocketMessageContent.alpha;
 	}
 
 	/*
@@ -82,5 +88,10 @@ public class WebSocketClient : MonoBehaviour
 	private WebSocketMessage ProcessMessage(string data)
 	{
 		return WebSocketMessage.Parse(data);
+	}
+
+	private WebSocketMessageContent ProcessMessageContent(string data)
+	{
+		return WebSocketMessageContent.Parse(data);
 	}
 }

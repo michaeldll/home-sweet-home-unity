@@ -4,7 +4,7 @@ using UnityEngine;
 public class WebSocketMessage
 {
 	public string type;
-	public float message;
+	public string message;
 
 	public static WebSocketMessage Parse(string data)
 	{
