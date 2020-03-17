@@ -5,7 +5,7 @@ using DG.Tweening;
 using Cinemachine;
 using UnityEngine.UI;
 
-public class SecondSceneManager : MonoBehaviour
+public class InitSceneTwo : MonoBehaviour
 {
 	[SerializeField] private GameObject phone = null;
 	[SerializeField] private Transform init = null;
@@ -14,6 +14,7 @@ public class SecondSceneManager : MonoBehaviour
 	[SerializeField] private GameObject appt = null;
 	[SerializeField] private GameObject beam = null;
 	[SerializeField] private Image[] images;
+	public static InitSceneTwo Instance { get; private set; } // static singleton
 
 	void Start()
 	{

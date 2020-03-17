@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
-public class FirstSceneManager : MonoBehaviour
+public class SceneOneManager : MonoBehaviour
 {
 	private bool _isBeginning = false;
 
