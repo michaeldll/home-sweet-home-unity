@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/LoadingScene.unity
     guid: 3aba99bace2c94a29a129c71bb3507f4
   - enabled: 1
+    path: Assets/Scenes/First Scene.unity
+    guid: 09d0b717d7245458f8781abcb9964e27
+  - enabled: 1
     path: Assets/Scenes/Second Scene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
   - enabled: 1
-    path: Assets/Scenes/First Scene.unity
-    guid: 09d0b717d7245458f8781abcb9964e27
+    path: Assets/Scenes/Third Scene.unity
+    guid: 005d5e8f24a614fd7bb29824a4090cb8
   m_configObjects: {}

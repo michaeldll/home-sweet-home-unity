@@ -8,8 +8,8 @@ public class GyroRotate : MonoBehaviour
 	[SerializeField] private float speed = 1.0f;
 	private float x = GameManager.gyroAngleX;
 	private float y = GameManager.gyroAngleY;
-	private int _xLowerLimit = 79, _xUpperLimit = 115;
-	private int _yLowerLimit = -20, _yUpperLimit = 45;
+	[SerializeField] private int _xLowerLimit = 79, _xUpperLimit = 115;
+	[SerializeField] private int _yLowerLimit = -20, _yUpperLimit = 45;
 
 	void Update()
 	{

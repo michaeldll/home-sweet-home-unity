@@ -1,19 +1,37 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class SceneOneManager : MonoBehaviour
 {
-	private bool _isBeginning = false;
-
+	private Coroutine loader = null;
+	private bool isLoading = false;
 	void Update()
 	{
-		if (GameManager.isPhoneConnected && !_isBeginning) BeginGame();
+		if (GameManager.isPhoneConnected && !isLoading) LoadScene("Second Scene");
 	}
 
-	private void BeginGame()
+	void LoadScene(string name)
 	{
-		_isBeginning = true;
-		SceneTransitioner.Instance.LoadScene(1);
+
+		if (loader != null)
+		{
+			//Debug.LogWarning("Scene load already in progress. Will not load.");
+			return;
+		}
+
+		isLoading = true;
+		loader = StartCoroutine(AsyncLoader(name));
+	}
+
+	public IEnumerator AsyncLoader(string name)
+	{
+		// The Application loads the Scene in the background as the current Scene runs.
+		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(name);
+
+		// Wait until the asynchronous scene fully loads
+		while (!asyncLoad.isDone)
+		{
+			yield return null;
+		}
 	}
 }

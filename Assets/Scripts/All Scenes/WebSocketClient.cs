@@ -27,12 +27,7 @@ public class WebSocketClient : MonoBehaviour
 
 		_webSocket = new WebSocket(url);
 
-		_webSocket.OnOpen += OnOpen;
-		_webSocket.OnClose += OnClose;
-		_webSocket.OnError += OnError;
-		_webSocket.OnMessage += OnMessage;
-
-		_webSocket.Connect();
+		ConnectClient();
 	}
 
 	/*
@@ -64,22 +59,22 @@ public class WebSocketClient : MonoBehaviour
 	private void OnMessage(object sender, MessageEventArgs e)
 	{
 		var webSocketMessage = ProcessMessage(e.Data);
-		var webSocketMessageContent = ProcessMessageContent(webSocketMessage.message);
+		var WebSocketMessageContentGyro = ProcessMessageContent(webSocketMessage.message);
 
 		if (showLog)
 		{
 			// Debug.Log("WebSocketClient - OnMessage : " + e.Data);
 			// Debug.Log(webSocketMessage.type);
-			// Debug.Log(webSocketMessageContent.alpha);
-			// Debug.Log(webSocketMessageContent.beta);
-			Debug.Log(webSocketMessageContent.gamma);
+			// Debug.Log(WebSocketMessageContentGyro.alpha);
+			// Debug.Log(WebSocketMessageContentGyro.beta);
+			Debug.Log(WebSocketMessageContentGyro.gamma);
 		}
 
 		GameManager.isPhoneConnected = true;
 
-		GameManager.gyroAngleX = webSocketMessageContent.beta;
-		GameManager.gyroAngleY = webSocketMessageContent.gamma;
-		GameManager.gyroAngleZ = webSocketMessageContent.alpha;
+		GameManager.gyroAngleX = WebSocketMessageContentGyro.beta;
+		GameManager.gyroAngleY = WebSocketMessageContentGyro.gamma;
+		GameManager.gyroAngleZ = WebSocketMessageContentGyro.alpha;
 	}
 
 	/*
@@ -90,8 +85,34 @@ public class WebSocketClient : MonoBehaviour
 		return WebSocketMessage.Parse(data);
 	}
 
-	private WebSocketMessageContent ProcessMessageContent(string data)
+	private WebSocketMessageContentGyro ProcessMessageContent(string data)
 	{
-		return WebSocketMessageContent.Parse(data);
+		return WebSocketMessageContentGyro.Parse(data);
+	}
+
+	public void Send(WebSocketMessage message)
+	{
+		if (!_webSocket.IsAlive)
+		{
+			ConnectClient();
+			return;
+		}
+		Debug.Log("sending");
+		_webSocket.Send(CreateMessage(message));
+	}
+
+	private byte[] CreateMessage(WebSocketMessage message)
+	{
+		return message.ToByte();
+	}
+
+	private void ConnectClient()
+	{
+		_webSocket.OnOpen += OnOpen;
+		_webSocket.OnClose += OnClose;
+		_webSocket.OnError += OnError;
+		_webSocket.OnMessage += OnMessage;
+
+		_webSocket.Connect();
 	}
 }

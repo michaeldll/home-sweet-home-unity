@@ -18,17 +18,20 @@ public class InitSceneTwo : MonoBehaviour
 
 	void Start()
 	{
-		phone.transform.position = init.position;
 		StartCoroutine(WaitAndMove());
 	}
 
 	IEnumerator WaitAndMove()
 	{
+		phone.transform.position = init.position;
 		yield return new WaitForSeconds(1.0f);
+
 		phone.transform.DOMove(end.position, 2.0f);
 		yield return new WaitForSeconds(0.3f);
+
 		GameManager.hasFirstIntroEnded = true;
 		yield return new WaitForSeconds(2.3f);
+
 		foreach (var image in images)
 		{
 			image.enabled = true;
@@ -37,6 +40,7 @@ public class InitSceneTwo : MonoBehaviour
 		appt.SetActive(true);
 		beam.SetActive(true);
 		yield return new WaitForSeconds(2.0f);
+
 		foreach (var image in images)
 		{
 			image.enabled = false;

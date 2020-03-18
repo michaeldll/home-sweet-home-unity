@@ -577,7 +577,6 @@ GameObject:
   - component: {fileID: 780312179}
   - component: {fileID: 780312178}
   - component: {fileID: 780312177}
-  - component: {fileID: 780312180}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -742,21 +741,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 780312175}
   m_CullTransparentMesh: 0
---- !u!114 &780312180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 780312175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee9ba548e82024f21aca71fc9295d292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: His name is SnowflakeSmasher86. Nique le coronavirus, baby.
-  delay: 0.064
-  textTyperComponent: {fileID: 780312177}
 --- !u!1 &842037311
 GameObject:
   m_ObjectHideFlags: 3
@@ -1476,6 +1460,8 @@ GameObject:
   - component: {fileID: 1679854554}
   - component: {fileID: 1679854555}
   - component: {fileID: 1679854556}
+  - component: {fileID: 1679854557}
+  - component: {fileID: 1679854558}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -1535,7 +1521,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1679854550}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11f1fa03c098f4e808839e00410e5dd6, type: 3}
   m_Name: 
@@ -1566,7 +1552,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   phone: {fileID: 359088574}
   speed: 1.5
+  _xLowerLimit: 79
+  _xUpperLimit: 115
+  _yLowerLimit: -20
+  _yUpperLimit: 45
 --- !u!114 &1679854556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679854550}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0a6ff6a59e0471bb009865b114a990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 1540882476}
+  text: His name is SnowflakeSmasher86. Nique le coronavirus, baby.
+  voiceName: en-US-Wavenet-C
+  languageName: en_US
+  genderName: 2
+--- !u!114 &1679854557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679854550}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9ba548e82024f21aca71fc9295d292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: His name is SnowflakeSmasher86. Nique le coronavirus, baby.
+  delay: 0.064
+  textTyperComponent: {fileID: 780312177}
+--- !u!114 &1679854558
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1575,14 +1597,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1679854550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f0a6ff6a59e0471bb009865b114a990, type: 3}
+  m_Script: {fileID: 11500000, guid: 114ee13f38bd341bfb417134d95eaa71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 1540882476}
-  text: His name is SnowflakeSmasher86. Nique le coronavirus, baby.
-  voiceName: en-US-Standard-E
-  languageName: en_US
-  genderName: 2
 --- !u!1 &1687258581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,7 +1849,7 @@ PrefabInstance:
     - target: {fileID: 114599950165526744, guid: dadfefdf830a0494fa60be45f5125fac,
         type: 3}
       propertyPath: apiKey
-      value: AIzaSyDMoEv6AQJuYBRLRNdKXNT9QM-Rj6EKB00
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dadfefdf830a0494fa60be45f5125fac, type: 3}
@@ -2206,7 +2223,6 @@ GameObject:
   - component: {fileID: 1818857345}
   - component: {fileID: 1818857347}
   - component: {fileID: 1818857346}
-  - component: {fileID: 1818857348}
   m_Layer: 0
   m_Name: Spotlight and Beam
   m_TagString: Untagged
@@ -2368,30 +2384,6 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &1818857348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818857344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 558dd6d156642974780bc97cd2ab1bd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dimensions: 0
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  considerTriggers: 0
-  minOccluderArea: 0
-  waitFrameCount: 3
-  minSurfaceRatio: 0.5
-  maxSurfaceDot: 0.25
-  planeAlignment: 0
-  planeOffset: 0.1
-  fadeDistanceToPlane: 0.25
 --- !u!1 &1826373293
 GameObject:
   m_ObjectHideFlags: 0
