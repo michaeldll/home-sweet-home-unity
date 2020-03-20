@@ -7,44 +7,72 @@ using UnityEngine.UI;
 
 public class InitSceneTwo : MonoBehaviour
 {
-	[SerializeField] private GameObject phone = null;
-	[SerializeField] private Transform init = null;
-	[SerializeField] private Transform end = null;
+	[SerializeField] private Transform[] phoneTransforms; //beginning, end
 	[SerializeField] private CinemachineVirtualCamera cam2 = null;
-	[SerializeField] private GameObject appt = null;
-	[SerializeField] private GameObject beam = null;
+	[SerializeField] private GameObject[] assets; //appt, phone, phone beam, character,
+	[SerializeField] private GameObject[] lights; //spotlight and beam, point light 1, directional light
 	[SerializeField] private Image[] images;
-	public static InitSceneTwo Instance { get; private set; } // static singleton
 
 	void Start()
 	{
-		StartCoroutine(WaitAndMove());
+		//hide everything
+		toggleGameObjects(assets, false);
+		toggleGameObjects(lights, false);
+		toggleIntroAnim(images, false);
+
+		//start animation
+		StartCoroutine(InitScene());
 	}
 
-	IEnumerator WaitAndMove()
+	void toggleGameObjects(GameObject[] gObjects, bool toggle)
 	{
-		phone.transform.position = init.position;
+		foreach (var gObject in gObjects)
+		{
+			gObject.SetActive(toggle ? true : false);
+		}
+	}
+
+	void toggleIntroAnim(Image[] imgs, bool toggle)
+	{
+		foreach (var img in imgs)
+		{
+			img.enabled = toggle ? true : false;
+		}
+
+	}
+
+	IEnumerator InitScene()
+	{
+		//show phone and character
+		assets[1].SetActive(true);
+		assets[3].SetActive(true);
+		//reset phone position to beginning position
+		assets[1].transform.position = phoneTransforms[0].position;
 		yield return new WaitForSeconds(1.0f);
 
-		phone.transform.DOMove(end.position, 2.0f);
+
+		//start moving phone to end position
+		assets[1].transform.DOMove(phoneTransforms[1].position, 2.0f);
 		yield return new WaitForSeconds(0.3f);
 
-		GameManager.hasFirstIntroEnded = true;
+		//turn on phone
+		assets[2].SetActive(true);
+		//start looking at phone
+		GameManager.lookAt = true;
 		yield return new WaitForSeconds(2.3f);
 
-		foreach (var image in images)
-		{
-			image.enabled = true;
-		}
+		//show intro animation
+		toggleIntroAnim(images, true);
+		//switch cams
 		cam2.m_Priority = 2;
-		appt.SetActive(true);
-		beam.SetActive(true);
+		//show appartment
+		assets[0].SetActive(true);
+		//show lights
+		toggleGameObjects(lights, true);
 		yield return new WaitForSeconds(2.0f);
 
-		foreach (var image in images)
-		{
-			image.enabled = false;
-		}
+		//end intro
+		toggleIntroAnim(images, false);
 		GameManager.hasSecondIntroEnded = true;
 	}
 }

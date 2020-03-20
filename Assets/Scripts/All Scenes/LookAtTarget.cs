@@ -13,7 +13,7 @@ public class LookAtTarget : MonoBehaviour
 	}
 	void FixedUpdate()
 	{
-		if (GameManager.hasFirstIntroEnded)
+		if (GameManager.lookAt)
 		{
 			qTo = Quaternion.LookRotation(target.position - transform.position);
 			qSlerp = Quaternion.Slerp(transform.rotation, qTo, speed * Time.deltaTime);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RedBlueGames.Tools.TextTyper;
-using TMPro;
+// using TMPro;
 
 public class TextTyperTalker : MonoBehaviour
 {
