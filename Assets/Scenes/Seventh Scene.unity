@@ -4857,12 +4857,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f1fa03c098f4e808839e00410e5dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phone: {fileID: 1964262021}
-  init: {fileID: 2147221311}
-  end: {fileID: 478569281}
+  phoneTransforms: []
   cam2: {fileID: 34014950}
-  appt: {fileID: 0}
-  beam: {fileID: 0}
+  assets: []
+  lights: []
   images:
   - {fileID: 2091320958}
   - {fileID: 948698767}

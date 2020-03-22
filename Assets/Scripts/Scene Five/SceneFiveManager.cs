@@ -10,6 +10,10 @@ public class SceneFiveManager : MonoBehaviour
 
 	private Coroutine _loader = null;
 
+	void Awake(){
+		GameManager.lookAt = true;
+	}
+
 	void Update()
 	{
 		if (Input.GetMouseButtonDown(0))
