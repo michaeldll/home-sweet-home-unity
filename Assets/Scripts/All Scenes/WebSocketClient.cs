@@ -63,18 +63,29 @@ public class WebSocketClient : MonoBehaviour
 
 		if (showLog)
 		{
+			/*
+				{
+					"type":"orientation",
+					"message":"{
+						\"_x\":-0.6071305695921945,
+						\"_y\":-3.003360119444884,
+						\"_z\":-0.016295066848099844,
+						\"_order\":\"YXZ\
+					"}
+				"}*/
 			// Debug.Log("WebSocketClient - OnMessage : " + e.Data);
-			// Debug.Log(webSocketMessage.type);
-			// Debug.Log(WebSocketMessageContentGyro.alpha);
-			// Debug.Log(WebSocketMessageContentGyro.beta);
-			Debug.Log(WebSocketMessageContentGyro.gamma);
+			// Debug.Log(webSocketMessage.message);
+			// Debug.Log(WebSocketMessageContentGyro._x);
+			Debug.Log(WebSocketMessageContentGyro._y * Mathf.Rad2Deg);
+			// Debug.Log(WebSocketMessageContentGyro._y);
+			// Debug.Log(WebSocketMessageContentGyro._z);
 		}
 
 		GameManager.isPhoneConnected = true;
 
-		GameManager.gyroAngleX = WebSocketMessageContentGyro.beta;
-		GameManager.gyroAngleY = WebSocketMessageContentGyro.gamma;
-		GameManager.gyroAngleZ = WebSocketMessageContentGyro.alpha;
+		GameManager.gyroAngleX = WebSocketMessageContentGyro._x * Mathf.Rad2Deg;
+		GameManager.gyroAngleY = WebSocketMessageContentGyro._y * Mathf.Rad2Deg;
+		GameManager.gyroAngleZ = WebSocketMessageContentGyro._z * Mathf.Rad2Deg;
 	}
 
 	/*

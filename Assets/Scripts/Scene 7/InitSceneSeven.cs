@@ -1,0 +1,57 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using DG.Tweening;
+using Cinemachine;
+using UnityEngine.UI;
+
+public class InitSceneSeven : MonoBehaviour
+{
+	[SerializeField] private TextToSpeech[] textToSpeechArr;
+	[SerializeField] private TextTyperTalker textTyper;
+	[SerializeField] private GameObject textCanvas;
+	[SerializeField] private Fade fade;
+	[SerializeField] private Image background;
+	[SerializeField] private GyroRotate gRotate;
+
+	void Start()
+	{
+		//black
+		background.enabled = true;
+
+		//set text
+		textToSpeechArr[0].text = GameManager.seventhScene.introText;
+		textToSpeechArr[1].text = GameManager.seventhScene.moonText[0];
+		textToSpeechArr[2].text = GameManager.seventhScene.moonText[1];
+		textToSpeechArr[3].text = GameManager.seventhScene.endText;
+		textTyper.text = GameManager.seventhScene.introText;
+
+		gRotate.enabled = false;
+
+		//start animation
+		StartCoroutine(Init());
+	}
+
+	void toggleTyper(bool toggle)
+	{
+		textTyper.enabled = toggle ? true : false;
+		textCanvas.SetActive(toggle ? true : false);
+	}
+
+	IEnumerator Init()
+	{
+		yield return new WaitForSeconds(2f);
+		textToSpeechArr[0].enabled = true;
+
+		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
+
+		toggleTyper(true);
+		yield return new WaitForSeconds(4.0f);
+
+		toggleTyper(false);
+		fade.FadeIn();
+
+		yield return new WaitForSeconds(2.0f);
+		if (GameManager.isPhoneConnected) gRotate.enabled = true;
+	}
+}

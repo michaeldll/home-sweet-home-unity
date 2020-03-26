@@ -494,8 +494,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f268b495aebea46f9b4a8b90249e41a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url: ws://home-sweet-home--ws.herokuapp.com/
-  showLog: 0
+  url: wss://home-sweet-home--ws.herokuapp.com/
+  showLog: 1
 --- !u!4 &1584053151
 Transform:
   m_ObjectHideFlags: 0

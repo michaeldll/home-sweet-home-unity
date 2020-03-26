@@ -13,11 +13,8 @@ public class LookAtTarget : MonoBehaviour
 	}
 	void FixedUpdate()
 	{
-		if (GameManager.lookAt)
-		{
-			qTo = Quaternion.LookRotation(target.position - transform.position);
-			qSlerp = Quaternion.Slerp(transform.rotation, qTo, speed * Time.deltaTime);
-			_rb.MoveRotation(qSlerp);
-		}
+		qTo = Quaternion.LookRotation(target.position - transform.position);
+		qSlerp = Quaternion.Slerp(transform.rotation, qTo, speed * Time.deltaTime);
+		_rb.MoveRotation(qSlerp);
 	}
 }

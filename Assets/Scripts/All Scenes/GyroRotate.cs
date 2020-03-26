@@ -8,36 +8,34 @@ public class GyroRotate : MonoBehaviour
 	[SerializeField] private float speed = 1.0f;
 	private float x = GameManager.gyroAngleX;
 	private float y = GameManager.gyroAngleY;
-	[SerializeField] private int _xLowerLimit = 79, _xUpperLimit = 115;
-	[SerializeField] private int _yLowerLimit = -20, _yUpperLimit = 45;
+	[SerializeField] private int _yLowerLimit = -60, _yUpperLimit = 10;
+	[SerializeField] private int _zLowerLimit = -10, _zUpperLimit = 40;
 
 	void Update()
 	{
-		if (GameManager.hasSecondIntroEnded)
-		{
-			x = GameManager.gyroAngleX;
-			y = GameManager.gyroAngleY;
+		x = GameManager.gyroAngleX;
+		y = GameManager.gyroAngleY;
 
-			// Handle and clamp gyro coordinates
-			float clampedX = Mathf.Clamp(handleGyroX(x), _xLowerLimit, _xUpperLimit);
-			float clampedZ = Mathf.Clamp(y, _yLowerLimit, _yUpperLimit);
+		// Handle and clamp gyro coordinates
+		float clampedY = Mathf.Clamp(handleGyroY(y), _yLowerLimit, _yUpperLimit);
+		float clampedZ = Mathf.Clamp(handleGyroX(x), _zLowerLimit, _zUpperLimit);
 
-			// Rotate the phone by converting Euler into Quaternion
-			// Don't need to change Y
-			Quaternion target = Quaternion.Euler(clampedX, -90.0f, clampedZ);
+		// Rotate the phone by converting Euler into Quaternion
+		// Don't need to change Y
+		Quaternion target = Quaternion.Euler(0, clampedY, clampedZ);
 
-			// Dampen towards the target rotation
-			phone.rotation = Quaternion.Slerp(phone.rotation, target, Time.deltaTime * speed);
-		}
+		// Dampen towards the target rotation
+		phone.rotation = Quaternion.Slerp(phone.rotation, target, Time.deltaTime * speed);
+		// }
 	}
 
 	float handleGyroX(float x)
 	{
-		return -x + 180.0f;
+		return -x;
 	}
 
 	float handleGyroY(float y)
 	{
-		return y - 90.0f;
+		return -(y + 90);
 	}
 }

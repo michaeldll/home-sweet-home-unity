@@ -4,9 +4,9 @@ using FrostweepGames.Plugins.GoogleCloud.TextToSpeech;
 public class TextToSpeech : MonoBehaviour
 {
 	[SerializeField] private AudioSource audioSource;
-	[SerializeField] string text = GameManager.textOne;
-	[SerializeField] string voiceName = "en-US-Wavenet-C";
-	[SerializeField] string languageName = "en_US";
+	public string text = "default text please change";
+	[SerializeField] private string voiceName = "en-US-Wavenet-C";
+	[SerializeField] private string languageName = "en_US";
 	[SerializeField] Enumerators.SsmlVoiceGender genderName = Enumerators.SsmlVoiceGender.FEMALE;
 
 	private GCTextToSpeech _gcTextToSpeechInstance;
@@ -15,8 +15,7 @@ public class TextToSpeech : MonoBehaviour
 
 	void Start()
 	{
-		//get text
-		text = GameManager.textOne;
+		GameManager.isVoiceLoaded = false;
 
 		//get singleton instance
 		_gcTextToSpeechInstance = GCTextToSpeech.Instance;
@@ -43,6 +42,7 @@ public class TextToSpeech : MonoBehaviour
 	private void _gcTextToSpeech_SynthesizeSuccessEvent(PostSynthesizeResponse response)
 	{
 		audioSource.clip = _gcTextToSpeechInstance.GetAudioClipFromBase64(response.audioContent, Constants.DEFAULT_AUDIO_ENCODING);
+		GameManager.isVoiceLoaded = true;
 		audioSource.Play();
 	}
 
