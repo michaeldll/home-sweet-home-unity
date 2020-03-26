@@ -2462,14 +2462,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1618307879}
-  m_LocalRotation: {x: 0.07895458, y: 0.8980982, z: -0.18026955, w: 0.39330506}
+  m_LocalRotation: {x: 0.074614085, y: 0.9072455, z: -0.18210895, w: 0.37171862}
   m_LocalPosition: {x: -7.82, y: 5.88, z: 6.727316}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 842037312}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 22.7, y: 132.7, z: 0.001}
+  m_LocalEulerAnglesHint: {x: 22.7, y: 135.44, z: 0}
 --- !u!1 &1654748895
 GameObject:
   m_ObjectHideFlags: 0
@@ -2513,9 +2513,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.8, g: 0.654902, b: 0.4392157, a: 1}
-  m_Intensity: 853.35
-  m_Range: 3.06
-  m_SpotAngle: 105.36843
+  m_Intensity: 503.35
+  m_Range: 3.56
+  m_SpotAngle: 105.36844
   m_InnerSpotAngle: 45.64419
   m_CookieSize: 10
   m_Shadows:
@@ -2581,6 +2581,7 @@ GameObject:
   - component: {fileID: 1679854558}
   - component: {fileID: 1679854555}
   - component: {fileID: 1679854559}
+  - component: {fileID: 1679854562}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -2787,6 +2788,20 @@ MonoBehaviour:
   voiceName: en-US-Wavenet-C
   languageName: en_US
   genderName: 2
+--- !u!114 &1679854562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679854550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3346cc27697a0443994c64815280c8f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 1618307880}
+  amplitude: 0.001
 --- !u!1 &1687258581
 GameObject:
   m_ObjectHideFlags: 0
@@ -2964,7 +2979,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 0
-    m_Time: 1
+    m_Time: 2
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
