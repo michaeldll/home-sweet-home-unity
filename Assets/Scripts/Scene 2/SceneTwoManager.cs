@@ -9,17 +9,20 @@ public class SceneTwoManager : MonoBehaviour
 
 	private Coroutine _loader = null;
 	private WebSocketMessage _message;
-
+	[SerializeField] private CrossfadeMixer crossfadeMixer;
+	[SerializeField] private float crossfadeDuration = 4.0f;
 	[SerializeField] private Fade fade;
 
 	void Awake()
 	{
 		_message = new WebSocketMessage();
+		GameManager.secondScene();
 	}
 	void Update()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
+			crossfadeMixer.CrossfadeGroups(crossfadeDuration);
 			if (WebSocketClient.Instance != null)
 			{
 				_message.type = "sound";
@@ -27,10 +30,12 @@ public class SceneTwoManager : MonoBehaviour
 
 				WebSocketClient.Instance.Send(_message);
 			}
+
 		}
 
-		if (Input.GetKey(KeyCode.RightArrow) && !_isLoading) LoadScene("Third Scene"); ;
+		if (GameManager.phoneCurrentScene > 0 && !_isLoading) { Debug.Log(GameManager.phoneCurrentScene); LoadScene("Third Scene"); }
 
+		if (Input.GetKey(KeyCode.RightArrow) && !_isLoading) LoadScene("Third Scene"); ;
 	}
 
 	void LoadScene(string name)

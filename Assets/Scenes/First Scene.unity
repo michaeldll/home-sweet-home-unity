@@ -495,7 +495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   url: wss://home-sweet-home--ws.herokuapp.com/
-  showLog: 1
+  showLog: 0
 --- !u!4 &1584053151
 Transform:
   m_ObjectHideFlags: 0

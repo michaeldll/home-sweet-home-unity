@@ -48,5 +48,6 @@ public class InitSceneFour : MonoBehaviour
 		yield return new WaitForSeconds(2.0f);
 		textToSpeechArr[1].enabled = true;
 
+
 	}
 }

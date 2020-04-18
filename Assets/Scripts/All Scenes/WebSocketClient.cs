@@ -59,7 +59,6 @@ public class WebSocketClient : MonoBehaviour
 	private void OnMessage(object sender, MessageEventArgs e)
 	{
 		var webSocketMessage = ProcessMessage(e.Data);
-		var WebSocketMessageContentGyro = ProcessMessageContent(webSocketMessage.message);
 
 		if (showLog)
 		{
@@ -74,23 +73,43 @@ public class WebSocketClient : MonoBehaviour
 					"}
 				"}*/
 			// Debug.Log("WebSocketClient - OnMessage : " + e.Data);
-			// Debug.Log(webSocketMessage.message);
+			Debug.Log(webSocketMessage.type);
+			Debug.Log(webSocketMessage.message);
+			Debug.Log(webSocketMessage.id);
 			// Debug.Log(WebSocketMessageContentGyro._x);
-			Debug.Log(WebSocketMessageContentGyro._y * Mathf.Rad2Deg);
+			// Debug.Log(WebSocke tMessageContentGyro._y * Mathf.Rad2Deg);
 			// Debug.Log(WebSocketMessageContentGyro._y);
 			// Debug.Log(WebSocketMessageContentGyro._z);
 		}
 
-		GameManager.isPhoneConnected = true;
+		if (GameManager.websocketID == "")
+		{
+			GameManager.websocketID = webSocketMessage.id;
+		}
 
-		GameManager.gyroAngleX = WebSocketMessageContentGyro._x * Mathf.Rad2Deg;
-		GameManager.gyroAngleY = WebSocketMessageContentGyro._y * Mathf.Rad2Deg;
-		GameManager.gyroAngleZ = WebSocketMessageContentGyro._z * Mathf.Rad2Deg;
+		else if (GameManager.websocketID == webSocketMessage.id)
+		{
+			if (webSocketMessage.type == "orientation")
+			{
+				var WebSocketMessageContentGyro = ProcessMessageContent(webSocketMessage.message);
+
+				GameManager.isPhoneConnected = true;
+
+				GameManager.gyroAngleX = WebSocketMessageContentGyro._x * Mathf.Rad2Deg;
+				GameManager.gyroAngleY = WebSocketMessageContentGyro._y * Mathf.Rad2Deg;
+				GameManager.gyroAngleZ = WebSocketMessageContentGyro._z * Mathf.Rad2Deg;
+			}
+
+			else if (webSocketMessage.type == "changeScene")
+			{
+				GameManager.phoneCurrentScene += 1;
+			}
+		}
 	}
 
 	/*
-     * Methods
-     */
+	 * Methods
+	 */
 	private WebSocketMessage ProcessMessage(string data)
 	{
 		return WebSocketMessage.Parse(data);

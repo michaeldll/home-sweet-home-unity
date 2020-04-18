@@ -11,6 +11,11 @@ public class SceneFourManager : MonoBehaviour
 
 	[SerializeField] private Fade fade;
 
+	void Awake()
+	{
+		if (GameManager.name == "") GameManager.secondScene();
+	}
+
 	void Update()
 	{
 		if (Input.GetKey(KeyCode.RightArrow) && !_isLoading) LoadScene("Fifth Scene"); ;

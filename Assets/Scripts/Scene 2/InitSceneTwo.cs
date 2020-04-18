@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class InitSceneTwo : MonoBehaviour
 {
-	[SerializeField] private Transform[] phoneTransforms; //Inital, Top, Bottom
-	[SerializeField] private Transform[] characterTransforms; //Top, Bottom, Head Reset Transform
+	// [SerializeField] private Transform[] phoneTransforms; //Inital, Top, Bottom
+	// [SerializeField] private Transform[] characterTransforms; //Top, Bottom, Head Reset Transform
 	[SerializeField] private CinemachineVirtualCamera[] cams; //Start cam, Scene cam
 	[SerializeField] private GameObject[] assets; //appt, phone, phone beam, character,
 	[SerializeField] private GameObject[] lights; //spotlight and beam, point light 1, directional light
@@ -20,6 +20,7 @@ public class InitSceneTwo : MonoBehaviour
 	[SerializeField] private GyroRotate gRotate;
 	[SerializeField] private LookAtTarget lookAt;
 	[SerializeField] private GameObject head;
+	[SerializeField] private CrossfadeMixer crossfadeMixer;
 
 	void Start()
 	{
@@ -32,14 +33,14 @@ public class InitSceneTwo : MonoBehaviour
 		titleAnimation.SetActive(false);
 
 		//reset text
-		textToSpeechArr[0].text = GameManager.secondScene.introText;
-		textToSpeechArr[1].text = GameManager.secondScene.preSceneText;
-		textToSpeechArr[2].text = GameManager.secondScene.sceneText;
-		textTyper.text = GameManager.secondScene.introText;
+		textToSpeechArr[0].text = GameManager.introText;
+		textToSpeechArr[1].text = GameManager.preSceneText;
+		textToSpeechArr[2].text = GameManager.sceneText;
+		textTyper.text = GameManager.introText;
 
-		//reset positions to beginning
-		assets[1].transform.position = phoneTransforms[0].position;
-		assets[3].transform.position = characterTransforms[0].position;
+		//reset phone and character positions to beginning
+		// assets[1].transform.position = phoneTransforms[0].position;
+		// assets[3].transform.position = characterTransforms[0].position;
 
 		//disable scripts
 		gRotate.enabled = false;
@@ -93,37 +94,35 @@ public class InitSceneTwo : MonoBehaviour
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
 		yield return new WaitForSeconds(3f);
 		//start moving phone to end position
-		assets[1].transform.DOMove(phoneTransforms[1].position, 2.0f);
+		// assets[1].transform.DOMove(phoneTransforms[1].position, 2.0f);
 
 		yield return new WaitForSeconds(0.6f);
 		//turn on phone
 		assets[2].SetActive(true);
 		//start looking at phone
 		lookAt.enabled = true;
+		//turn on gyro
+		if (GameManager.isPhoneConnected) gRotate.enabled = true;
 
 		yield return new WaitForSeconds(4.8f);
 		//reset head to avoid long neck bug
-		lookAt.enabled = false;
-		head.transform.position = characterTransforms[3].transform.position;
+		// lookAt.enabled = false;
+		// head.transform.position = characterTransforms[3].transform.position;
 		// head.transform.rotation = characterTransforms[3].transform.rotation;
 
 		//move dude and phone
-		assets[1].transform.DOMove(phoneTransforms[2].position, 2.0f);
-		assets[3].transform.DOMove(characterTransforms[1].position, 2.0f);
-		head.transform.DOMove(characterTransforms[2].position, 2.0f);
+		// assets[1].transform.DOMove(phoneTransforms[2].position, 2.0f);
+		// assets[3].transform.DOMove(characterTransforms[1].position, 2.0f);
+		// head.transform.DOMove(characterTransforms[2].position, 2.0f);
 
 		yield return new WaitForSeconds(1.2f);
 		//show intro animation
 		titleAnimation.SetActive(true);
 
 		yield return new WaitForSeconds(7.5f);
-		//enable look
-		lookAt.enabled = true;
 		//reset positions
-		assets[1].transform.position = phoneTransforms[1].position;
-		assets[3].transform.position = characterTransforms[0].position;
-		//disable anim
-		titleAnimation.SetActive(false);
+		// assets[1].transform.position = phoneTransforms[0].position;
+		// assets[3].transform.position = characterTransforms[0].position;
 		//switch cams
 		cams[1].m_Priority = 3;
 		//show appartment
@@ -136,5 +135,11 @@ public class InitSceneTwo : MonoBehaviour
 		if (GameManager.isPhoneConnected) gRotate.enabled = true;
 		//talk
 		textToSpeechArr[2].enabled = true;
+		//ambient sound
+		crossfadeMixer.CrossfadeGroups(1f);
+		//enable look
+		lookAt.enabled = true;
+		//disable anim
+		titleAnimation.SetActive(false);
 	}
 }

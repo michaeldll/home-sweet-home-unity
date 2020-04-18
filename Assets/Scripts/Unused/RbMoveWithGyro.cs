@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveWithGyro : MonoBehaviour
+public class RbMoveWithGyro : MonoBehaviour
 {
 	[SerializeField] private float thrust = 1.0f;
 	[SerializeField] private bool isRigidbody = true;

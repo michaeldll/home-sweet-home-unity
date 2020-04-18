@@ -30,7 +30,7 @@ public class MoveWithCursor : MonoBehaviour
 		var xFromMouse = (Input.mousePosition.x - Screen.height / 2) * amplitude;
 		var yFromMouse = (Input.mousePosition.y - Screen.width / 2) * amplitude;
 
-		Debug.Log(yFromMouse);
+		// Debug.Log(yFromMouse);
 
 		_x = Mathf.Clamp(_x + xFromMouse, _minRotationX, _maxRotationX);
 		_y = Mathf.Clamp(_y + yFromMouse, _minRotationY, _maxRotationY);
