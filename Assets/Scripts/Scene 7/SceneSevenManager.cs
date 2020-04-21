@@ -11,10 +11,18 @@ public class SceneSevenManager : MonoBehaviour
 	[SerializeField] private TextToSpeech[] textToSpeechArr;
 	[SerializeField] private Fade fade;
 	[SerializeField] private CinemachineVirtualCamera[] cams;
-	[SerializeField] private ToggleRagdoll tRagdoll;
 	[SerializeField] private GameObject phoneSpotlight;
 	[SerializeField] private GameObject phoneSpotlight2;
+	[SerializeField] private GameObject perso;
+	[SerializeField] private GameObject persoRagdoll;
+	[SerializeField] private GameObject phone;
+	[SerializeField] private CrossfadeMixer crossfadeMixer;
 	private bool hasEnded = false;
+
+	void Awake()
+	{
+		GameManager.seventhScene();
+	}
 
 	void Update()
 	{
@@ -36,9 +44,6 @@ public class SceneSevenManager : MonoBehaviour
 				break;
 			case 4:
 				StartCoroutine(Epilogue());
-
-
-
 				break;
 			default:
 				break;
@@ -48,6 +53,7 @@ public class SceneSevenManager : MonoBehaviour
 		{
 			_isLoading = true;
 			fade.FadeOut();
+			crossfadeMixer.CrossfadeGroups("volPadLow", "volPadHigh", 5f);
 		}
 	}
 
@@ -57,7 +63,10 @@ public class SceneSevenManager : MonoBehaviour
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
 		yield return new WaitForSeconds(6.0f);
 
-		tRagdoll.toggle(true);
+		perso.SetActive(false);
+		persoRagdoll.SetActive(true);
+		phone.SetActive(false);
+
 		yield return new WaitForSeconds(1.0f);
 
 		cams[1].m_Priority = 2;
@@ -68,7 +77,7 @@ public class SceneSevenManager : MonoBehaviour
 
 	IEnumerator Epilogue()
 	{
-		cams[2].m_Priority = 3;
+		// cams[2].m_Priority = 3;
 		yield return new WaitForSeconds(4.0f);
 
 		if (hasEnded == false)

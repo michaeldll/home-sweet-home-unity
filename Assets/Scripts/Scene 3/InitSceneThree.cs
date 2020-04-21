@@ -8,17 +8,17 @@ using UnityEngine.UI;
 public class InitSceneThree : MonoBehaviour
 {
 	[SerializeField] private TextToSpeech[] textToSpeech;
-	[SerializeField] private TextTyperTalker textTyper;
-	[SerializeField] private GameObject textCanvas;
-	[SerializeField] private Fade fade;
-	[SerializeField] private Image background;
-
+	[SerializeField] private TextTyperTalker textTyper = null;
+	[SerializeField] private GameObject textCanvas = null;
+	[SerializeField] private Fade fade = null;
+	[SerializeField] private Image background = null;
+	[SerializeField] private CrossfadeMixer crossfadeMixer = null;
 	void Start()
 	{
 		//set text
-		textToSpeech[0].text = GameManager.thirdScene.introText;
-		textToSpeech[1].text = GameManager.thirdScene.sceneText;
-		textTyper.text = GameManager.thirdScene.introText;
+		textToSpeech[0].text = GameManager.introText;
+		textToSpeech[1].text = GameManager.sceneText;
+		textTyper.text = GameManager.introText;
 
 		//black
 		background.enabled = true;
@@ -41,10 +41,12 @@ public class InitSceneThree : MonoBehaviour
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
 
 		toggleTyper(true);
-		yield return new WaitForSeconds(6.0f);
+		yield return new WaitForSeconds(7.0f);
 
 		toggleTyper(false);
 		fade.FadeIn();
+		//fade music
+		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
 		yield return new WaitForSeconds(2.0f);
 
 		textToSpeech[1].enabled = true;

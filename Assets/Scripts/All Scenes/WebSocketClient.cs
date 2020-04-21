@@ -82,6 +82,8 @@ public class WebSocketClient : MonoBehaviour
 			// Debug.Log(WebSocketMessageContentGyro._z);
 		}
 
+		GameManager.isPhoneConnected = true;
+
 		if (GameManager.websocketID == "")
 		{
 			GameManager.websocketID = webSocketMessage.id;
@@ -92,8 +94,6 @@ public class WebSocketClient : MonoBehaviour
 			if (webSocketMessage.type == "orientation")
 			{
 				var WebSocketMessageContentGyro = ProcessMessageContent(webSocketMessage.message);
-
-				GameManager.isPhoneConnected = true;
 
 				GameManager.gyroAngleX = WebSocketMessageContentGyro._x * Mathf.Rad2Deg;
 				GameManager.gyroAngleY = WebSocketMessageContentGyro._y * Mathf.Rad2Deg;

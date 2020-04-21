@@ -10,6 +10,12 @@ public class SceneFiveManager : MonoBehaviour
 	private Coroutine _loader = null;
 
 	[SerializeField] private Fade fade;
+	[SerializeField] private CrossfadeMixer crossfadeMixer;
+
+	void Awake()
+	{
+		GameManager.fifthScene();
+	}
 
 	void Update()
 	{
@@ -18,6 +24,8 @@ public class SceneFiveManager : MonoBehaviour
 
 	void LoadScene(string name)
 	{
+		//fade music
+		crossfadeMixer.CrossfadeGroups("volPadLow", "volPadHigh", 2f);
 
 		if (_loader != null)
 		{

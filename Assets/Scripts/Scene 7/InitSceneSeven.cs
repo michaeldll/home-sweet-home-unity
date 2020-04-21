@@ -8,11 +8,12 @@ using UnityEngine.UI;
 public class InitSceneSeven : MonoBehaviour
 {
 	[SerializeField] private TextToSpeech[] textToSpeechArr;
-	[SerializeField] private TextTyperTalker textTyper;
-	[SerializeField] private GameObject textCanvas;
-	[SerializeField] private Fade fade;
-	[SerializeField] private Image background;
-	[SerializeField] private GyroRotate gRotate;
+	[SerializeField] private TextTyperTalker textTyper = null;
+	[SerializeField] private GameObject textCanvas = null;
+	[SerializeField] private Fade fade = null;
+	[SerializeField] private Image background = null;
+	[SerializeField] private GyroRotate gRotate = null;
+	[SerializeField] private CrossfadeMixer crossfadeMixer = null;
 
 	void Start()
 	{
@@ -20,11 +21,11 @@ public class InitSceneSeven : MonoBehaviour
 		background.enabled = true;
 
 		//set text
-		textToSpeechArr[0].text = GameManager.seventhScene.introText;
-		textToSpeechArr[1].text = GameManager.seventhScene.moonText[0];
-		textToSpeechArr[2].text = GameManager.seventhScene.moonText[1];
-		textToSpeechArr[3].text = GameManager.seventhScene.endText;
-		textTyper.text = GameManager.seventhScene.introText;
+		textToSpeechArr[0].text = GameManager.introText;
+		textToSpeechArr[1].text = GameManager.moonText[0];
+		textToSpeechArr[2].text = GameManager.moonText[1];
+		textToSpeechArr[3].text = GameManager.endText;
+		textTyper.text = GameManager.introText;
 
 		gRotate.enabled = false;
 
@@ -50,6 +51,8 @@ public class InitSceneSeven : MonoBehaviour
 
 		toggleTyper(false);
 		fade.FadeIn();
+		//fade music
+		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
 
 		yield return new WaitForSeconds(2.0f);
 		if (GameManager.isPhoneConnected) gRotate.enabled = true;

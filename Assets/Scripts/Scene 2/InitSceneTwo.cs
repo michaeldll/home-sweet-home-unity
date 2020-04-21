@@ -14,13 +14,13 @@ public class InitSceneTwo : MonoBehaviour
 	[SerializeField] private GameObject[] lights; //spotlight and beam, point light 1, directional light
 	[SerializeField] private GameObject titleAnimation;
 	[SerializeField] private TextToSpeech[] textToSpeechArr;
-	[SerializeField] private TextTyperTalker textTyper;
-	[SerializeField] private GameObject textCanvas;
-	[SerializeField] private Camera mainCamera;
-	[SerializeField] private GyroRotate gRotate;
-	[SerializeField] private LookAtTarget lookAt;
-	[SerializeField] private GameObject head;
-	[SerializeField] private CrossfadeMixer crossfadeMixer;
+	[SerializeField] private TextTyperTalker textTyper = null;
+	[SerializeField] private GameObject textCanvas = null;
+	[SerializeField] private Camera mainCamera = null;
+	[SerializeField] private GyroRotate gRotate = null;
+	[SerializeField] private LookAtTarget lookAt = null;
+	[SerializeField] private GameObject head = null;
+	[SerializeField] private CrossfadeMixer crossfadeMixer = null;
 
 	void Start()
 	{
@@ -58,14 +58,6 @@ public class InitSceneTwo : MonoBehaviour
 		}
 	}
 
-	void toggleIntroAnim(Image[] imgs, bool toggle)
-	{
-		foreach (var img in imgs)
-		{
-			img.enabled = toggle ? true : false;
-		}
-	}
-
 	void toggleTyper(bool toggle)
 	{
 		textTyper.enabled = toggle ? true : false;
@@ -87,8 +79,6 @@ public class InitSceneTwo : MonoBehaviour
 		assets[1].SetActive(true);
 		assets[3].SetActive(true);
 		toggleGameObjects(lights, true);
-
-		yield return new WaitForSeconds(1f);
 		textToSpeechArr[1].enabled = true;
 
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
@@ -115,11 +105,11 @@ public class InitSceneTwo : MonoBehaviour
 		// assets[3].transform.DOMove(characterTransforms[1].position, 2.0f);
 		// head.transform.DOMove(characterTransforms[2].position, 2.0f);
 
-		yield return new WaitForSeconds(1.2f);
+		yield return new WaitForSeconds(0.6f);
 		//show intro animation
 		titleAnimation.SetActive(true);
 
-		yield return new WaitForSeconds(7.5f);
+		yield return new WaitForSeconds(8.5f);
 		//reset positions
 		// assets[1].transform.position = phoneTransforms[0].position;
 		// assets[3].transform.position = characterTransforms[0].position;
@@ -127,16 +117,14 @@ public class InitSceneTwo : MonoBehaviour
 		cams[1].m_Priority = 3;
 		//show appartment
 		assets[0].SetActive(true);
-		//show lights
-		toggleGameObjects(lights, true);
 		//bg yellow
 		mainCamera.backgroundColor = new Color(0.82f, 0.6979567f, 0.51168f, 1f);
 		//turn on gyro
 		if (GameManager.isPhoneConnected) gRotate.enabled = true;
 		//talk
 		textToSpeechArr[2].enabled = true;
-		//ambient sound
-		crossfadeMixer.CrossfadeGroups(1f);
+		//fade music
+		crossfadeMixer.CrossfadeGroups("volPadAll", "volPadLow", 1f);
 		//enable look
 		lookAt.enabled = true;
 		//disable anim

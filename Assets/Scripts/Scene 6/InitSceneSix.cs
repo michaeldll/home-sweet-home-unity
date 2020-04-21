@@ -8,21 +8,21 @@ using UnityEngine.UI;
 public class InitSceneSix : MonoBehaviour
 {
 	[SerializeField] private TextToSpeech[] textToSpeechArr;
-	[SerializeField] private TextTyperTalker textTyper;
-	[SerializeField] private GameObject textCanvas;
-	[SerializeField] private Fade fade;
-	[SerializeField] private Image background;
-	[SerializeField] private GyroRotate gRotate;
-
+	[SerializeField] private TextTyperTalker textTyper = null;
+	[SerializeField] private GameObject textCanvas = null;
+	[SerializeField] private Fade fade = null;
+	[SerializeField] private Image background = null;
+	[SerializeField] private GyroRotate gRotate = null;
+	[SerializeField] private CrossfadeMixer crossfadeMixer = null;
 	void Start()
 	{
 		//black
 		background.enabled = true;
 
 		//set text
-		textToSpeechArr[0].text = GameManager.sixthScene.introText;
-		textToSpeechArr[1].text = GameManager.sixthScene.sceneText;
-		textTyper.text = GameManager.sixthScene.introText;
+		textToSpeechArr[0].text = GameManager.introText;
+		textToSpeechArr[1].text = GameManager.sceneText;
+		textTyper.text = GameManager.introText;
 
 		gRotate.enabled = false;
 
@@ -48,6 +48,8 @@ public class InitSceneSix : MonoBehaviour
 
 		toggleTyper(false);
 		fade.FadeIn();
+		//fade music
+		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
 
 		yield return new WaitForSeconds(2.0f);
 		if (GameManager.isPhoneConnected) gRotate.enabled = true;

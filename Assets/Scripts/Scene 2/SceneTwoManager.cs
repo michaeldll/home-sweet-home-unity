@@ -18,28 +18,18 @@ public class SceneTwoManager : MonoBehaviour
 		_message = new WebSocketMessage();
 		GameManager.secondScene();
 	}
+
 	void Update()
 	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			crossfadeMixer.CrossfadeGroups(crossfadeDuration);
-			if (WebSocketClient.Instance != null)
-			{
-				_message.type = "sound";
-				_message.message = "{\"soundName\":\"notif\"}";
+		if (GameManager.phoneCurrentScene > 0 && !_isLoading) { LoadScene("Third Scene"); }
 
-				WebSocketClient.Instance.Send(_message);
-			}
-
-		}
-
-		if (GameManager.phoneCurrentScene > 0 && !_isLoading) { Debug.Log(GameManager.phoneCurrentScene); LoadScene("Third Scene"); }
-
-		if (Input.GetKey(KeyCode.RightArrow) && !_isLoading) LoadScene("Third Scene"); ;
+		if (Input.GetKey(KeyCode.RightArrow) && !_isLoading) { LoadScene("Third Scene"); }
 	}
 
 	void LoadScene(string name)
 	{
+		//fade music
+		crossfadeMixer.CrossfadeGroups("volPadLow", "volPadHigh", 2f);
 
 		if (_loader != null)
 		{

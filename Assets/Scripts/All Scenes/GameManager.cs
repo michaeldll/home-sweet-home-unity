@@ -22,6 +22,8 @@ public static class GameManager
 	public static string introText;
 	public static string preSceneText;
 	public static string sceneText;
+	public static string[] moonText = { "", "" };
+	public static string endText;
 	// public static string[] maleFirstNames = { "gonc", "henry", "valentin", "artey", "ave", "ouri", "marius", "michael" };
 	// public static string[] maleSecondNames = { "inity", "_bzrd", ".dll", "miramont10", "_kevin", ".levin", "ballot" };
 	// public static string[] femaleFirstNames = { "mogo", "sol", "mog", "set", "cha", "saana", "marie", "chloro", "interieur", "julie", "m" };
@@ -33,62 +35,47 @@ public static class GameManager
 		"boogie2988",
 		"lobbybobby88",
 		"TheyCallMeDSP",
-		"ChrisChanSonichu",
 		"funkybandit",
 		"lincostinko",
 		"SirCaesar29",
 		"tamwebb90",
-		"canineduchess3848",
-		"SuperficialParrot",
 		"oceanicheader77",
 		"FuzzyCurator",
-		"throwaway3225",
 		"greytossing",
-		"awakehacker362",
+		"awakehacker36",
 		"CrispVocalist",
 		"unknowncyclist82",
 		"dustydomination",
 		"BlueHedgehog",
 		"optimaltrauma8",
-		"tangibleabbey890",
+		"tangibleabbey89",
 		"LoneMouse",
 		"acclaimedfetish",
-		"toothsomeduchess31",
 		"hothardship5",
 		"Frenchcorpus2",
 		"uprightrashfluke",
-		"thegrievingduckling",
-		"unfortunateflora518",
 		"demonichockey",
 		"iamthedevil666",
-		"handsomebodyguard33",
 		"TheEnragedBrunt",
 		"sackoftongues",
 		"littlefish97",
 		"LividKangaroo",
 		"InsistentDiver",
 		"fertilecoomer",
-		"throwaway38333",
+		"throwaway38",
 		"2honored4u",
 		"zonkedbonus558",
-		"moralplurality0645",
 		"softprecedence74",
 		"AveragePanther",
-		"growingopposition67",
 		"disloyalnovella",
 		"baggyslugger58",
 		"TautBoldness",
 		"virtualaviation57",
 		"smarttycoon49",
 		"CoolMole",
-		"scornfuldialect86",
-		"cravensubsidy888",
-		"mercifulcombustion11",
 		"PepperySpectre",
-		"distressedseizure472",
 		"QuietCheerleader",
 		"HappyFetish",
-		"insecurefoothold6235",
 		"thirstysaucer",
 		"pungentgrappling",
 		"dustymeantime86",
@@ -118,25 +105,19 @@ public static class GameManager
 		"uglymeanman",
 		"bouncytphone187",
 		"CoollySteel",
-		"darkrecreation386",
 		"snottybullion15",
 		"DopeyLlama",
 		"bothmatrix",
 		"lavishsnark",
 		"LoudlyHallowed",
-		"moistdriver281",
-		"silkyavarice2968",
 		"sugardaddy69",
 		"SymptomaticCapybara",
 		"tastysushi",
 		"OmegaMind04",
 		"throwaway2104",
 		"TinyAnt",
-		"TheAmazingAtheist",
 		"giddyfastball70",
 		"noiselessoverseer",
-		"nutritiousjuror5682",
-		"cavernousphysique68",
 		"CandidSchooner",
 		"toxicwasteXxX",
 		"AuthenticApe",
@@ -148,30 +129,24 @@ public static class GameManager
 		"blankprovider21",
 		"WorriedRecreation",
 		"TheVapidHorseman",
-		"thoughtfulmaintenance86",
 		"robloxfantasy",
 		"wingedconstable6",
 		"perkyactress615",
 		"FlimsyPneumonia",
-		"DisgustingAlligator",
 		"frantichands",
 		"SadPhilosopher",
 		"wholeheader3",
 		"JubilantRalph",
 		"totalunderdog74",
 		"loungelizard",
-		"pointlessliberation",
 		"BasicDonkey",
 		"quaintposter75",
 		"mightyliner83",
 		"deadlypottery8",
 		"FabulousListener",
-		"honoredtheology72",
 		"PastJuncture",
 		"GutturalMartin",
 		"chiefdumps733",
-		"unknownrefrigerator168",
-		"alarmingdepression8",
 		"thefullmayhem",
 		"TheUsedBasis",
 		"ObliviousDriver",
@@ -184,13 +159,11 @@ public static class GameManager
 		"radiantartisan71",
 		"TheLameRecipe",
 		"glumcharade32",
-		"vacantmaintenance827",
 		"LonelyScholarship",
 		"GentleGiant",
 		"FaithfulHamburger",
 		"sociablememory",
 		"CalmCamel",
-		"gaudycivility28",
 		"starchywidth72",
 		"RoomyBroccoli",
 		"MetallicBooty",
@@ -200,15 +173,13 @@ public static class GameManager
 		"Cr1msonPr1nce",
 		"snobbishhands2",
 		"LazyRock",
-		"muscularcheerleader023",
-		"zestylookout5642",
 		"superbjoseph",
 	};
 
 	public static void setGender()
 	{
 		gender = Random.value < 0.5f ? "male" : "female";
-		Debug.Log(gender);
+		// Debug.Log(gender);
 	}
 
 	public static void setName()
@@ -250,39 +221,57 @@ public static class GameManager
 
 	}
 
-	public static class thirdScene
+	public static void thirdScene()
 	{
-		public static string introText = "They would get more and more lost in each other’s lives, sharing their deepest fears and desires.";
-
-		public static string sceneText = "And so they whispered each other’s secrets";
+		introText = "They would get more and more lost in each other’s lives, sharing their deepest fears and desires.";
+		sceneText = "And so, they whispered each other’s secrets...";
 	}
 
-	public static class fourthScene
+	public static void fourthScene()
 	{
-		public static string introText = "One day, she turned to his friend, the Internet, and asked: “Internet, do you love me ?”. The Internet then said: “Yes, I love you very very very very much.\"";
-		public static string sceneText = "I love you so much that I never, ever want us to be apart ever again ever";
+		if (gender == "male")
+		{
+			introText = "One day, he turned to his friend, the Internet, and asked: “Internet, do you love me ?”. The Internet then said: “Yes, I love you very very very very much.\"";
+		}
+		else
+		{
+			introText = "One day, she turned to her friend, the Internet, and asked: “Internet, do you love me ?”. The Internet then said: “Yes, I love you very very very very much.\"";
+		}
+		sceneText = "I love you so much that I never, ever want us to be apart ever again ever";
 	}
 
-	public static class fifthScene
+	public static void fifthScene()
 	{
-		public static string introText =
-		"The Internet took her to all kinds of places, and they built their own home, together.";
+		if (gender == "male")
+		{
+			introText = "The Internet took him to all kinds of places, and they built their own home, together.";
+		}
+		else
+		{
+			introText = "The Internet took her to all kinds of places, and they built their own home, together.";
+		}
 	}
 
-	public static class sixthScene
+	public static void sixthScene()
 	{
-		public static string introText =
-		"Their love crossed the boundaries of their relationship. Their trust knew no limits. They always agreed with each other. ";
-		public static string sceneText = "They would build the sweetest of homes, together and endlessly.";
+		introText =
+		"Their love crossed the boundaries of their relationship. Their trust knew no limits. They always agreed with each other.";
+		sceneText = "They would build the sweetest of homes, together.";
 	}
 
-	public static class seventhScene
+	public static void seventhScene()
 	{
-		public static string introText = "And so they lived.";
-		public static string[] moonText = {
-			"But this somehow felt like something more, beyond just living.",
-			"All of her dreams were now at hand's reach - all of it, everything."
-		};
-		public static string endText = "BobbyBranda69 would tell herself: \"Man shall not live by bread alone\". And then she died.";
+		if (name == "") name = "SnowFlakeSmasher86";
+		introText = "And so they lived.";
+		moonText.SetValue("But this somehow felt like something more, beyond just living.", 0);
+		moonText.SetValue("All of her dreams were now at hand's reach - all of it, everything.", 1);
+		if (gender == "male")
+		{
+			endText = $"{name} would tell herself: \"Man shall not live by bread alone\". And then she died.";
+		}
+		else
+		{
+			endText = $"{name} would tell herself: \"Man shall not live by bread alone\". And then he died.";
+		}
 	}
 }

@@ -8,15 +8,15 @@ public class CrossfadeMixer : MonoBehaviour
 	public AudioMixer mixer;
 	public bool fading;
 
-	public void CrossfadeGroups(float duration)
+	public void CrossfadeGroups(string vol1, string vol2, float duration)
 	{
 		if (!fading)
 		{
-			StartCoroutine(Crossfade(duration));
+			StartCoroutine(Crossfade(vol1, vol2, duration));
 		}
 	}
 
-	IEnumerator Crossfade(float fadeTime)
+	IEnumerator Crossfade(string vol1, string vol2, float fadeTime)
 	{
 		fading = true;
 		float currentTime = 0;
@@ -25,8 +25,15 @@ public class CrossfadeMixer : MonoBehaviour
 		{
 			currentTime += Time.deltaTime;
 
-			mixer.SetFloat("volPadAll", Mathf.Log10(Mathf.Lerp(1, 0.0001f, currentTime / fadeTime)) * 20);
-			mixer.SetFloat("volPadLow", Mathf.Log10(Mathf.Lerp(0.0001f, 1, currentTime / fadeTime)) * 20);
+			mixer.SetFloat(vol1, Mathf.Log10(Mathf.Lerp(1, 0.0001f, currentTime / fadeTime)) * 20);
+			if (vol2 == "volPadHigh")
+			{
+				mixer.SetFloat(vol2, Mathf.Log10(Mathf.Lerp(0.0001f, 0.5f, currentTime / fadeTime)) * 20);
+			}
+			else
+			{
+				mixer.SetFloat(vol2, Mathf.Log10(Mathf.Lerp(0.0001f, 1, currentTime / fadeTime)) * 20);
+			}
 
 			yield return null;
 		}

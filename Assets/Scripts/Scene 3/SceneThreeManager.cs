@@ -6,10 +6,14 @@ using UnityEngine.SceneManagement;
 public class SceneThreeManager : MonoBehaviour
 {
 	private bool _isLoading = false;
-
 	private Coroutine _loader = null;
-
 	[SerializeField] private Fade fade;
+	[SerializeField] private CrossfadeMixer crossfadeMixer;
+
+	void Awake()
+	{
+		GameManager.thirdScene();
+	}
 
 	void Update()
 	{
@@ -18,6 +22,8 @@ public class SceneThreeManager : MonoBehaviour
 
 	void LoadScene(string name)
 	{
+		//fade music
+		crossfadeMixer.CrossfadeGroups("volPadLow", "volPadHigh", 2f);
 
 		if (_loader != null)
 		{
