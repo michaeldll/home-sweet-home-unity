@@ -267,11 +267,11 @@ public static class GameManager
 		moonText.SetValue("All of her dreams were now at hand's reach - all of it, everything.", 1);
 		if (gender == "male")
 		{
-			endText = $"{name} would tell herself: \"Man shall not live by bread alone\". And then she died.";
+			endText = $"{name} would tell herself: \"Man shall not live by bread alone\". And then he died.";
 		}
 		else
 		{
-			endText = $"{name} would tell herself: \"Man shall not live by bread alone\". And then he died.";
+			endText = $"{name} would tell herself: \"Man shall not live by bread alone\". And then she died.";
 		}
 	}
 }

@@ -13,6 +13,7 @@ public class InitSceneFour : MonoBehaviour
 	[SerializeField] private Fade fade = null;
 	[SerializeField] private Image background = null;
 	[SerializeField] private CrossfadeMixer crossfadeMixer = null;
+	[SerializeField] private CinemachineVirtualCamera cam2 = null;
 	void Start()
 	{
 		//black
@@ -51,6 +52,8 @@ public class InitSceneFour : MonoBehaviour
 		yield return new WaitForSeconds(2.0f);
 		textToSpeechArr[1].enabled = true;
 
+		yield return new WaitForSeconds(1.0f);
+		cam2.m_Priority = 2;
 
 	}
 }

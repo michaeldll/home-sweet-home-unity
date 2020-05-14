@@ -28,7 +28,7 @@ public class CrossfadeMixer : MonoBehaviour
 			mixer.SetFloat(vol1, Mathf.Log10(Mathf.Lerp(1, 0.0001f, currentTime / fadeTime)) * 20);
 			if (vol2 == "volPadHigh")
 			{
-				mixer.SetFloat(vol2, Mathf.Log10(Mathf.Lerp(0.0001f, 0.5f, currentTime / fadeTime)) * 20);
+				mixer.SetFloat(vol2, Mathf.Log10(Mathf.Lerp(0.0001f, 0.6f, currentTime / fadeTime)) * 20);
 			}
 			else
 			{

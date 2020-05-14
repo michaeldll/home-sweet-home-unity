@@ -76,6 +76,7 @@ public class WebSocketClient : MonoBehaviour
 			Debug.Log(webSocketMessage.type);
 			Debug.Log(webSocketMessage.message);
 			Debug.Log(webSocketMessage.id);
+			Debug.Log(GameManager.websocketID);
 			// Debug.Log(WebSocketMessageContentGyro._x);
 			// Debug.Log(WebSocke tMessageContentGyro._y * Mathf.Rad2Deg);
 			// Debug.Log(WebSocketMessageContentGyro._y);

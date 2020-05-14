@@ -12,9 +12,6 @@ public class SetMasturbationAnimation : MonoBehaviour
 
 		if (GameManager.gender == "male") anim.SetBool("isMale", true);
 		else anim.SetBool("isMale", false);
-		//set masturbation animation
-		// if (GameManager.gender == "male") anim.clip ;
-		// else anim.clip = femaleClip;
 	}
 
 }
