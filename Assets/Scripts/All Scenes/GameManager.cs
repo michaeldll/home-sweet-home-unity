@@ -175,7 +175,7 @@ public static class GameManager
 		"LazyRock",
 		"superbjoseph",
 	};
-
+	public static bool startFalling = false;
 	public static void setGender()
 	{
 		gender = Random.value < 0.5f ? "male" : "female";
