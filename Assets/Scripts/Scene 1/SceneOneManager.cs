@@ -15,11 +15,12 @@ public class SceneOneManager : MonoBehaviour
 	{
 		GameManager.firstScene();
 		codeText.SetText($"Access Key: {GameManager.name}");
+		InvokeRepeating("SendAccessKey", 0, 1);
 	}
 	
 	void Update()
 	{
-		InvokeRepeating("SendAccessKey", 0, 1);
+		if (Input.GetKey(KeyCode.Mouse0)) SendNotif();
 
 		if (GameManager.isPhoneConnected && !_isLoading) LoadScene("Second Scene");
 
@@ -34,6 +35,18 @@ public class SceneOneManager : MonoBehaviour
 			_message.id = GameManager.name;
 			_message.type = "sendAccessKey";
 			_message.message = "{\"accessKey\":\"" + GameManager.name + "\"}";
+
+			WebSocketClient.Instance.Send(_message);
+		}
+	}
+
+	void SendNotif(){
+		if (WebSocketClient.Instance != null)
+		{
+			_message = new WebSocketMessage();
+			_message.id = GameManager.name;
+			_message.type = "sound";
+			_message.message = "{\"soundname\":\"notif\"}";
 
 			WebSocketClient.Instance.Send(_message);
 		}

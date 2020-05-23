@@ -92,7 +92,6 @@ public class WebSocketClient : MonoBehaviour
 				GameManager.isPhoneConnected = true;
 				var WebSocketMessageContentGyro = ProcessMessageContent(webSocketMessage.message);
 
-				Debug.Log(WebSocketMessageContentGyro._x);
 				GameManager.gyroAngleX = WebSocketMessageContentGyro._x * Mathf.Rad2Deg;
 				GameManager.gyroAngleY = WebSocketMessageContentGyro._y * Mathf.Rad2Deg;
 				GameManager.gyroAngleZ = WebSocketMessageContentGyro._z * Mathf.Rad2Deg;

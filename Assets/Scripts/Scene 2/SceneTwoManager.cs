@@ -21,9 +21,23 @@ public class SceneTwoManager : MonoBehaviour
 
 	void Update()
 	{
+		if (Input.GetKey(KeyCode.LeftArrow)) SendNotif();
+
 		if (GameManager.phoneCurrentScene > 0 && !_isLoading) { LoadScene("Third Scene"); }
 
 		if (Input.GetKey(KeyCode.RightArrow) && !_isLoading) { LoadScene("Third Scene"); }
+	}
+
+	void SendNotif(){
+		if (WebSocketClient.Instance != null)
+		{
+			_message = new WebSocketMessage();
+			_message.id = GameManager.name;
+			_message.type = "sound";
+			_message.message = "{\"soundname\":\"notif\"}";
+
+			WebSocketClient.Instance.Send(_message);
+		}
 	}
 
 	void LoadScene(string name)
