@@ -13,7 +13,7 @@ public class WebSocketClient : MonoBehaviour
 
 	public static WebSocketClient Instance;
 
-	public delegate void MessageAction(WebSocketMessage webSocketMessage);
+	// public delegate void MessageAction(WebSocketMessage webSocketMessage);
 	// public static event MessageAction OnMessageReceived;
 
 	private void Awake()
@@ -53,49 +53,46 @@ public class WebSocketClient : MonoBehaviour
 
 	private void OnError(object sender, ErrorEventArgs e)
 	{
-		if (showLog) Debug.Log("WebSocketClient - OnError : " + e.Message);
+		if (showLog) { Debug.Log("WebSocketClient - OnError : " + e.Message); }
 	}
 
 	private void OnMessage(object sender, MessageEventArgs e)
 	{
-		var webSocketMessage = ProcessMessage(e.Data);
+		// if (showLog) Debug.Log(e.Data);
 
-		if (showLog)
+		if (e.Data != "Null" && e.Data != "" && e.Data != null)
 		{
-			/*
-				{
-					"type":"orientation",
-					"message":"{
-						\"_x\":-0.6071305695921945,
-						\"_y\":-3.003360119444884,
-						\"_z\":-0.016295066848099844,
-						\"_order\":\"YXZ\
-					"}
-				"}*/
-			// Debug.Log("WebSocketClient - OnMessage : " + e.Data);
-			Debug.Log(webSocketMessage.type);
-			Debug.Log(webSocketMessage.message);
-			Debug.Log(webSocketMessage.id);
-			Debug.Log(GameManager.websocketID);
-			// Debug.Log(WebSocketMessageContentGyro._x);
-			// Debug.Log(WebSocke tMessageContentGyro._y * Mathf.Rad2Deg);
-			// Debug.Log(WebSocketMessageContentGyro._y);
-			// Debug.Log(WebSocketMessageContentGyro._z);
-		}
+			var webSocketMessage = ProcessMessage(e.Data);
+			if (showLog)
+			{
+				/*
+					{
+						"type":"orientation",
+						"message":"{
+							\"_x\":-0.6071305695921945,
+							\"_y\":-3.003360119444884,
+							\"_z\":-0.016295066848099844,
+							\"_order\":\"YXZ\
+						"}
+					"}*/
+				// Debug.Log("WebSocketClient - OnMessage : " + e.Data);
+				// Debug.Log(e.Data);
+				// Debug.Log(webSocketMessage.message);
+				// Debug.Log(webSocketMessage.id);
+				// Debug.Log(GameManager.name);
+				// Debug.Log(WebSocketMessageContentGyro._x);
+				// Debug.Log(WebSocke tMessageContentGyro._y * Mathf.Rad2Deg);
+				// Debug.Log(WebSocketMessageContentGyro._y);
+				// Debug.Log(WebSocketMessageContentGyro._z);
+			}
 
-		GameManager.isPhoneConnected = true;
 
-		if (GameManager.websocketID == "")
-		{
-			GameManager.websocketID = webSocketMessage.id;
-		}
-
-		else if (GameManager.websocketID == webSocketMessage.id)
-		{
 			if (webSocketMessage.type == "orientation")
 			{
+				GameManager.isPhoneConnected = true;
 				var WebSocketMessageContentGyro = ProcessMessageContent(webSocketMessage.message);
 
+				Debug.Log(WebSocketMessageContentGyro._x);
 				GameManager.gyroAngleX = WebSocketMessageContentGyro._x * Mathf.Rad2Deg;
 				GameManager.gyroAngleY = WebSocketMessageContentGyro._y * Mathf.Rad2Deg;
 				GameManager.gyroAngleZ = WebSocketMessageContentGyro._z * Mathf.Rad2Deg;
@@ -103,10 +100,13 @@ public class WebSocketClient : MonoBehaviour
 
 			else if (webSocketMessage.type == "changeScene")
 			{
+				GameManager.isPhoneConnected = true;
 				GameManager.phoneCurrentScene += 1;
 			}
 		}
+
 	}
+
 
 	/*
 	 * Methods
@@ -128,7 +128,7 @@ public class WebSocketClient : MonoBehaviour
 			ConnectClient();
 			return;
 		}
-		Debug.Log("sending");
+		if (showLog) Debug.Log($"sending {message.id} {message.type} {message.message}");
 		_webSocket.Send(CreateMessage(message));
 	}
 

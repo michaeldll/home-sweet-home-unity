@@ -10,7 +10,6 @@ public static class ArrayExtensions
 
 public static class GameManager
 {
-	public static string websocketID = "";
 	public static bool isPhoneConnected = false;
 	public static bool isVoiceLoaded = false;
 	public static int phoneCurrentScene = 0;
@@ -31,10 +30,9 @@ public static class GameManager
 	public static string[] userNames = {
 		"SnowflakeSmasher86",
 		"boggybrendan69",
-		"larryisgood207",
+		"larryisgood20",
 		"boogie2988",
 		"lobbybobby88",
-		"TheyCallMeDSP",
 		"funkybandit",
 		"lincostinko",
 		"SirCaesar29",
@@ -50,8 +48,6 @@ public static class GameManager
 		"optimaltrauma8",
 		"tangibleabbey89",
 		"LoneMouse",
-		"acclaimedfetish",
-		"hothardship5",
 		"Frenchcorpus2",
 		"uprightrashfluke",
 		"demonichockey",
@@ -71,19 +67,16 @@ public static class GameManager
 		"baggyslugger58",
 		"TautBoldness",
 		"virtualaviation57",
-		"smarttycoon49",
 		"CoolMole",
 		"PepperySpectre",
 		"QuietCheerleader",
 		"HappyFetish",
-		"thirstysaucer",
-		"pungentgrappling",
 		"dustymeantime86",
 		"WhollyTrained",
 		"GratefulDemon6",
 		"generoustendon7",
 		"AcclaimedDentist",
-		"raspyperusal176",
+		"raspyperusal17",
 		"dizzyjoseph",
 		"evelknievel01",
 		"ChubbyScrum",
@@ -97,13 +90,13 @@ public static class GameManager
 		"goldenphosphorus",
 		"emptynarrator75",
 		"LittleThriller",
-		"wavyfunction1101",
+		"wavyfunction11",
 		"dustyman",
 		"CraftyNoodle",
 		"saladass555",
 		"tomamoto",
 		"uglymeanman",
-		"bouncytphone187",
+		"bouncytphone17",
 		"CoollySteel",
 		"snottybullion15",
 		"DopeyLlama",
@@ -114,7 +107,7 @@ public static class GameManager
 		"SymptomaticCapybara",
 		"tastysushi",
 		"OmegaMind04",
-		"throwaway2104",
+		"throwaway1001",
 		"TinyAnt",
 		"giddyfastball70",
 		"noiselessoverseer",
@@ -131,7 +124,6 @@ public static class GameManager
 		"TheVapidHorseman",
 		"robloxfantasy",
 		"wingedconstable6",
-		"perkyactress615",
 		"FlimsyPneumonia",
 		"frantichands",
 		"SadPhilosopher",
@@ -153,7 +145,7 @@ public static class GameManager
 		"wobblylikeness81",
 		"vengefuleater",
 		"GapingHole",
-		"throwaway9529",
+		"throwaway1002",
 		"properwords642",
 		"CraftyNuisance",
 		"radiantartisan71",
@@ -162,15 +154,12 @@ public static class GameManager
 		"LonelyScholarship",
 		"GentleGiant",
 		"FaithfulHamburger",
-		"sociablememory",
+		"lonelyBird",
 		"CalmCamel",
 		"starchywidth72",
 		"RoomyBroccoli",
-		"MetallicBooty",
 		"flickeringfluke",
-		"CommentEtiquette",
 		"stickybasin",
-		"Cr1msonPr1nce",
 		"snobbishhands2",
 		"LazyRock",
 		"superbjoseph",
@@ -202,10 +191,14 @@ public static class GameManager
 		name = userNames.RandomItem();
 	}
 
+	public static void firstScene()
+	{
+		setName();
+	}
+
 	public static void secondScene()
 	{
 		setGender();
-		setName();
 		if (gender == "male")
 		{
 			introText = $"This is the story of {name}. He was a lonely, lonely man. But of course, he had the Internet. The Internet was his friend.";
