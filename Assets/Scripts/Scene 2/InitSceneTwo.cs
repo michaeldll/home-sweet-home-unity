@@ -6,6 +6,7 @@ using RedBlueGames.Tools.TextTyper;
 
 public class InitSceneTwo : MonoBehaviour
 {
+	private WebSocketMessage _message;
 	[SerializeField] private CinemachineVirtualCamera[] cams; //Start cam, Scene cam
 	[SerializeField] private GameObject[] assets; //appt, phone, phone beam, character,
 	[SerializeField] private GameObject[] lights; //spotlight and beam, point light 1, directional light
@@ -124,6 +125,8 @@ public class InitSceneTwo : MonoBehaviour
 		titleAnimation.SetActive(false);
 		//show logo
 		logoUI.SetActive(true);
+		//send readyForNextScene
+		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"0\"}");
 
 		yield return new WaitForSeconds(8.5f);
 		setObjective(1);
@@ -142,6 +145,19 @@ public class InitSceneTwo : MonoBehaviour
 			objectiveText.SetText("");
 			whitePhoneAnimator.SetBool("isActive", false);
 			whitePhoneAnimator.SetBool("isInactive", true);
+		}
+	}
+
+	void SendMessage(string type, string message)
+	{
+		if (WebSocketClient.Instance != null)
+		{
+			_message = new WebSocketMessage();
+			_message.id = GameManager.name;
+			_message.type = type; //"readyForNextScene"
+			_message.message = message; //"{\"from\":\"0\", \"to\":\"0\"}"
+
+			WebSocketClient.Instance.Send(_message);
 		}
 	}
 }

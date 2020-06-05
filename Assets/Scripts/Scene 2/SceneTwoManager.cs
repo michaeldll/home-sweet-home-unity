@@ -41,6 +41,9 @@ public class SceneTwoManager : MonoBehaviour
 				default:
 					break;
 			}
+
+			//send readyForNextScene
+			// SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"0\"}");
 		}
 	}
 
@@ -60,14 +63,14 @@ public class SceneTwoManager : MonoBehaviour
 		}
 	}
 
-	void SendNotif()
+	void SendMessage(string type, string message)
 	{
 		if (WebSocketClient.Instance != null)
 		{
 			_message = new WebSocketMessage();
 			_message.id = GameManager.name;
-			_message.type = "sound";
-			_message.message = "{\"soundname\":\"notif\"}";
+			_message.type = type; //"readyForNextScene" , "sound";
+			_message.message = message; //"{\"from\":\"0\", \"to\":\"0\"}", "{\"soundname\":\"notif\"}";
 
 			WebSocketClient.Instance.Send(_message);
 		}
