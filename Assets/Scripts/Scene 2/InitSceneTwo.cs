@@ -1,14 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 using Cinemachine;
-using UnityEngine.UI;
+using TMPro;
+using RedBlueGames.Tools.TextTyper;
 
 public class InitSceneTwo : MonoBehaviour
 {
-	// [SerializeField] private Transform[] phoneTransforms; //Inital, Top, Bottom
-	// [SerializeField] private Transform[] characterTransforms; //Top, Bottom, Head Reset Transform
 	[SerializeField] private CinemachineVirtualCamera[] cams; //Start cam, Scene cam
 	[SerializeField] private GameObject[] assets; //appt, phone, phone beam, character,
 	[SerializeField] private GameObject[] lights; //spotlight and beam, point light 1, directional light
@@ -21,6 +18,14 @@ public class InitSceneTwo : MonoBehaviour
 	[SerializeField] private LookAtTarget lookAt = null;
 	[SerializeField] private GameObject head = null;
 	[SerializeField] private CrossfadeMixer crossfadeMixer = null;
+	[SerializeField] private GameObject canvasUI = null;
+	[SerializeField] private TextMeshProUGUI objectiveText = null;
+	[SerializeField] private float delay = 0.032f;
+	[SerializeField] private TextTyper textTyperComponent;
+	[SerializeField] private Fade fade;
+	[SerializeField] private GameObject whitePhoneUI = null;
+	[SerializeField] private GameObject logoUI = null;
+	[SerializeField] private Animator whitePhoneAnimator = null;
 
 	void Start()
 	{
@@ -66,7 +71,7 @@ public class InitSceneTwo : MonoBehaviour
 
 	IEnumerator Init()
 	{
-		yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(1f);
 		textToSpeechArr[0].enabled = true;
 
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
@@ -82,11 +87,10 @@ public class InitSceneTwo : MonoBehaviour
 		textToSpeechArr[1].enabled = true;
 
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
-		yield return new WaitForSeconds(3f);
-		//start moving phone to end position
-		// assets[1].transform.DOMove(phoneTransforms[1].position, 2.0f);
-
-		yield return new WaitForSeconds(0.6f);
+		yield return new WaitForSeconds(2.6f);
+		canvasUI.SetActive(true);
+		whitePhoneUI.SetActive(true);
+		setObjective(0);
 		//turn on phone
 		assets[2].SetActive(true);
 		//start looking at phone
@@ -95,24 +99,13 @@ public class InitSceneTwo : MonoBehaviour
 		if (GameManager.isPhoneConnected) gRotate.enabled = true;
 
 		yield return new WaitForSeconds(4.8f);
-		//reset head to avoid long neck bug
-		// lookAt.enabled = false;
-		// head.transform.position = characterTransforms[3].transform.position;
-		// head.transform.rotation = characterTransforms[3].transform.rotation;
-
-		//move dude and phone
-		// assets[1].transform.DOMove(phoneTransforms[2].position, 2.0f);
-		// assets[3].transform.DOMove(characterTransforms[1].position, 2.0f);
-		// head.transform.DOMove(characterTransforms[2].position, 2.0f);
+		setObjective(-1);
 
 		yield return new WaitForSeconds(0.6f);
 		//show intro animation
 		titleAnimation.SetActive(true);
 
 		yield return new WaitForSeconds(8.5f);
-		//reset positions
-		// assets[1].transform.position = phoneTransforms[0].position;
-		// assets[3].transform.position = characterTransforms[0].position;
 		//switch cams
 		cams[1].m_Priority = 3;
 		//show appartment
@@ -129,5 +122,26 @@ public class InitSceneTwo : MonoBehaviour
 		lookAt.enabled = true;
 		//disable anim
 		titleAnimation.SetActive(false);
+		//show logo
+		logoUI.SetActive(true);
+
+		yield return new WaitForSeconds(8.5f);
+		setObjective(1);
+	}
+
+	void setObjective(int objectiveIndex)
+	{
+		if (objectiveIndex > -1)
+		{
+			objectiveText.SetText(GameManager.objectiveTexts[objectiveIndex]);
+			whitePhoneAnimator.SetBool("isInactive", false);
+			whitePhoneAnimator.SetBool("isActive", true);
+		}
+		else
+		{
+			objectiveText.SetText("");
+			whitePhoneAnimator.SetBool("isActive", false);
+			whitePhoneAnimator.SetBool("isInactive", true);
+		}
 	}
 }

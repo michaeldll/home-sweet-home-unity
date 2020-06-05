@@ -44,6 +44,7 @@ public class TextToSpeech : MonoBehaviour
 		audioSource.clip = _gcTextToSpeechInstance.GetAudioClipFromBase64(response.audioContent, Constants.DEFAULT_AUDIO_ENCODING);
 		GameManager.isVoiceLoaded = true;
 		audioSource.Play();
+		Invoke("resetVoiceLoaded", 0.5f);
 	}
 
 	private void initSpeak()
@@ -61,4 +62,9 @@ public class TextToSpeech : MonoBehaviour
 
 
 	#endregion sucess handlers
+
+	private void resetVoiceLoaded()
+	{
+		GameManager.isVoiceLoaded = false;
+	}
 }

@@ -1,9 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
-using Cinemachine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InitSceneThree : MonoBehaviour
 {
@@ -13,11 +11,14 @@ public class InitSceneThree : MonoBehaviour
 	[SerializeField] private Fade fade = null;
 	[SerializeField] private Image background = null;
 	[SerializeField] private CrossfadeMixer crossfadeMixer = null;
+	[SerializeField] private TextMeshProUGUI objectiveText = null;
+	[SerializeField] private Animator whitePhoneAnimator = null;
 	void Start()
 	{
 		//set text
 		textToSpeech[0].text = GameManager.introText;
 		textToSpeech[1].text = GameManager.sceneText;
+		textToSpeech[2].text = GameManager.secondSceneText;
 		textTyper.text = GameManager.introText;
 
 		//black
@@ -50,5 +51,28 @@ public class InitSceneThree : MonoBehaviour
 		yield return new WaitForSeconds(2.0f);
 
 		textToSpeech[1].enabled = true;
+		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
+
+		yield return new WaitForSeconds(4.3f);
+		textToSpeech[2].enabled = true;
+
+		yield return new WaitForSeconds(3.1f);
+		setObjective(3);
+	}
+
+	void setObjective(int objectiveIndex)
+	{
+		if (objectiveIndex > -1)
+		{
+			objectiveText.SetText(GameManager.objectiveTexts[objectiveIndex]);
+			whitePhoneAnimator.SetBool("isInactive", false);
+			whitePhoneAnimator.SetBool("isActive", true);
+		}
+		else
+		{
+			objectiveText.SetText("");
+			whitePhoneAnimator.SetBool("isActive", false);
+			whitePhoneAnimator.SetBool("isInactive", true);
+		}
 	}
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -9,22 +10,58 @@ public class SceneOneManager : MonoBehaviour
 	private bool _isLoading = false;
 	[SerializeField] private Fade fade;
 	[SerializeField] private TextMeshProUGUI codeText;
+	[SerializeField] private TextMeshProUGUI dotsText;
+	[SerializeField] private GameObject codeTextBorder;
+	[SerializeField] private TextMeshProUGUI subtitleText;
+	[SerializeField] private TextMeshProUGUI connectionText;
+	[SerializeField] private GameObject dotsGameObject;
+	[SerializeField] private GameObject phoneLoadedGameObject;
+	private string[] _dots = { ".", "..", "..." };
+	private int _dotsIndex = 0;
+	private int _countdownNumber = 10;
+	private bool _isCodeLoaded;
 	private WebSocketMessage _message;
 
 	void Awake()
 	{
 		GameManager.firstScene();
-		codeText.SetText($"Access Key: {GameManager.name}");
+		codeText.SetText($"{GameManager.name}");
+		SetDotsText();
 		InvokeRepeating("SendAccessKey", 0, 1);
+		InvokeRepeating("AnimateDots", 0.75f, 0.75f);
 	}
-	
+
 	void Update()
 	{
 		if (Input.GetKey(KeyCode.Mouse0)) SendNotif();
 
-		if (GameManager.isPhoneConnected && !_isLoading) LoadScene("Second Scene");
+		if (GameManager.isPhoneConnected && !_isCodeLoaded) SetPreLoadingScreen();
 
-		if (Input.GetKey(KeyCode.RightArrow) && !_isLoading) LoadScene("Second Scene");
+		if (Input.GetKey(KeyCode.RightArrow) && !_isCodeLoaded) SetPreLoadingScreen();
+	}
+
+	void SetPreLoadingScreen()
+	{
+		_isCodeLoaded = true;
+		codeTextBorder.SetActive(false);
+		dotsGameObject.SetActive(false);
+		phoneLoadedGameObject.SetActive(true);
+		subtitleText.SetText("The experience is starting");
+		connectionText.SetText("Connected");
+		codeText.SetText(_countdownNumber.ToString());
+		InvokeRepeating("SetCountdown", 1, 1);
+		Invoke("LoadSecondScene", 10f);
+	}
+
+	void LoadSecondScene()
+	{
+		LoadScene("Second Scene");
+	}
+
+	void SetCountdown()
+	{
+		if (_countdownNumber > 0) _countdownNumber = _countdownNumber - 1;
+		codeText.SetText(_countdownNumber.ToString());
 	}
 
 	void SendAccessKey()
@@ -39,8 +76,25 @@ public class SceneOneManager : MonoBehaviour
 			WebSocketClient.Instance.Send(_message);
 		}
 	}
+	void AnimateDots()
+	{
+		if (_dotsIndex < 2)
+		{
+			_dotsIndex += 1;
+		}
+		else
+		{
+			_dotsIndex = 0;
+		}
 
-	void SendNotif(){
+		SetDotsText();
+	}
+	void SetDotsText()
+	{
+		dotsText.SetText(_dots[_dotsIndex]);
+	}
+	void SendNotif()
+	{
 		if (WebSocketClient.Instance != null)
 		{
 			_message = new WebSocketMessage();

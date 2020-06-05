@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 using Cinemachine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InitSceneFour : MonoBehaviour
 {
@@ -22,6 +21,8 @@ public class InitSceneFour : MonoBehaviour
 		//set text
 		textToSpeechArr[0].text = GameManager.introText;
 		textToSpeechArr[1].text = GameManager.sceneText;
+		textToSpeechArr[2].text = GameManager.secondSceneText;
+		textToSpeechArr[3].text = GameManager.thirdSceneText;
 		textTyper.text = GameManager.introText;
 
 		//start animation
@@ -52,8 +53,17 @@ public class InitSceneFour : MonoBehaviour
 		yield return new WaitForSeconds(2.0f);
 		textToSpeechArr[1].enabled = true;
 
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(0.7f);
 		cam2.m_Priority = 2;
 
+		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
+
+		yield return new WaitForSeconds(6.5f);
+		textToSpeechArr[2].enabled = true;
+
+		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
+
+		yield return new WaitForSeconds(2.8f);
+		textToSpeechArr[3].enabled = true;
 	}
 }

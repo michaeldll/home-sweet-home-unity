@@ -16,13 +16,15 @@ public static class GameManager
 	public static float gyroAngleX = 0.0f;
 	public static float gyroAngleY = 0.0f;
 	public static float gyroAngleZ = 0.0f;
-	public static string name = "";
-	public static string gender;
+	public static string name = "SnowflakeSmasher";
+	public static string gender = "male";
 	public static string introText;
 	public static string preSceneText;
 	public static string sceneText;
+	public static string secondSceneText;
+	public static string thirdSceneText;
 	public static string[] moonText = { "", "" };
-	public static string endText;
+	public static string[] endText = { "", "" };
 	// public static string[] maleFirstNames = { "gonc", "henry", "valentin", "artey", "ave", "ouri", "marius", "michael" };
 	// public static string[] maleSecondNames = { "inity", "_bzrd", ".dll", "miramont10", "_kevin", ".levin", "ballot" };
 	// public static string[] femaleFirstNames = { "mogo", "sol", "mog", "set", "cha", "saana", "marie", "chloro", "interieur", "julie", "m" };
@@ -104,7 +106,7 @@ public static class GameManager
 		"lavishsnark",
 		"LoudlyHallowed",
 		"sugardaddy69",
-		"SymptomaticCapybara",
+		"LonelyMan12",
 		"tastysushi",
 		"OmegaMind04",
 		"throwaway1001",
@@ -164,10 +166,23 @@ public static class GameManager
 		"LazyRock",
 		"superbjoseph",
 	};
+	public static string[] objectiveTexts = {
+		"Swipe up to see through his eyes",
+		"Throw the ball twice to play with the Internet",
+		"Throw it again",
+		"Gently blow on your phone to seduce the Internet",
+		"Tap followers to corral them",
+		"Safeguard your relationship from all your followers",
+		"Tap anywhere to fly away",
+		"Tap once more in order to reach unconditional love",
+		"Tap one last time to gift your soul to Love"
+	};
 	public static bool startFalling = false;
+	public static int currentInteractionIndex = 0;
 	public static void setGender()
 	{
-		gender = Random.value < 0.5f ? "male" : "female";
+		// gender = Random.value < 0.5f ? "male" : "female";
+		gender = "male";
 		// Debug.Log(gender);
 	}
 
@@ -218,6 +233,7 @@ public static class GameManager
 	{
 		introText = "They would get more and more lost in each other’s lives, sharing their deepest fears and desires.";
 		sceneText = "And so, they whispered each other’s secrets...";
+		secondSceneText = "...therefore growing closer and closer, together";
 	}
 
 	public static void fourthScene()
@@ -228,9 +244,11 @@ public static class GameManager
 		}
 		else
 		{
-			introText = "One day, she turned to her friend, the Internet, and asked: “Internet, do you love me ?”. The Internet then said: “Yes, I love you very very very very much.\"";
+			introText = "One day, she turned to her friend, the Internet, and asked: “Internet, do you love me ?”. The Internet then answered: “Yes, I love you very very very very much.\"";
 		}
-		sceneText = "I love you so much that I never, ever want us to be apart ever again ever";
+		sceneText = "'I love you so much,' - said the Internet - 'that I never, ever want us to be apart ever again ever.'";
+		secondSceneText = "For they brought each other extraordinary pleasure.";
+		thirdSceneText = "And so, they saw everything, anytime, together.";
 	}
 
 	public static void fifthScene()
@@ -238,10 +256,16 @@ public static class GameManager
 		if (gender == "male")
 		{
 			introText = "The Internet took him to all kinds of places, and they built their own home, together.";
+			sceneText = $"{name} and The Internet embarked on a journey with no end...";
+			secondSceneText = "...during which they shared both dreams and desires.";
+			thirdSceneText = "They finally belonged to their own endless home.";
 		}
 		else
 		{
 			introText = "The Internet took her to all kinds of places, and they built their own home, together.";
+			sceneText = $"{name} and The Internet embarked on a journey with no end...";
+			secondSceneText = "...during which they shared both dreams and desires.";
+			thirdSceneText = "They finally belonged to their own endless home.";
 		}
 	}
 
@@ -249,22 +273,27 @@ public static class GameManager
 	{
 		introText =
 		"Their love crossed the boundaries of their relationship. Their trust knew no limits. They always agreed with each other.";
-		sceneText = "They would build the sweetest of homes, together.";
+		sceneText = $"{name} and the Internet then kept building the sweetest of homes, together.";
+		secondSceneText = "This attracted many followers, some of which misbehaved.";
 	}
 
 	public static void seventhScene()
 	{
 		if (name == "") name = "SnowFlakeSmasher86";
 		introText = "And so they lived.";
-		moonText.SetValue("But this somehow felt like something more, beyond just living.", 0);
-		moonText.SetValue("All of her dreams were now at hand's reach - all of it, everything.", 1);
+		sceneText = $"“Life is more than food, and the body more than clothes” - thought {name}";
+		moonText.SetValue("And this somehow felt like something more, beyond just living.", 0);
 		if (gender == "male")
 		{
-			endText = $"{name} would tell herself: \"Man shall not live by bread alone\". And then he died.";
+			moonText.SetValue("All of his dreams were now at hand's reach - all of it, everything.", 1);
+			endText.SetValue($"{name} would tell himself: \"Man shall not live by bread alone\". And then he died.", 0);
+			endText.SetValue("In his lonely house. In his lonely street. In his lonely part of the world.", 1);
 		}
 		else
 		{
-			endText = $"{name} would tell herself: \"Man shall not live by bread alone\". And then she died.";
+			moonText.SetValue("All of her dreams were now at hand's reach - all of it, everything.", 1);
+			endText.SetValue($"{name} would tell herself: \"Man shall not live by bread alone\". And then she died.", 0);
+			endText.SetValue("In her lonely house. In her lonely street. In her lonely part of the world.", 1);
 		}
 	}
 }

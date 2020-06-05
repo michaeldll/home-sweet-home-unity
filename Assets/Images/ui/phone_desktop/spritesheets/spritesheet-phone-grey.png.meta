@@ -1,0 +1,907 @@
+fileFormatVersion: 2
+guid: c1cdb68ba255e45e1874aab32fa01f51
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1853889656523131734
+    second: spritesheet-phone-grey_0
+  - first:
+      213: 5137938400367618972
+    second: spritesheet-phone-grey_1
+  - first:
+      213: -7161342412616248587
+    second: spritesheet-phone-grey_2
+  - first:
+      213: -5950534939280210587
+    second: spritesheet-phone-grey_3
+  - first:
+      213: -7536163416052968591
+    second: spritesheet-phone-grey_4
+  - first:
+      213: 2395296427015441135
+    second: spritesheet-phone-grey_5
+  - first:
+      213: 1216388064536541214
+    second: spritesheet-phone-grey_6
+  - first:
+      213: 4896225846555014922
+    second: spritesheet-phone-grey_7
+  - first:
+      213: 5886346862143261941
+    second: spritesheet-phone-grey_8
+  - first:
+      213: 9125036869190198298
+    second: spritesheet-phone-grey_9
+  - first:
+      213: -7814952434895027800
+    second: spritesheet-phone-grey_10
+  - first:
+      213: 2978899048930591205
+    second: spritesheet-phone-grey_11
+  - first:
+      213: -2258494725334531122
+    second: spritesheet-phone-grey_12
+  - first:
+      213: 4019229261240114706
+    second: spritesheet-phone-grey_13
+  - first:
+      213: 4320232001121128684
+    second: spritesheet-phone-grey_14
+  - first:
+      213: -5615555435795001146
+    second: spritesheet-phone-grey_15
+  - first:
+      213: 492710491623519148
+    second: spritesheet-phone-grey_16
+  - first:
+      213: -6820787891082128165
+    second: spritesheet-phone-grey_17
+  - first:
+      213: -6524977277501060296
+    second: spritesheet-phone-grey_18
+  - first:
+      213: -385301403660554275
+    second: spritesheet-phone-grey_19
+  - first:
+      213: 4152516493921381518
+    second: spritesheet-phone-grey_20
+  - first:
+      213: -4926264761695400147
+    second: spritesheet-phone-grey_21
+  - first:
+      213: -6027126256405978380
+    second: spritesheet-phone-grey_22
+  - first:
+      213: 13595861510958776
+    second: spritesheet-phone-grey_23
+  - first:
+      213: 9217581177403218021
+    second: spritesheet-phone-grey_24
+  - first:
+      213: -2001440072195688097
+    second: spritesheet-phone-grey_25
+  - first:
+      213: 2857088263646434404
+    second: spritesheet-phone-grey_26
+  - first:
+      213: -3269255047945505838
+    second: spritesheet-phone-grey_27
+  - first:
+      213: -7068211963935972116
+    second: spritesheet-phone-grey_0
+  - first:
+      213: -7081337171396619492
+    second: spritesheet-phone-grey_1
+  - first:
+      213: -6444403769969577155
+    second: spritesheet-phone-grey_2
+  - first:
+      213: -5974777189525785399
+    second: spritesheet-phone-grey_3
+  - first:
+      213: 1823519285436884563
+    second: spritesheet-phone-grey_4
+  - first:
+      213: -3706115798175041315
+    second: spritesheet-phone-grey_5
+  - first:
+      213: -5963443103992660682
+    second: spritesheet-phone-grey_6
+  - first:
+      213: 555331717959261184
+    second: spritesheet-phone-grey_7
+  - first:
+      213: -2969560034638426323
+    second: spritesheet-phone-grey_8
+  - first:
+      213: 4894422458686976358
+    second: spritesheet-phone-grey_9
+  - first:
+      213: -2258527846243997637
+    second: spritesheet-phone-grey_10
+  - first:
+      213: -1964905881667932603
+    second: spritesheet-phone-grey_11
+  - first:
+      213: 1153473793392941520
+    second: spritesheet-phone-grey_12
+  - first:
+      213: 3419625964435522594
+    second: spritesheet-phone-grey_13
+  - first:
+      213: -2415626328004548063
+    second: spritesheet-phone-grey_14
+  - first:
+      213: -2415730503098955810
+    second: spritesheet-phone-grey_15
+  - first:
+      213: 6629720243907668405
+    second: spritesheet-phone-grey_16
+  - first:
+      213: -6325808483033093665
+    second: spritesheet-phone-grey_17
+  - first:
+      213: 4656235005593325511
+    second: spritesheet-phone-grey_18
+  - first:
+      213: -5734867686526951896
+    second: spritesheet-phone-grey_19
+  - first:
+      213: -4152596727885471029
+    second: spritesheet-phone-grey_20
+  - first:
+      213: 4314099254124502997
+    second: spritesheet-phone-grey_21
+  - first:
+      213: -3404408957349840408
+    second: spritesheet-phone-grey_22
+  - first:
+      213: -7882230445141175948
+    second: spritesheet-phone-grey_23
+  - first:
+      213: -1804335627890843983
+    second: spritesheet-phone-grey_24
+  - first:
+      213: 163372085471346254
+    second: spritesheet-phone-grey_25
+  - first:
+      213: 9007669609142979235
+    second: spritesheet-phone-grey_26
+  - first:
+      213: 8354721384087038316
+    second: spritesheet-phone-grey_27
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce42e64faaaa8ed90800000000000000
+      internalID: -7068211963935972116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_1
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1392247c590abd90800000000000000
+      internalID: -7081337171396619492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_2
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3376c54ae0e096a0800000000000000
+      internalID: -6444403769969577155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_3
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c475364dc3551da0800000000000000
+      internalID: -5974777189525785399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_4
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3562a81f0217e4910800000000000000
+      internalID: 1823519285436884563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_5
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd83051415b319cc0800000000000000
+      internalID: -3706115798175041315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_6
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63db344b7189d3da0800000000000000
+      internalID: -5963443103992660682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_7
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00c1875514fe4b700800000000000000
+      internalID: 555331717959261184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_8
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2f0e24c1e00ac6d0800000000000000
+      internalID: -2969560034638426323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_9
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6613bbe5b4b7ce340800000000000000
+      internalID: 4894422458686976358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_10
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b386c49d3e818a0e0800000000000000
+      internalID: -2258527846243997637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_11
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54e6b1ad2804bb4e0800000000000000
+      internalID: -1964905881667932603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_12
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d998e0cd46f10010800000000000000
+      internalID: 1153473793392941520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_13
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 224c1ea52b3f47f20800000000000000
+      internalID: 3419625964435522594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_14
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12a253937a8f97ed0800000000000000
+      internalID: -2415626328004548063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_15
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed706b118e9997ed0800000000000000
+      internalID: -2415730503098955810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_16
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b92552af6f710c50800000000000000
+      internalID: 6629720243907668405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_17
+      rect:
+        serializedVersion: 2
+        x: 884
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd9e8a343b63638a0800000000000000
+      internalID: -6325808483033093665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_18
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cf012b51154e9040800000000000000
+      internalID: 4656235005593325511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_19
+      rect:
+        serializedVersion: 2
+        x: 988
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82ed1b64938a960b0800000000000000
+      internalID: -5734867686526951896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_20
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc2efe207430f56c0800000000000000
+      internalID: -4152596727885471029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_21
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5df5edf1a62cedb30800000000000000
+      internalID: 4314099254124502997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_22
+      rect:
+        serializedVersion: 2
+        x: 1144
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e93103371c11c0d0800000000000000
+      internalID: -3404408957349840408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_23
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47157970c21bc9290800000000000000
+      internalID: -7882230445141175948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_24
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1be1cf36e46b5f6e0800000000000000
+      internalID: -1804335627890843983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_25
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4efbb0db0a644200800000000000000
+      internalID: 163372085471346254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_26
+      rect:
+        serializedVersion: 2
+        x: 1352
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3aa8c0be8cba10d70800000000000000
+      internalID: 9007669609142979235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-phone-grey_27
+      rect:
+        serializedVersion: 2
+        x: 1404
+        y: 1
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c692ed765dee1f370800000000000000
+      internalID: 8354721384087038316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: c7b2d18678daa4b58bd904f40fb204ac
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

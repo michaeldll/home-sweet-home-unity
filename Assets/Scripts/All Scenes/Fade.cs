@@ -4,19 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Fade : MonoBehaviour
 {
-	[SerializeField] public Image background;
+	[SerializeField] public Image img;
 
-	public void FadeOut()
+	public void FadeOut(float duration = 2.0f)
 	{
-		background.enabled = true;
-		background.canvasRenderer.SetAlpha(0.0f);
-		background.CrossFadeAlpha(1, 2, false);
+		img.enabled = true;
+		img.canvasRenderer.SetAlpha(0.0f);
+		img.CrossFadeAlpha(1, duration, false);
 	}
 
 	public void FadeIn()
 	{
-		background.enabled = true;
-		background.canvasRenderer.SetAlpha(1.0f);
-		background.CrossFadeAlpha(0, 3, false);
+		img.enabled = true;
+		img.canvasRenderer.SetAlpha(1.0f);
+		img.CrossFadeAlpha(0, 3, false);
 	}
 }

@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
@@ -22,6 +22,8 @@ public class SceneSixManager : MonoBehaviour
 	[SerializeField] private GameObject phoneSpotlight;
 	[SerializeField] private Color[] cameraBackgroundColors;
 	[SerializeField] [Range(0f, 1f)] private float lerpTime;
+	[SerializeField] private TextMeshProUGUI objectiveText = null;
+	[SerializeField] private Animator whitePhoneAnimator = null;
 	private bool _lerpFirstColor = false;
 	private bool _lerpSecondColor = false;
 
@@ -32,7 +34,27 @@ public class SceneSixManager : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKey(KeyCode.DownArrow) && !_isLoading) GameManager.startFalling = true;
+		if (Input.GetMouseButtonDown(0) && !_isLoading)
+		{
+			GameManager.currentInteractionIndex += 1;
+			switch (GameManager.currentInteractionIndex)
+			{
+				case 1:
+					setObjective(5);
+					break;
+				case 2:
+					setObjective(-1);
+					GameManager.startFalling = true;
+					break;
+				case 3:
+					GameManager.currentInteractionIndex = 0;
+					setObjective(-1);
+					LoadScene("Seventh Scene");
+					break;
+				default:
+					break;
+			}
+		}
 
 		if (_lerpFirstColor)
 		{
@@ -46,12 +68,12 @@ public class SceneSixManager : MonoBehaviour
 		if (GameManager.startFalling)
 		{
 			GameManager.startFalling = false;
-			HandleDissolve();
+			HandleFall();
 		}
 
-		if (Input.GetKey(KeyCode.RightArrow) && !_isLoading) LoadScene("Seventh Scene"); ;
+		// if (Input.GetKey(KeyCode.RightArrow) && !_isLoading) LoadScene("Seventh Scene"); ;
 	}
-	void HandleDissolve()
+	void HandleFall()
 	{
 		fallingAnimator.SetBool("startFalling", true);
 		StartCoroutine(ToggleDelayCamera(true, 0.4f));
@@ -149,6 +171,22 @@ public class SceneSixManager : MonoBehaviour
 		while (!asyncLoad.isDone)
 		{
 			yield return null;
+		}
+	}
+
+	void setObjective(int objectiveIndex)
+	{
+		if (objectiveIndex > -1)
+		{
+			objectiveText.SetText(GameManager.objectiveTexts[objectiveIndex]);
+			whitePhoneAnimator.SetBool("isInactive", false);
+			whitePhoneAnimator.SetBool("isActive", true);
+		}
+		else
+		{
+			objectiveText.SetText("");
+			whitePhoneAnimator.SetBool("isActive", false);
+			whitePhoneAnimator.SetBool("isInactive", true);
 		}
 	}
 }

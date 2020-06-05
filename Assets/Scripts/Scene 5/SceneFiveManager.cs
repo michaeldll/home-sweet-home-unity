@@ -19,7 +19,7 @@ public class SceneFiveManager : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKey(KeyCode.RightArrow) && !_isLoading) LoadScene("Sixth Scene"); ;
+		if (Input.GetMouseButtonDown(0) && !_isLoading) LoadScene("Sixth Scene"); ;
 	}
 
 	void LoadScene(string name)

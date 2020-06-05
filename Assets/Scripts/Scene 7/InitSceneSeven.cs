@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
-using Cinemachine;
+using TMPro;
 using UnityEngine.UI;
 
 public class InitSceneSeven : MonoBehaviour
@@ -14,6 +12,8 @@ public class InitSceneSeven : MonoBehaviour
 	[SerializeField] private Image background = null;
 	[SerializeField] private GyroRotate gRotate = null;
 	[SerializeField] private CrossfadeMixer crossfadeMixer = null;
+	[SerializeField] private TextMeshProUGUI objectiveText = null;
+	[SerializeField] private Animator whitePhoneAnimator = null;
 
 	void Start()
 	{
@@ -24,7 +24,9 @@ public class InitSceneSeven : MonoBehaviour
 		textToSpeechArr[0].text = GameManager.introText;
 		textToSpeechArr[1].text = GameManager.moonText[0];
 		textToSpeechArr[2].text = GameManager.moonText[1];
-		textToSpeechArr[3].text = GameManager.endText;
+		textToSpeechArr[3].text = GameManager.endText[0];
+		textToSpeechArr[4].text = GameManager.sceneText;
+		textToSpeechArr[5].text = GameManager.endText[1];
 		textTyper.text = GameManager.introText;
 
 		gRotate.enabled = false;
@@ -53,8 +55,27 @@ public class InitSceneSeven : MonoBehaviour
 		fade.FadeIn();
 		//fade music
 		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
-
-		yield return new WaitForSeconds(2.0f);
 		if (GameManager.isPhoneConnected) gRotate.enabled = true;
+		textToSpeechArr[4].enabled = true;
+
+		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
+		yield return new WaitForSeconds(6.2f);
+		setObjective(6);
+	}
+
+	void setObjective(int objectiveIndex)
+	{
+		if (objectiveIndex > -1)
+		{
+			objectiveText.SetText(GameManager.objectiveTexts[objectiveIndex]);
+			whitePhoneAnimator.SetBool("isInactive", false);
+			whitePhoneAnimator.SetBool("isActive", true);
+		}
+		else
+		{
+			objectiveText.SetText("");
+			whitePhoneAnimator.SetBool("isActive", false);
+			whitePhoneAnimator.SetBool("isInactive", true);
+		}
 	}
 }

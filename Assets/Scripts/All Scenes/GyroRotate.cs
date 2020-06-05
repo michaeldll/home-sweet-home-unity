@@ -10,11 +10,19 @@ public class GyroRotate : MonoBehaviour
 	private float y = GameManager.gyroAngleY;
 	[SerializeField] private int _yLowerLimit = -60, _yUpperLimit = 10;
 	[SerializeField] private int _zLowerLimit = -10, _zUpperLimit = 40;
+	// [SerializeField] private Animator turnBackController = null;
 
 	void Update()
 	{
 		x = GameManager.gyroAngleX;
 		y = GameManager.gyroAngleY;
+
+		if (x < _zLowerLimit || x > _zUpperLimit)
+		{
+			// Debug.Log("isover");
+		}
+
+		// if (Input.GetMouseButtonDown(0)) turnBackController.SetBool("turnBack", true);
 
 		// Handle and clamp gyro coordinates
 		float clampedY = Mathf.Clamp(handleGyroY(y), _yLowerLimit, _yUpperLimit);

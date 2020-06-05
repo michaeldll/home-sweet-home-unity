@@ -22,6 +22,9 @@ public class InitSceneFive : MonoBehaviour
 
 		//set text
 		textToSpeechArr[0].text = GameManager.introText;
+		textToSpeechArr[1].text = GameManager.sceneText;
+		textToSpeechArr[2].text = GameManager.secondSceneText;
+		textToSpeechArr[3].text = GameManager.thirdSceneText;
 		textTyper.text = GameManager.introText;
 
 		gRotate.enabled = false;
@@ -44,14 +47,24 @@ public class InitSceneFive : MonoBehaviour
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
 
 		toggleTyper(true);
-		yield return new WaitForSeconds(8.5f);
+		yield return new WaitForSeconds(8f);
 
 		toggleTyper(false);
 		fade.FadeIn();
 		//fade music
 		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
-
-		yield return new WaitForSeconds(2.0f);
 		if (GameManager.isPhoneConnected) gRotate.enabled = true;
+
+		textToSpeechArr[1].enabled = true;
+		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
+		yield return new WaitForSeconds(4.5f);
+
+		textToSpeechArr[2].enabled = true;
+		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
+		yield return new WaitForSeconds(3.8f);
+
+		textToSpeechArr[3].enabled = true;
+		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
+		yield return new WaitForSeconds(3.5f);
 	}
 }

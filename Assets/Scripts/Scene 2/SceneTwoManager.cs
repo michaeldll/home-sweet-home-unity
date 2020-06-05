@@ -1,17 +1,19 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class SceneTwoManager : MonoBehaviour
 {
 	private bool _isLoading = false;
-
 	private Coroutine _loader = null;
 	private WebSocketMessage _message;
 	[SerializeField] private CrossfadeMixer crossfadeMixer;
 	[SerializeField] private float crossfadeDuration = 4.0f;
 	[SerializeField] private Fade fade;
+	[SerializeField] private GameObject canvasUI = null;
+	[SerializeField] private TextMeshProUGUI objectiveText = null;
+	[SerializeField] private Animator whitePhoneAnimator = null;
 
 	void Awake()
 	{
@@ -21,14 +23,45 @@ public class SceneTwoManager : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKey(KeyCode.LeftArrow)) SendNotif();
-
 		if (GameManager.phoneCurrentScene > 0 && !_isLoading) { LoadScene("Third Scene"); }
 
-		if (Input.GetKey(KeyCode.RightArrow) && !_isLoading) { LoadScene("Third Scene"); }
+		if (Input.GetMouseButtonDown(0) && !_isLoading)
+		{
+			GameManager.currentInteractionIndex += 1;
+			switch (GameManager.currentInteractionIndex)
+			{
+				case 1:
+					setObjective(2);
+					break;
+				case 2:
+					GameManager.currentInteractionIndex = 0;
+					setObjective(-1);
+					LoadScene("Third Scene");
+					break;
+				default:
+					break;
+			}
+		}
 	}
 
-	void SendNotif(){
+	void setObjective(int objectiveIndex)
+	{
+		if (objectiveIndex > -1)
+		{
+			objectiveText.SetText(GameManager.objectiveTexts[objectiveIndex]);
+			whitePhoneAnimator.SetBool("isInactive", false);
+			whitePhoneAnimator.SetBool("isActive", true);
+		}
+		else
+		{
+			objectiveText.SetText("");
+			whitePhoneAnimator.SetBool("isActive", false);
+			whitePhoneAnimator.SetBool("isInactive", true);
+		}
+	}
+
+	void SendNotif()
+	{
 		if (WebSocketClient.Instance != null)
 		{
 			_message = new WebSocketMessage();

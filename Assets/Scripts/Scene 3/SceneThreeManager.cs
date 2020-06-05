@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class SceneThreeManager : MonoBehaviour
 {
@@ -9,7 +9,8 @@ public class SceneThreeManager : MonoBehaviour
 	private Coroutine _loader = null;
 	[SerializeField] private Fade fade;
 	[SerializeField] private CrossfadeMixer crossfadeMixer;
-
+	[SerializeField] private TextMeshProUGUI objectiveText = null;
+	[SerializeField] private Animator whitePhoneAnimator = null;
 	void Awake()
 	{
 		GameManager.thirdScene();
@@ -17,7 +18,29 @@ public class SceneThreeManager : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKey(KeyCode.RightArrow) && !_isLoading) LoadScene("Fourth Scene"); ;
+		// if (Input.GetKey(KeyCode.RightArrow) && !_isLoading) LoadScene("Fourth Scene"); ;
+
+		if (Input.GetMouseButtonDown(0) && !_isLoading)
+		{
+			setObjective(-1);
+			LoadScene("Fourth Scene");
+		}
+	}
+
+	void setObjective(int objectiveIndex)
+	{
+		if (objectiveIndex > -1)
+		{
+			objectiveText.SetText(GameManager.objectiveTexts[objectiveIndex]);
+			whitePhoneAnimator.SetBool("isInactive", false);
+			whitePhoneAnimator.SetBool("isActive", true);
+		}
+		else
+		{
+			objectiveText.SetText("");
+			whitePhoneAnimator.SetBool("isActive", false);
+			whitePhoneAnimator.SetBool("isInactive", true);
+		}
 	}
 
 	void LoadScene(string name)
