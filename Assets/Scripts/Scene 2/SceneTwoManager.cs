@@ -14,7 +14,6 @@ public class SceneTwoManager : MonoBehaviour
 	[SerializeField] private GameObject canvasUI = null;
 	[SerializeField] private TextMeshProUGUI objectiveText = null;
 	[SerializeField] private Animator whitePhoneAnimator = null;
-
 	void Awake()
 	{
 		_message = new WebSocketMessage();
@@ -23,27 +22,37 @@ public class SceneTwoManager : MonoBehaviour
 
 	void Update()
 	{
-		if (GameManager.phoneCurrentScene > 0 && !_isLoading) { LoadScene("Third Scene"); }
+		if (GameManager.changedScene && !_isLoading) { 
+			GameManager.changedScene = false;
+			setObjective(-1);
+			LoadScene("Third Scene");
+		}
 
 		if (Input.GetMouseButtonDown(0) && !_isLoading)
 		{
-			GameManager.currentInteractionIndex += 1;
-			switch (GameManager.currentInteractionIndex)
-			{
-				case 1:
-					setObjective(2);
-					break;
-				case 2:
-					GameManager.currentInteractionIndex = 0;
-					setObjective(-1);
-					LoadScene("Third Scene");
-					break;
-				default:
-					break;
-			}
+			// LoadScene("Third Scene");
+
+			// GameManager.currentInteractionIndex += 1;
+			// switch (GameManager.currentInteractionIndex)
+			// {
+			// 	case 1:
+			// 		setObjective(2);
+			// 		break;
+			// 	case 2:
+			// 		GameManager.currentInteractionIndex = 0;
+			// 		setObjective(-1);
+			// 		LoadScene("Third Scene");
+			// 		break;
+			// 	default:
+			// 		break;
+			// }
 
 			//send readyForNextScene
 			// SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"0\"}");
+		}
+
+		if(Input.GetMouseButtonDown(1)){
+			SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"0\"}");
 		}
 	}
 

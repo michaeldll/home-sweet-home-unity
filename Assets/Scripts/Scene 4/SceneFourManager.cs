@@ -19,7 +19,9 @@ public class SceneFourManager : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetMouseButtonDown(0) && !_isLoading) LoadScene("Fifth Scene"); ;
+		if (Input.GetMouseButtonDown(0) && !_isLoading) LoadScene("Fifth Scene");
+		if(GameManager.changedScene && !_isLoading) {GameManager.changedScene = false; LoadScene("Fifth Scene");}
+
 	}
 
 	void LoadScene(string name)

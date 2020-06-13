@@ -53,9 +53,12 @@ public class InitSceneTwo : MonoBehaviour
 		lookAt.enabled = false;
 
 		//start animation
-		StartCoroutine(Init());
+		StartCoroutine(InitPartOne());
 	}
 
+	void Update(){
+		if(GameManager.hasSlid) StartCoroutine(InitPartTwo());
+	}
 	void toggleGameObjects(GameObject[] gObjects, bool toggle)
 	{
 		foreach (var gObject in gObjects)
@@ -70,7 +73,7 @@ public class InitSceneTwo : MonoBehaviour
 		textCanvas.SetActive(toggle ? true : false);
 	}
 
-	IEnumerator Init()
+	IEnumerator InitPartOne()
 	{
 		yield return new WaitForSeconds(1f);
 		textToSpeechArr[0].enabled = true;
@@ -86,20 +89,22 @@ public class InitSceneTwo : MonoBehaviour
 		assets[3].SetActive(true);
 		toggleGameObjects(lights, true);
 		textToSpeechArr[1].enabled = true;
-
-		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
-		yield return new WaitForSeconds(2.6f);
 		canvasUI.SetActive(true);
 		whitePhoneUI.SetActive(true);
 		setObjective(0);
-		//turn on phone
-		assets[2].SetActive(true);
+		SendMessage("readyToSwipe", "{\"from\":\"0\", \"to\":\"0\"}");
+	}
+
+	IEnumerator InitPartTwo()
+	{
+		GameManager.hasSlid = false;
+
 		//start looking at phone
 		lookAt.enabled = true;
 		//turn on gyro
 		if (GameManager.isPhoneConnected) gRotate.enabled = true;
-
-		yield return new WaitForSeconds(4.8f);
+		//turn on phone
+		assets[2].SetActive(true);
 		setObjective(-1);
 
 		yield return new WaitForSeconds(0.6f);
@@ -113,20 +118,16 @@ public class InitSceneTwo : MonoBehaviour
 		assets[0].SetActive(true);
 		//bg yellow
 		mainCamera.backgroundColor = new Color(0.82f, 0.6979567f, 0.51168f, 1f);
-		//turn on gyro
-		if (GameManager.isPhoneConnected) gRotate.enabled = true;
-		//talk
-		textToSpeechArr[2].enabled = true;
 		//fade music
 		crossfadeMixer.CrossfadeGroups("volPadAll", "volPadLow", 1f);
-		//enable look
-		lookAt.enabled = true;
 		//disable anim
 		titleAnimation.SetActive(false);
 		//show logo
 		logoUI.SetActive(true);
 		//send readyForNextScene
 		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"0\"}");
+		//talk
+		textToSpeechArr[2].enabled = true;
 
 		yield return new WaitForSeconds(8.5f);
 		setObjective(1);

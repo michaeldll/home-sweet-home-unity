@@ -489,6 +489,7 @@ GameObject:
   m_Component:
   - component: {fileID: 375753693}
   - component: {fileID: 375753694}
+  - component: {fileID: 375753695}
   m_Layer: 0
   m_Name: WebSocketClient
   m_TagString: Untagged
@@ -524,6 +525,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   url: wss://home-sweet-home--ws.herokuapp.com/
   showLog: 1
+--- !u!114 &375753695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375753692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c09320b659369480d8565ae39b1f0163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &444105164
 GameObject:
   m_ObjectHideFlags: 0

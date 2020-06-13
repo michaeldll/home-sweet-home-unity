@@ -19,7 +19,7 @@ public class SceneOneManager : MonoBehaviour
 	private string[] _dots = { ".", "..", "..." };
 	private int _dotsIndex = 0;
 	private int _countdownNumber = 10;
-	private bool _isCodeLoaded;
+	private bool _isPreLoading;
 	private WebSocketMessage _message;
 
 	void Awake()
@@ -33,16 +33,14 @@ public class SceneOneManager : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKey(KeyCode.Mouse0)) SendNotif();
+		if (GameManager.isPhoneConnected && !_isPreLoading) SetPreLoadingScreen();
 
-		if (GameManager.isPhoneConnected && !_isCodeLoaded) SetPreLoadingScreen();
-
-		if (Input.GetKey(KeyCode.RightArrow) && !_isCodeLoaded) SetPreLoadingScreen();
+		if (Input.GetKey(KeyCode.RightArrow) && !_isPreLoading) SetPreLoadingScreen();
 	}
 
 	void SetPreLoadingScreen()
 	{
-		_isCodeLoaded = true;
+		_isPreLoading = true;
 		codeTextBorder.SetActive(false);
 		dotsGameObject.SetActive(false);
 		phoneLoadedGameObject.SetActive(true);
@@ -92,18 +90,6 @@ public class SceneOneManager : MonoBehaviour
 	void SetDotsText()
 	{
 		dotsText.SetText(_dots[_dotsIndex]);
-	}
-	void SendNotif()
-	{
-		if (WebSocketClient.Instance != null)
-		{
-			_message = new WebSocketMessage();
-			_message.id = GameManager.name;
-			_message.type = "sound";
-			_message.message = "{\"soundname\":\"notif\"}";
-
-			WebSocketClient.Instance.Send(_message);
-		}
 	}
 
 	void LoadScene(string name)

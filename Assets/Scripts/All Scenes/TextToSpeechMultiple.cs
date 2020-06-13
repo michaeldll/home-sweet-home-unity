@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using FrostweepGames.Plugins.GoogleCloud.TextToSpeech;
 
-public class TextToSpeech : MonoBehaviour
+public class TextToSpeechMultiple : MonoBehaviour
 {
 	[SerializeField] private AudioSource audioSource;
 	public string text = "default text please change";
@@ -10,10 +10,8 @@ public class TextToSpeech : MonoBehaviour
 	[SerializeField] Enumerators.SsmlVoiceGender genderName = Enumerators.SsmlVoiceGender.FEMALE;
 
 	private GCTextToSpeech _gcTextToSpeechInstance;
-	private Voice[] _voices;
-	private Voice _currentVoice;
 
-	void Start()
+	void Awake()
 	{
 		GameManager.isVoiceLoaded = false;
 
@@ -22,10 +20,9 @@ public class TextToSpeech : MonoBehaviour
 
 		//subscribe to events
 		_gcTextToSpeechInstance.SynthesizeSuccessEvent += _gcTextToSpeech_SynthesizeSuccessEvent;
-
 		_gcTextToSpeechInstance.SynthesizeFailedEvent += _gcTextToSpeech_SynthesizeFailedEvent;
 
-		initSpeak();
+		Debug.Log("debug");
 	}
 
 	#region failed handlers
@@ -44,13 +41,19 @@ public class TextToSpeech : MonoBehaviour
 		audioSource.clip = _gcTextToSpeechInstance.GetAudioClipFromBase64(response.audioContent, Constants.DEFAULT_AUDIO_ENCODING);
 		GameManager.isVoiceLoaded = true;
 		audioSource.Play();
-		Invoke("resetVoiceLoaded", 0.1f);
+		Invoke("ResetVoiceLoaded", 0.2f);
 	}
+	#endregion sucess handlers
 
-	private void initSpeak()
+	public void TrySpeak()
 	{
 		if (string.IsNullOrEmpty(text))
 			return;
+
+		GameManager.isVoiceLoaded = false;
+		
+		//get singleton instance
+		_gcTextToSpeechInstance = GCTextToSpeech.Instance;
 
 		_gcTextToSpeechInstance.Synthesize(text, new VoiceConfig()
 		{
@@ -60,10 +63,7 @@ public class TextToSpeech : MonoBehaviour
 		});
 	}
 
-
-	#endregion sucess handlers
-
-	private void resetVoiceLoaded()
+	private void ResetVoiceLoaded()
 	{
 		GameManager.isVoiceLoaded = false;
 	}

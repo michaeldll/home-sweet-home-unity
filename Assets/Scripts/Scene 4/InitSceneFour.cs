@@ -6,6 +6,7 @@ using TMPro;
 
 public class InitSceneFour : MonoBehaviour
 {
+	private WebSocketMessage _message;
 	[SerializeField] private TextToSpeech[] textToSpeechArr;
 	[SerializeField] private TextTyperTalker textTyper = null;
 	[SerializeField] private GameObject textCanvas = null;
@@ -49,6 +50,8 @@ public class InitSceneFour : MonoBehaviour
 		fade.FadeIn();
 		//fade music
 		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
+		//send readyForNextScene
+		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"1\"}");
 
 		yield return new WaitForSeconds(2.0f);
 		textToSpeechArr[1].enabled = true;
@@ -65,5 +68,18 @@ public class InitSceneFour : MonoBehaviour
 
 		yield return new WaitForSeconds(2.8f);
 		textToSpeechArr[3].enabled = true;
+	}
+
+	void SendMessage(string type, string message)
+	{
+		if (WebSocketClient.Instance != null)
+		{
+			_message = new WebSocketMessage();
+			_message.id = GameManager.name;
+			_message.type = type; //"readyForNextScene"
+			_message.message = message; //"{\"from\":\"0\", \"to\":\"0\"}"
+
+			WebSocketClient.Instance.Send(_message);
+		}
 	}
 }

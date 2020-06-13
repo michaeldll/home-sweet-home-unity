@@ -12,7 +12,8 @@ public static class GameManager
 {
 	public static bool isPhoneConnected = false;
 	public static bool isVoiceLoaded = false;
-	public static int phoneCurrentScene = 0;
+	public static bool changedScene = false;
+	public static bool hasSlid = false;
 	public static float gyroAngleX = 0.0f;
 	public static float gyroAngleY = 0.0f;
 	public static float gyroAngleZ = 0.0f;
@@ -23,8 +24,8 @@ public static class GameManager
 	public static string sceneText;
 	public static string secondSceneText;
 	public static string thirdSceneText;
-	public static string[] moonText = { "", "" };
-	public static string[] endText = { "", "" };
+	public static string[] moonTexts = { "", "", "" };
+	public static string[] endTexts = { "", "", "", "", "" };
 	// public static string[] maleFirstNames = { "gonc", "henry", "valentin", "artey", "ave", "ouri", "marius", "michael" };
 	// public static string[] maleSecondNames = { "inity", "_bzrd", ".dll", "miramont10", "_kevin", ".levin", "ballot" };
 	// public static string[] femaleFirstNames = { "mogo", "sol", "mog", "set", "cha", "saana", "marie", "chloro", "interieur", "julie", "m" };
@@ -168,8 +169,8 @@ public static class GameManager
 	};
 	public static string[] objectiveTexts = {
 		"Swipe up to see through his eyes",
-		"Throw the ball twice to play with the Internet",
-		"Throw it again",
+		"Throw the ball to play with the Internet",
+		"UNUSED Throw it again",
 		"Gently blow on your phone to seduce the Internet",
 		"Tap followers to corral them",
 		"Safeguard your relationship from all your followers",
@@ -279,21 +280,29 @@ public static class GameManager
 
 	public static void seventhScene()
 	{
-		if (name == "") name = "SnowFlakeSmasher86";
+		Debug.developerConsoleVisible = true;
+		Debug.LogError("I am an Error");
 		introText = "And so they lived.";
 		sceneText = $"“Life is more than food, and the body more than clothes” - thought {name}";
-		moonText.SetValue("And this somehow felt like something more, beyond just living.", 0);
+		moonTexts.SetValue("And this somehow felt like something more, beyond just living.", 0);
 		if (gender == "male")
 		{
-			moonText.SetValue("All of his dreams were now at hand's reach - all of it, everything.", 1);
-			endText.SetValue($"{name} would tell himself: \"Man shall not live by bread alone\". And then he died.", 0);
-			endText.SetValue("In his lonely house. In his lonely street. In his lonely part of the world.", 1);
+			moonTexts.SetValue("All of his dreams were now at hand's reach - all of it, everything.", 1);
+			moonTexts.SetValue($"{name} would tell himself: \"Man shall not live by bread alone\".", 2);
+			endTexts.SetValue("And then he died.",0); 
+			endTexts.SetValue("In his lonely house.", 1);
+			endTexts.SetValue("In his lonely street.", 2);
+			endTexts.SetValue("In that lonely part of the world.", 3);
+			endTexts.SetValue("You can go on his profile.", 4);
 		}
 		else
 		{
-			moonText.SetValue("All of her dreams were now at hand's reach - all of it, everything.", 1);
-			endText.SetValue($"{name} would tell herself: \"Man shall not live by bread alone\". And then she died.", 0);
-			endText.SetValue("In her lonely house. In her lonely street. In her lonely part of the world.", 1);
+			moonTexts.SetValue("All of her dreams were now at hand's reach - all of it, everything.", 1);
+			moonTexts.SetValue($"{name} would tell herself: \"Man shall not live by bread alone\".", 2);
+			endTexts.SetValue("And then she died. In her lonely house.", 0);
+			endTexts.SetValue("In her lonely street.", 1);
+			endTexts.SetValue("In that lonely part of the world.", 2);
+			endTexts.SetValue("You can go on his profile.", 3);
 		}
 	}
 }

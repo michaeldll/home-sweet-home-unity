@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using WebSocketSharp;
 
 public class WebSocketClient : MonoBehaviour
@@ -85,22 +83,26 @@ public class WebSocketClient : MonoBehaviour
 				// Debug.Log(WebSocketMessageContentGyro._y);
 				// Debug.Log(WebSocketMessageContentGyro._z);
 			}
-
-
-			if (webSocketMessage.type == "orientation")
+			GameManager.isPhoneConnected = true;
+			switch (webSocketMessage.type)
 			{
-				GameManager.isPhoneConnected = true;
-				var WebSocketMessageContentGyro = ProcessMessageContent(webSocketMessage.message);
+				case "orientation":
+					var WebSocketMessageContentGyro = ProcessMessageContent(webSocketMessage.message);
+					GameManager.gyroAngleX = WebSocketMessageContentGyro._x * Mathf.Rad2Deg;
+					GameManager.gyroAngleY = WebSocketMessageContentGyro._y * Mathf.Rad2Deg;
+					GameManager.gyroAngleZ = WebSocketMessageContentGyro._z * Mathf.Rad2Deg;
+					break;
+				
+				case "changeScene":
+					GameManager.changedScene = true;
+					break;
 
-				GameManager.gyroAngleX = WebSocketMessageContentGyro._x * Mathf.Rad2Deg;
-				GameManager.gyroAngleY = WebSocketMessageContentGyro._y * Mathf.Rad2Deg;
-				GameManager.gyroAngleZ = WebSocketMessageContentGyro._z * Mathf.Rad2Deg;
-			}
-
-			else if (webSocketMessage.type == "changeScene")
-			{
-				GameManager.isPhoneConnected = true;
-				GameManager.phoneCurrentScene += 1;
+				case "hasSlidUp":
+					GameManager.hasSlid = true;
+					break;
+				
+				default:
+					break;
 			}
 		}
 

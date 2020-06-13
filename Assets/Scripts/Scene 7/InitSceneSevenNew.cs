@@ -3,34 +3,35 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class InitSceneSeven : MonoBehaviour
+public class InitSceneSevenNew : MonoBehaviour
 {
-	[SerializeField] private TextToSpeech[] textToSpeechArr;
+	private WebSocketMessage _message;
+	[SerializeField] private TextToSpeechMultiple textToSpeech;
 	[SerializeField] private TextTyperTalker textTyper = null;
 	[SerializeField] private GameObject textCanvas = null;
 	[SerializeField] private Fade fade = null;
 	[SerializeField] private Image background = null;
 	[SerializeField] private GyroRotate gRotate = null;
 	[SerializeField] private CrossfadeMixer crossfadeMixer = null;
-	[SerializeField] private TextMeshProUGUI objectiveText = null;
+	[SerializeField] private TextMeshProUGUI whiteObjectiveText = null;
 	[SerializeField] private Animator whitePhoneAnimator = null;
+	void Awake()
+	{
+		toggleTyper(false);
+	}
 
 	void Start()
 	{
+		Debug.developerConsoleVisible = true;
 		//black
 		background.enabled = true;
 
 		//set text
-		textToSpeechArr[0].text = GameManager.introText;
-		textToSpeechArr[1].text = GameManager.moonText[0];
-		textToSpeechArr[2].text = GameManager.moonText[1];
-		textToSpeechArr[3].text = GameManager.endText[0];
-		textToSpeechArr[4].text = GameManager.sceneText;
-		textToSpeechArr[5].text = GameManager.endText[1];
 		textTyper.text = GameManager.introText;
-
+		
 		gRotate.enabled = false;
 
+		Debug.LogError("0");
 		//start animation
 		StartCoroutine(Init());
 	}
@@ -43,23 +44,27 @@ public class InitSceneSeven : MonoBehaviour
 
 	IEnumerator Init()
 	{
-		yield return new WaitForSeconds(2f);
-		textToSpeechArr[0].enabled = true;
-
+		Debug.LogError("1");
+		textToSpeech.text = GameManager.introText;
+		textToSpeech.TrySpeak();
+		
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
-
+		Debug.LogError("2");
 		toggleTyper(true);
-		yield return new WaitForSeconds(4.0f);
 
+		yield return new WaitForSeconds(4.0f);
+		Debug.LogError("3");
+		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"1\"}");
 		toggleTyper(false);
 		fade.FadeIn();
-		//fade music
-		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
+		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f); //fade music
 		if (GameManager.isPhoneConnected) gRotate.enabled = true;
-		textToSpeechArr[4].enabled = true;
+		textToSpeech.text = GameManager.sceneText;
+		textToSpeech.TrySpeak();
 
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
 		yield return new WaitForSeconds(6.2f);
+		Debug.LogError("4");
 		setObjective(6);
 	}
 
@@ -67,15 +72,28 @@ public class InitSceneSeven : MonoBehaviour
 	{
 		if (objectiveIndex > -1)
 		{
-			objectiveText.SetText(GameManager.objectiveTexts[objectiveIndex]);
+			whiteObjectiveText.SetText(GameManager.objectiveTexts[objectiveIndex]);
 			whitePhoneAnimator.SetBool("isInactive", false);
 			whitePhoneAnimator.SetBool("isActive", true);
 		}
 		else
 		{
-			objectiveText.SetText("");
+			whiteObjectiveText.SetText("");
 			whitePhoneAnimator.SetBool("isActive", false);
 			whitePhoneAnimator.SetBool("isInactive", true);
+		}
+	}
+
+	void SendMessage(string type, string message)
+	{
+		if (WebSocketClient.Instance != null)
+		{
+			_message = new WebSocketMessage();
+			_message.id = GameManager.name;
+			_message.type = type; //"readyForNextScene"
+			_message.message = message; //"{\"from\":\"0\", \"to\":\"0\"}"
+
+			WebSocketClient.Instance.Send(_message);
 		}
 	}
 }

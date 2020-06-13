@@ -71,6 +71,8 @@ public class SceneSixManager : MonoBehaviour
 			HandleFall();
 		}
 
+		if(GameManager.changedScene && !_isLoading){ GameManager.changedScene = false; LoadScene("Seventh Scene");}
+
 		// if (Input.GetKey(KeyCode.RightArrow) && !_isLoading) LoadScene("Seventh Scene"); ;
 	}
 	void HandleFall()

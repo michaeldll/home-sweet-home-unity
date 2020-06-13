@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InitSceneSix : MonoBehaviour
 {
+	private WebSocketMessage _message;
 	[SerializeField] private TextToSpeech[] textToSpeechArr;
 	[SerializeField] private TextTyperTalker textTyper = null;
 	[SerializeField] private GameObject textCanvas = null;
@@ -51,6 +52,8 @@ public class InitSceneSix : MonoBehaviour
 		//fade music
 		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
 		if (GameManager.isPhoneConnected) gRotate.enabled = true;
+		//send readyForNextScene
+		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"1\"}");
 
 		yield return new WaitForSeconds(1.0f);
 		textToSpeechArr[1].enabled = true;
@@ -77,6 +80,19 @@ public class InitSceneSix : MonoBehaviour
 			objectiveText.SetText("");
 			whitePhoneAnimator.SetBool("isActive", false);
 			whitePhoneAnimator.SetBool("isInactive", true);
+		}
+	}
+
+	void SendMessage(string type, string message)
+	{
+		if (WebSocketClient.Instance != null)
+		{
+			_message = new WebSocketMessage();
+			_message.id = GameManager.name;
+			_message.type = type; //"readyForNextScene"
+			_message.message = message; //"{\"from\":\"0\", \"to\":\"0\"}"
+
+			WebSocketClient.Instance.Send(_message);
 		}
 	}
 }

@@ -1580,7 +1580,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -54.80005, y: 54.450012}
+  m_AnchoredPosition: {x: -54.80005, y: 54.44995}
   m_SizeDelta: {x: 430, y: 188.70001}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &202947439
@@ -1756,7 +1756,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 236439493}
-  - component: {fileID: 236439492}
   - component: {fileID: 236439491}
   - component: {fileID: 236439490}
   - component: {fileID: 236439489}
@@ -1860,20 +1859,6 @@ MonoBehaviour:
   HandTarget: {fileID: 0}
   HandPole: {fileID: 0}
   Attraction: {fileID: 0}
---- !u!114 &236439492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 236439486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f268b495aebea46f9b4a8b90249e41a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url: ws://home-sweet-home--ws.herokuapp.com/
-  showLog: 0
 --- !u!4 &236439493
 Transform:
   m_ObjectHideFlags: 0
@@ -1928,7 +1913,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236439486}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f55e3ccfd03544f348d2fe0a2e081972, type: 3}
   m_Name: 
