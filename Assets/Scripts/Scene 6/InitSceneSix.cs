@@ -51,7 +51,7 @@ public class InitSceneSix : MonoBehaviour
 		fade.FadeIn();
 		//fade music
 		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
-		if (GameManager.isPhoneConnected) gRotate.enabled = true;
+		gRotate.enabled = true;
 		//send readyForNextScene
 		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"1\"}");
 

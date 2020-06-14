@@ -31,7 +31,7 @@ public class InitSceneSevenNew : MonoBehaviour
 		
 		gRotate.enabled = false;
 
-		Debug.LogError("0");
+		// Debug.LogError("0");
 		//start animation
 		StartCoroutine(Init());
 	}
@@ -44,27 +44,27 @@ public class InitSceneSevenNew : MonoBehaviour
 
 	IEnumerator Init()
 	{
-		Debug.LogError("1");
+		// Debug.LogError("1");
 		textToSpeech.text = GameManager.introText;
 		textToSpeech.TrySpeak();
 		
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
-		Debug.LogError("2");
+		// Debug.LogError("2");
 		toggleTyper(true);
 
 		yield return new WaitForSeconds(4.0f);
-		Debug.LogError("3");
+		// Debug.LogError("3");
 		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"1\"}");
 		toggleTyper(false);
 		fade.FadeIn();
 		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f); //fade music
-		if (GameManager.isPhoneConnected) gRotate.enabled = true;
+		gRotate.enabled = true;
 		textToSpeech.text = GameManager.sceneText;
 		textToSpeech.TrySpeak();
 
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
 		yield return new WaitForSeconds(6.2f);
-		Debug.LogError("4");
+		// Debug.LogError("4");
 		setObjective(6);
 	}
 

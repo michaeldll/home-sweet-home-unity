@@ -14,6 +14,7 @@ public class InitSceneThree : MonoBehaviour
 	[SerializeField] private CrossfadeMixer crossfadeMixer = null;
 	[SerializeField] private TextMeshProUGUI objectiveText = null;
 	[SerializeField] private Animator whitePhoneAnimator = null;
+	[SerializeField] private GyroRotate gRotate = null;
 	void Start()
 	{
 		//set text
@@ -24,6 +25,8 @@ public class InitSceneThree : MonoBehaviour
 
 		//black
 		background.enabled = true;
+
+		gRotate.enabled = false;
 
 		//start animation
 		StartCoroutine(Init());
@@ -50,7 +53,8 @@ public class InitSceneThree : MonoBehaviour
 		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
 		//send readyForNextScene
 		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"1\"}");
-		
+		gRotate.enabled = true;
+
 		yield return new WaitForSeconds(2.0f);
 		textToSpeech[1].enabled = true;
 

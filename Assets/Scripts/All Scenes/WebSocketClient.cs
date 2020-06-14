@@ -101,6 +101,10 @@ public class WebSocketClient : MonoBehaviour
 					GameManager.hasSlid = true;
 					break;
 				
+				case "jump":
+					GameManager.jumps += 1;
+					break;
+
 				default:
 					break;
 			}

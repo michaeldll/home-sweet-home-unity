@@ -102,7 +102,7 @@ public class InitSceneTwo : MonoBehaviour
 		//start looking at phone
 		lookAt.enabled = true;
 		//turn on gyro
-		if (GameManager.isPhoneConnected) gRotate.enabled = true;
+		gRotate.enabled = true;
 		//turn on phone
 		assets[2].SetActive(true);
 		setObjective(-1);

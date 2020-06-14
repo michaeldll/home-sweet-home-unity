@@ -7,9 +7,13 @@ using TMPro;
 
 public class SceneSevenManagerNew : MonoBehaviour
 {
+	private WebSocketMessage _message;
 	private int _clicks = 0;
 	private bool _hasEnded = false;
 	private bool _showEndingFeed = false;
+	private bool _hasJumpedOnce = false;
+	private bool _hasJumpedTwice = false;
+	private bool _hasJumpedThrice = false;
 	[SerializeField] private TextToSpeechMultiple textToSpeech;
 	[SerializeField] private CinemachineVirtualCamera[] cams;
 	[SerializeField] private GameObject perso;
@@ -67,6 +71,37 @@ public class SceneSevenManagerNew : MonoBehaviour
 			}
 		}
 
+		switch (GameManager.jumps)
+		{
+			case 1:
+				if(!_hasJumpedOnce){
+					_hasJumpedOnce = true;
+					setObjective(7);
+					textToSpeech.text = GameManager.moonTexts[0];
+					textToSpeech.TrySpeak();
+				}
+				break;
+			case 2:
+				if(!_hasJumpedTwice){
+					_hasJumpedTwice = true;
+					setObjective(8);
+					textToSpeech.text = GameManager.moonTexts[1];
+					textToSpeech.TrySpeak();	
+				}
+				break;
+			case 3:
+				if(!_hasJumpedThrice){
+					_hasJumpedThrice = true;
+					setObjective(-1);
+					textToSpeech.text = GameManager.moonTexts[2];
+					textToSpeech.TrySpeak();
+					StartCoroutine(Die());
+				}
+				break;
+			default:
+				break;
+		}
+
 		if (_hasEnded)
 		{
 			whiteUICanvasGroup.alpha -= 0.006f;
@@ -102,6 +137,7 @@ public class SceneSevenManagerNew : MonoBehaviour
 		// persoRagdoll.SetActive(true);
 		deathPersoAnimator.SetBool("isDead", true);
 		deathPhoneAnimator.SetBool("isDead", true);
+		SendMessage("isDead", "{\"yep\":\"he ded\"}");
 		phone.SetActive(false);
 
 		yield return new WaitForSeconds(1.5f);
@@ -133,6 +169,7 @@ public class SceneSevenManagerNew : MonoBehaviour
 		yield return new WaitForSeconds(3f);
 		if (_hasEnded == false)
 		{
+			SendMessage("showCredits", "{\"yep\":\"he credit\"}");
 			foreach (var renderer in endingCanvasRenderers)
 			{
 				renderer.SetAlpha(0f);
@@ -158,6 +195,19 @@ public class SceneSevenManagerNew : MonoBehaviour
 			whiteObjectiveText.SetText("");
 			whitePhoneAnimator.SetBool("isActive", false);
 			whitePhoneAnimator.SetBool("isInactive", true);
+		}
+	}
+
+	void SendMessage(string type, string message)
+	{
+		if (WebSocketClient.Instance != null)
+		{
+			_message = new WebSocketMessage();
+			_message.id = GameManager.name;
+			_message.type = type; //"readyForNextScene"
+			_message.message = message; //"{\"from\":\"0\", \"to\":\"0\"}"
+
+			WebSocketClient.Instance.Send(_message);
 		}
 	}
 }
