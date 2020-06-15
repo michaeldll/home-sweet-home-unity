@@ -7,10 +7,12 @@ using Cinemachine;
 public class SceneSixManager : MonoBehaviour
 {
 	private bool _isLoading = false;
-
+	private bool _lerpFirstColor = false;
+	private bool _lerpSecondColor = false;
+	private bool _hasTappedOnce = false;
+	private bool _hasTappedTwice = false;
 	private Coroutine _loader = null;
-	private bool _fadeBackgroundToBlack = false;
-	private bool _fadeBackgroundToYellow = false;
+	private WebSocketMessage _message;
 
 	[SerializeField] private Fade fade;
 	[SerializeField] private CrossfadeMixer crossfadeMixer;
@@ -24,8 +26,7 @@ public class SceneSixManager : MonoBehaviour
 	[SerializeField] [Range(0f, 1f)] private float lerpTime;
 	[SerializeField] private TextMeshProUGUI objectiveText = null;
 	[SerializeField] private Animator whitePhoneAnimator = null;
-	private bool _lerpFirstColor = false;
-	private bool _lerpSecondColor = false;
+
 
 	void Awake()
 	{
@@ -46,20 +47,35 @@ public class SceneSixManager : MonoBehaviour
 					setObjective(-1);
 					GameManager.startFalling = true;
 					break;
-				case 3:
-					GameManager.currentInteractionIndex = 0;
-					setObjective(-1);
-					LoadScene("Seventh Scene");
-					break;
 				default:
 					break;
 			}
+		}
+
+		switch (GameManager.sheepTapped)
+		{
+			case 1:
+				if(!_hasTappedOnce){
+					_hasTappedOnce = true;
+					setObjective(5);
+				}
+				break;
+			case 2:
+				if(!_hasTappedTwice){
+					_hasTappedTwice = true;
+					setObjective(-1);
+					GameManager.startFalling = true;
+				}
+				break;
+			default:
+				break;
 		}
 
 		if (_lerpFirstColor)
 		{
 			fadeCameraBackgroundColor(true);
 		}
+
 		if (_lerpSecondColor)
 		{
 			fadeCameraBackgroundColor(false);
@@ -72,8 +88,6 @@ public class SceneSixManager : MonoBehaviour
 		}
 
 		if(GameManager.changedScene && !_isLoading){ GameManager.changedScene = false; LoadScene("Seventh Scene");}
-
-		// if (Input.GetKey(KeyCode.RightArrow) && !_isLoading) LoadScene("Seventh Scene"); ;
 	}
 	void HandleFall()
 	{
@@ -82,11 +96,32 @@ public class SceneSixManager : MonoBehaviour
 
 		StartCoroutine(DelayShaderFadeIn(0.5f));
 		StartCoroutine(ToggleDelayPhoneSpotlight(false, 1.3f));
+		StartCoroutine(SendDropPhone(1.3f));
 
 		StartCoroutine(ToggleDelayPhoneSpotlight(true, 8.5f));
+		StartCoroutine(SendLiftPhone(8.5f));
+		StartCoroutine(ToggleDelayCamera(false, 11f));
 		StartCoroutine(ResetGroundDissolve(9.25f));
 		StartCoroutine(ResetEnvironmentDissolves(10f));
 		StartCoroutine(ToggleDelayCamera(false, 11f));
+		StartCoroutine(LoadNextScene(15f));
+	}
+
+	public IEnumerator LoadNextScene(float delay){
+		yield return new WaitForSeconds(delay);
+		GameManager.currentInteractionIndex = 0;
+		setObjective(-1);
+		LoadScene("Seventh Scene");
+	}
+
+	public IEnumerator SendDropPhone(float delay){
+		yield return new WaitForSeconds(delay);
+		SendMessage("dropPhone", "{\"from\":\"0\", \"to\":\"0\"}");
+	}
+
+	public IEnumerator SendLiftPhone(float delay){
+		yield return new WaitForSeconds(delay);
+		SendMessage("liftPhone", "{\"from\":\"0\", \"to\":\"0\"}");
 	}
 
 	void LoadScene(string name)
@@ -189,6 +224,19 @@ public class SceneSixManager : MonoBehaviour
 			objectiveText.SetText("");
 			whitePhoneAnimator.SetBool("isActive", false);
 			whitePhoneAnimator.SetBool("isInactive", true);
+		}
+	}
+
+	void SendMessage(string type, string message)
+	{
+		if (WebSocketClient.Instance != null)
+		{
+			_message = new WebSocketMessage();
+			_message.id = GameManager.name;
+			_message.type = type; //"readyForNextScene"
+			_message.message = message; //"{\"from\":\"0\", \"to\":\"0\"}"
+
+			WebSocketClient.Instance.Send(_message);
 		}
 	}
 }

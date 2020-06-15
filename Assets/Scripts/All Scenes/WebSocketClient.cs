@@ -105,6 +105,11 @@ public class WebSocketClient : MonoBehaviour
 					GameManager.jumps += 1;
 					break;
 
+				case "tapSheep":
+					Debug.Log("tap");
+					GameManager.sheepTapped += 1;
+					break;
+
 				default:
 					break;
 			}

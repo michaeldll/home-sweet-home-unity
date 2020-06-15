@@ -15,6 +15,7 @@ public static class GameManager
 	public static bool changedScene = false;
 	public static bool hasSlid = false;
 	public static int jumps = 0;
+	public static int sheepTapped = 0;
 	public static float gyroAngleX = 0.0f;
 	public static float gyroAngleY = 0.0f;
 	public static float gyroAngleZ = 0.0f;
