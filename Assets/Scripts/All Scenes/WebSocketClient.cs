@@ -83,38 +83,39 @@ public class WebSocketClient : MonoBehaviour
 				// Debug.Log(WebSocketMessageContentGyro._y);
 				// Debug.Log(WebSocketMessageContentGyro._z);
 			}
-			GameManager.isPhoneConnected = true;
-			switch (webSocketMessage.type)
-			{
-				case "orientation":
-					var WebSocketMessageContentGyro = ProcessMessageContent(webSocketMessage.message);
-					GameManager.gyroAngleX = WebSocketMessageContentGyro._x * Mathf.Rad2Deg;
-					GameManager.gyroAngleY = WebSocketMessageContentGyro._y * Mathf.Rad2Deg;
-					GameManager.gyroAngleZ = WebSocketMessageContentGyro._z * Mathf.Rad2Deg;
-					break;
-				
-				case "changeScene":
-					GameManager.changedScene = true;
-					break;
+			if(webSocketMessage.id == GameManager.name){
+				GameManager.isPhoneConnected = true;
+				switch (webSocketMessage.type)
+				{
+					case "orientation":
+						var WebSocketMessageContentGyro = ProcessMessageContent(webSocketMessage.message);
+						GameManager.gyroAngleX = WebSocketMessageContentGyro._x * Mathf.Rad2Deg;
+						GameManager.gyroAngleY = WebSocketMessageContentGyro._y * Mathf.Rad2Deg;
+						GameManager.gyroAngleZ = WebSocketMessageContentGyro._z * Mathf.Rad2Deg;
+						break;
+					
+					case "changeScene":
+						GameManager.changedScene = true;
+						break;
 
-				case "hasSlidUp":
-					GameManager.hasSlid = true;
-					break;
-				
-				case "jump":
-					GameManager.jumps += 1;
-					break;
+					case "hasSlidUp":
+						GameManager.hasSlid = true;
+						break;
+					
+					case "jump":
+						GameManager.jumps += 1;
+						break;
 
-				case "tapSheep":
-					Debug.Log("tap");
-					GameManager.sheepTapped += 1;
-					break;
+					case "tapSheep":
+						Debug.Log("tap");
+						GameManager.sheepTapped += 1;
+						break;
 
-				default:
-					break;
+					default:
+						break;
+				}
 			}
 		}
-
 	}
 
 
