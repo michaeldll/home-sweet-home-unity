@@ -7,6 +7,7 @@ using RedBlueGames.Tools.TextTyper;
 public class InitSceneTwo : MonoBehaviour
 {
 	private WebSocketMessage _message;
+
 	[SerializeField] private CinemachineVirtualCamera[] cams; //Start cam, Scene cam
 	[SerializeField] private GameObject[] assets; //appt, phone, phone beam, character,
 	[SerializeField] private GameObject[] lights; //spotlight and beam, point light 1, directional light
@@ -43,10 +44,6 @@ public class InitSceneTwo : MonoBehaviour
 		textToSpeechArr[1].text = GameManager.preSceneText;
 		textToSpeechArr[2].text = GameManager.sceneText;
 		textTyper.text = GameManager.introText;
-
-		//reset phone and character positions to beginning
-		// assets[1].transform.position = phoneTransforms[0].position;
-		// assets[3].transform.position = characterTransforms[0].position;
 
 		//disable scripts
 		gRotate.enabled = false;
@@ -119,7 +116,7 @@ public class InitSceneTwo : MonoBehaviour
 		//bg yellow
 		mainCamera.backgroundColor = new Color(0.82f, 0.6979567f, 0.51168f, 1f);
 		//fade music
-		crossfadeMixer.CrossfadeGroups("volPadAll", "volPadLow", 1f);
+		// crossfadeMixer.CrossfadeGroups("volPadAll", "volPadLow", 1f);
 		//disable anim
 		titleAnimation.SetActive(false);
 		//show logo

@@ -27,7 +27,6 @@ public class SceneSixManager : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI objectiveText = null;
 	[SerializeField] private Animator whitePhoneAnimator = null;
 
-
 	void Awake()
 	{
 		GameManager.sixthScene();
@@ -91,19 +90,24 @@ public class SceneSixManager : MonoBehaviour
 	}
 	void HandleFall()
 	{
+		//start anim and zoom
 		fallingAnimator.SetBool("startFalling", true);
 		StartCoroutine(ToggleDelayCamera(true, 0.4f));
 
+		//start shader, turn off phone and send websocket message
 		StartCoroutine(DelayShaderFadeIn(0.5f));
 		StartCoroutine(ToggleDelayPhoneSpotlight(false, 1.3f));
 		StartCoroutine(SendDropPhone(1.3f));
 
+		//turn on phone, send websocket message, zoom out, and reset shaders
 		StartCoroutine(ToggleDelayPhoneSpotlight(true, 8.5f));
 		StartCoroutine(SendLiftPhone(8.5f));
 		StartCoroutine(ToggleDelayCamera(false, 11f));
 		StartCoroutine(ResetGroundDissolve(9.25f));
 		StartCoroutine(ResetEnvironmentDissolves(10f));
 		StartCoroutine(ToggleDelayCamera(false, 11f));
+
+		//load next scene
 		StartCoroutine(LoadNextScene(15f));
 	}
 
@@ -124,20 +128,6 @@ public class SceneSixManager : MonoBehaviour
 		SendMessage("liftPhone", "{\"from\":\"0\", \"to\":\"0\"}");
 	}
 
-	void LoadScene(string name)
-	{
-		//fade music
-		crossfadeMixer.CrossfadeGroups("volPadLow", "volPadHigh", 2f);
-
-		if (_loader != null)
-		{
-			//Debug.LogWarning("Scene load already in progress. Will not load.");
-			return;
-		}
-
-		_isLoading = true;
-		_loader = StartCoroutine(AsyncLoader(name));
-	}
 	public IEnumerator ToggleDelayCamera(bool mode, float delay)
 	{
 		yield return new WaitForSeconds(delay);
@@ -152,11 +142,13 @@ public class SceneSixManager : MonoBehaviour
 			_lerpFirstColor = false; _lerpSecondColor = true;
 		}
 	}
+
 	public IEnumerator ToggleDelayPhoneSpotlight(bool mode, float delay)
 	{
 		yield return new WaitForSeconds(delay);
 		phoneSpotlight.SetActive(mode);
 	}
+
 	public IEnumerator DelayShaderFadeIn(float delay)
 	{
 		yield return new WaitForSeconds(delay);
@@ -196,21 +188,6 @@ public class SceneSixManager : MonoBehaviour
 		}
 	}
 
-	public IEnumerator AsyncLoader(string name)
-	{
-		fade.FadeOut();
-		yield return new WaitForSeconds(2f);
-
-		// The Application loads the Scene in the background as the current Scene runs.
-		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(name);
-
-		// Wait until the asynchronous scene fully loads
-		while (!asyncLoad.isDone)
-		{
-			yield return null;
-		}
-	}
-
 	void setObjective(int objectiveIndex)
 	{
 		if (objectiveIndex > -1)
@@ -238,5 +215,35 @@ public class SceneSixManager : MonoBehaviour
 
 			WebSocketClient.Instance.Send(_message);
 		}
+	}
+
+	public IEnumerator AsyncLoader(string name)
+	{
+		fade.FadeOut();
+		yield return new WaitForSeconds(2f);
+
+		// The Application loads the Scene in the background as the current Scene runs.
+		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(name);
+
+		// Wait until the asynchronous scene fully loads
+		while (!asyncLoad.isDone)
+		{
+			yield return null;
+		}
+	}
+
+	void LoadScene(string name)
+	{
+		//fade music
+		// crossfadeMixer.CrossfadeGroups("volPadLow", "volPadHigh", 2f);
+
+		if (_loader != null)
+		{
+			//Debug.LogWarning("Scene load already in progress. Will not load.");
+			return;
+		}
+
+		_isLoading = true;
+		_loader = StartCoroutine(AsyncLoader(name));
 	}
 }

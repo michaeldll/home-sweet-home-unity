@@ -69,7 +69,7 @@ public class SceneThreeManager : MonoBehaviour
 	void LoadScene(string name)
 	{
 		//fade music
-		crossfadeMixer.CrossfadeGroups("volPadLow", "volPadHigh", 2f);
+		// crossfadeMixer.CrossfadeGroups("volPadLow", "volPadHigh", 2f);
 
 		if (_loader != null)
 		{

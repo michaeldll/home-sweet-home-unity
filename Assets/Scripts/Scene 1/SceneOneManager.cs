@@ -8,6 +8,7 @@ public class SceneOneManager : MonoBehaviour
 {
 	private Coroutine _loader = null;
 	private bool _isLoading = false;
+
 	[SerializeField] private Fade fade;
 	[SerializeField] private TextMeshProUGUI codeText;
 	[SerializeField] private TextMeshProUGUI dotsText;
@@ -16,6 +17,7 @@ public class SceneOneManager : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI connectionText;
 	[SerializeField] private GameObject dotsGameObject;
 	[SerializeField] private GameObject phoneLoadedGameObject;
+	
 	private string[] _dots = { ".", "..", "..." };
 	private int _dotsIndex = 0;
 	private int _countdownNumber = 10;

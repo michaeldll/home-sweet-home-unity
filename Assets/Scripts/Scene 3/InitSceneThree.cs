@@ -6,6 +6,7 @@ using TMPro;
 public class InitSceneThree : MonoBehaviour
 {
 	private WebSocketMessage _message;
+
 	[SerializeField] private TextToSpeech[] textToSpeech;
 	[SerializeField] private TextTyperTalker textTyper = null;
 	[SerializeField] private GameObject textCanvas = null;
@@ -15,6 +16,7 @@ public class InitSceneThree : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI objectiveText = null;
 	[SerializeField] private Animator whitePhoneAnimator = null;
 	[SerializeField] private GyroRotate gRotate = null;
+
 	void Start()
 	{
 		//set text
@@ -49,8 +51,9 @@ public class InitSceneThree : MonoBehaviour
 		yield return new WaitForSeconds(7.0f);
 		toggleTyper(false);
 		fade.FadeIn();
+
 		//fade music
-		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
+		// crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
 		//send readyForNextScene
 		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"1\"}");
 		gRotate.enabled = true;

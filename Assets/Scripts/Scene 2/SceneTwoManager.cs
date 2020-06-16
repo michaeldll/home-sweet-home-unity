@@ -8,12 +8,14 @@ public class SceneTwoManager : MonoBehaviour
 	private bool _isLoading = false;
 	private Coroutine _loader = null;
 	private WebSocketMessage _message;
+
 	[SerializeField] private CrossfadeMixer crossfadeMixer;
 	[SerializeField] private float crossfadeDuration = 4.0f;
 	[SerializeField] private Fade fade;
 	[SerializeField] private GameObject canvasUI = null;
 	[SerializeField] private TextMeshProUGUI objectiveText = null;
 	[SerializeField] private Animator whitePhoneAnimator = null;
+	
 	void Awake()
 	{
 		_message = new WebSocketMessage();
@@ -26,29 +28,6 @@ public class SceneTwoManager : MonoBehaviour
 			GameManager.changedScene = false;
 			setObjective(-1);
 			LoadScene("Third Scene");
-		}
-
-		if (Input.GetMouseButtonDown(0) && !_isLoading)
-		{
-			// LoadScene("Third Scene");
-
-			// GameManager.currentInteractionIndex += 1;
-			// switch (GameManager.currentInteractionIndex)
-			// {
-			// 	case 1:
-			// 		setObjective(2);
-			// 		break;
-			// 	case 2:
-			// 		GameManager.currentInteractionIndex = 0;
-			// 		setObjective(-1);
-			// 		LoadScene("Third Scene");
-			// 		break;
-			// 	default:
-			// 		break;
-			// }
-
-			//send readyForNextScene
-			// SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"0\"}");
 		}
 
 		if(Input.GetMouseButtonDown(1)){
@@ -88,7 +67,7 @@ public class SceneTwoManager : MonoBehaviour
 	void LoadScene(string name)
 	{
 		//fade music
-		crossfadeMixer.CrossfadeGroups("volPadLow", "volPadHigh", 2f);
+		// crossfadeMixer.CrossfadeGroups("volPadLow", "volPadHigh", 2f);
 
 		if (_loader != null)
 		{

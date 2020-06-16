@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class InitSceneFive : MonoBehaviour
 {
 	private WebSocketMessage _message;
+
 	[SerializeField] private TextToSpeech[] textToSpeechArr;
 	[SerializeField] private TextTyperTalker textTyper = null;
 	[SerializeField] private GameObject textCanvas = null;
@@ -52,8 +53,9 @@ public class InitSceneFive : MonoBehaviour
 
 		toggleTyper(false);
 		fade.FadeIn();
+
 		//fade music
-		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
+		// crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
 		gRotate.enabled = true;
 		//send readyForNextScene
 		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"1\"}");

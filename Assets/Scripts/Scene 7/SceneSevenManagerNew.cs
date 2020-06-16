@@ -14,10 +14,10 @@ public class SceneSevenManagerNew : MonoBehaviour
 	private bool _hasJumpedOnce = false;
 	private bool _hasJumpedTwice = false;
 	private bool _hasJumpedThrice = false;
+
 	[SerializeField] private TextToSpeechMultiple textToSpeech;
 	[SerializeField] private CinemachineVirtualCamera[] cams;
 	[SerializeField] private GameObject perso;
-	// [SerializeField] private GameObject persoRagdoll;
 	[SerializeField] private Animator deathPersoAnimator;
 	[SerializeField] private Animator deathPhoneAnimator;
 	[SerializeField] private GameObject phone;
@@ -120,13 +120,6 @@ public class SceneSevenManagerNew : MonoBehaviour
 				field.alpha += 0.006f;
 			}
 		}
-
-		// if (Input.GetKey(KeyCode.RightArrow) && !_isLoading)
-		// {
-		// 	_isLoading = true;
-		// 	fade.FadeOut();
-		// 	crossfadeMixer.CrossfadeGroups("volPadLow", "volPadHigh", 5f);
-		// }
 	}
 
 	IEnumerator Die()

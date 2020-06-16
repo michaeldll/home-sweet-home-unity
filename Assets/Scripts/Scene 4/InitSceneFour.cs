@@ -7,6 +7,7 @@ using TMPro;
 public class InitSceneFour : MonoBehaviour
 {
 	private WebSocketMessage _message;
+
 	[SerializeField] private TextToSpeech[] textToSpeechArr;
 	[SerializeField] private TextTyperTalker textTyper = null;
 	[SerializeField] private GameObject textCanvas = null;
@@ -14,6 +15,7 @@ public class InitSceneFour : MonoBehaviour
 	[SerializeField] private Image background = null;
 	[SerializeField] private CrossfadeMixer crossfadeMixer = null;
 	[SerializeField] private CinemachineVirtualCamera cam2 = null;
+
 	void Start()
 	{
 		//black
@@ -49,7 +51,7 @@ public class InitSceneFour : MonoBehaviour
 		toggleTyper(false);
 		fade.FadeIn();
 		//fade music
-		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
+		// crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
 		//send readyForNextScene
 		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"1\"}");
 

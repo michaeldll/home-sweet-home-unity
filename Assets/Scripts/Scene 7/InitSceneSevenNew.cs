@@ -57,7 +57,7 @@ public class InitSceneSevenNew : MonoBehaviour
 		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"1\"}");
 		toggleTyper(false);
 		fade.FadeIn();
-		crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f); //fade music
+		// crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f); //fade music
 		gRotate.enabled = true;
 		textToSpeech.text = GameManager.sceneText;
 		textToSpeech.TrySpeak();
