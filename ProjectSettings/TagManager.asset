@@ -4,7 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - music
+  - music_audio_sources
+  - music_intro
+  - music_avant_chute
+  - music_chute_portable
+  - music_apres_chute
+  - music_fin
   layers:
   - Default
   - TransparentFX

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -394,6 +394,7 @@ GameObject:
   - component: {fileID: 351238718}
   - component: {fileID: 351238722}
   - component: {fileID: 351238728}
+  - component: {fileID: 351238724}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -414,6 +415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fade: {fileID: 351238726}
+  fadeLowPass: {fileID: 351238724}
   crossfadeMixer: {fileID: 351238728}
   objectiveText: {fileID: 1104608809}
   whitePhoneAnimator: {fileID: 1670126225}
@@ -492,6 +494,7 @@ MonoBehaviour:
   objectiveText: {fileID: 1104608809}
   whitePhoneAnimator: {fileID: 1670126225}
   gRotate: {fileID: 351238721}
+  fadeLowPass: {fileID: 351238724}
 --- !u!114 &351238723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,6 +511,19 @@ MonoBehaviour:
   HandTarget: {fileID: 1767404523}
   HandPole: {fileID: 1464602413}
   Attraction: {fileID: 1642437169}
+--- !u!114 &351238724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351238717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d4688309da5048cdaf2759e7966cc2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: f39c6b9b058d34381bdbbac87e28466c, type: 2}
 --- !u!4 &351238725
 Transform:
   m_ObjectHideFlags: 0

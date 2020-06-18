@@ -9,6 +9,7 @@ public class SceneFourManager : MonoBehaviour
 	private Coroutine _loader = null;
 
 	[SerializeField] private Fade fade;
+	[SerializeField] private FadeLowPass fadeLowPass;
 	[SerializeField] private CrossfadeMixer crossfadeMixer;
 
 	void Awake()
@@ -18,8 +19,17 @@ public class SceneFourManager : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetMouseButtonDown(0) && !_isLoading) LoadScene("Fifth Scene");
-		if(GameManager.changedScene && !_isLoading) {GameManager.changedScene = false; LoadScene("Fifth Scene");}
+		if (Input.GetMouseButtonDown(0) && !_isLoading)
+		{
+			LoadScene("Fifth Scene");
+			fadeLowPass.Fade("avant_chute_cutoff", 0.35f);
+		}
+		if (GameManager.changedScene && !_isLoading)
+		{
+			GameManager.changedScene = false;
+			LoadScene("Fifth Scene");
+			fadeLowPass.Fade("avant_chute_cutoff", 0.35f);
+		}
 
 	}
 

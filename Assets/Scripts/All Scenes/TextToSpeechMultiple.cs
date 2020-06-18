@@ -22,7 +22,7 @@ public class TextToSpeechMultiple : MonoBehaviour
 		_gcTextToSpeechInstance.SynthesizeSuccessEvent += _gcTextToSpeech_SynthesizeSuccessEvent;
 		_gcTextToSpeechInstance.SynthesizeFailedEvent += _gcTextToSpeech_SynthesizeFailedEvent;
 
-		Debug.Log("debug");
+		// Debug.Log("debug");
 	}
 
 	#region failed handlers
@@ -51,7 +51,7 @@ public class TextToSpeechMultiple : MonoBehaviour
 			return;
 
 		GameManager.isVoiceLoaded = false;
-		
+
 		//get singleton instance
 		_gcTextToSpeechInstance = GCTextToSpeech.Instance;
 

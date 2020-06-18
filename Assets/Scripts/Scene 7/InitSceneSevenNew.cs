@@ -10,6 +10,7 @@ public class InitSceneSevenNew : MonoBehaviour
 	[SerializeField] private TextTyperTalker textTyper = null;
 	[SerializeField] private GameObject textCanvas = null;
 	[SerializeField] private Fade fade = null;
+	[SerializeField] private FadeLowPass fadeLowPass;
 	[SerializeField] private Image background = null;
 	[SerializeField] private GyroRotate gRotate = null;
 	[SerializeField] private CrossfadeMixer crossfadeMixer = null;
@@ -28,7 +29,7 @@ public class InitSceneSevenNew : MonoBehaviour
 
 		//set text
 		textTyper.text = GameManager.introText;
-		
+
 		gRotate.enabled = false;
 
 		// Debug.LogError("0");
@@ -47,7 +48,7 @@ public class InitSceneSevenNew : MonoBehaviour
 		// Debug.LogError("1");
 		textToSpeech.text = GameManager.introText;
 		textToSpeech.TrySpeak();
-		
+
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
 		// Debug.LogError("2");
 		toggleTyper(true);
@@ -57,7 +58,9 @@ public class InitSceneSevenNew : MonoBehaviour
 		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"1\"}");
 		toggleTyper(false);
 		fade.FadeIn();
-		// crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f); //fade music
+
+		//fade music
+		fadeLowPass.Fade("apres_chute_cutoff", 2.0f, 4000, 601);
 		gRotate.enabled = true;
 		textToSpeech.text = GameManager.sceneText;
 		textToSpeech.TrySpeak();

@@ -13,8 +13,10 @@ public class SceneSixManager : MonoBehaviour
 	private bool _hasTappedTwice = false;
 	private Coroutine _loader = null;
 	private WebSocketMessage _message;
+	private AudioSource[] _musicSources = new AudioSource[5];
 
 	[SerializeField] private Fade fade;
+	[SerializeField] private FadeLowPass fadeLowPass;
 	[SerializeField] private CrossfadeMixer crossfadeMixer;
 	[SerializeField] private Animator fallingAnimator;
 	[SerializeField] private Animator dissolveGroundAnimator;
@@ -30,6 +32,16 @@ public class SceneSixManager : MonoBehaviour
 	void Awake()
 	{
 		GameManager.sixthScene();
+		GetMusic();
+	}
+
+	void GetMusic()
+	{
+		_musicSources[0] = GameObject.FindWithTag("music_intro").GetComponent<AudioSource>();
+		_musicSources[1] = GameObject.FindWithTag("music_avant_chute").GetComponent<AudioSource>();
+		_musicSources[2] = GameObject.FindWithTag("music_chute_portable").GetComponent<AudioSource>();
+		_musicSources[3] = GameObject.FindWithTag("music_apres_chute").GetComponent<AudioSource>();
+		_musicSources[4] = GameObject.FindWithTag("music_fin").GetComponent<AudioSource>();
 	}
 
 	void Update()
@@ -45,6 +57,7 @@ public class SceneSixManager : MonoBehaviour
 				case 2:
 					setObjective(-1);
 					GameManager.startFalling = true;
+					_musicSources[2].Play();
 					break;
 				default:
 					break;
@@ -54,13 +67,15 @@ public class SceneSixManager : MonoBehaviour
 		switch (GameManager.sheepTapped)
 		{
 			case 1:
-				if(!_hasTappedOnce){
+				if (!_hasTappedOnce)
+				{
 					_hasTappedOnce = true;
 					setObjective(5);
 				}
 				break;
 			case 2:
-				if(!_hasTappedTwice){
+				if (!_hasTappedTwice)
+				{
 					_hasTappedTwice = true;
 					setObjective(-1);
 					GameManager.startFalling = true;
@@ -86,7 +101,7 @@ public class SceneSixManager : MonoBehaviour
 			HandleFall();
 		}
 
-		if(GameManager.changedScene && !_isLoading){ GameManager.changedScene = false; LoadScene("Seventh Scene");}
+		if (GameManager.changedScene && !_isLoading) { GameManager.changedScene = false; LoadScene("Seventh Scene"); }
 	}
 	void HandleFall()
 	{
@@ -95,13 +110,14 @@ public class SceneSixManager : MonoBehaviour
 		StartCoroutine(ToggleDelayCamera(true, 0.4f));
 
 		//start shader, turn off phone and send websocket message
+		StartCoroutine(FadeFallingSoundIn(0.5f));
 		StartCoroutine(DelayShaderFadeIn(0.5f));
 		StartCoroutine(ToggleDelayPhoneSpotlight(false, 1.3f));
 		StartCoroutine(SendDropPhone(1.3f));
 
 		//turn on phone, send websocket message, zoom out, and reset shaders
 		StartCoroutine(ToggleDelayPhoneSpotlight(true, 8.5f));
-		StartCoroutine(SendLiftPhone(8.5f));
+		StartCoroutine(AtPhoneOn(8.5f));
 		StartCoroutine(ToggleDelayCamera(false, 11f));
 		StartCoroutine(ResetGroundDissolve(9.25f));
 		StartCoroutine(ResetEnvironmentDissolves(10f));
@@ -110,22 +126,37 @@ public class SceneSixManager : MonoBehaviour
 		//load next scene
 		StartCoroutine(LoadNextScene(15f));
 	}
-
-	public IEnumerator LoadNextScene(float delay){
+	public IEnumerator FadeFallingSoundIn(float delay)
+	{
 		yield return new WaitForSeconds(delay);
+		crossfadeMixer.Crossfade("avant_chute", 2f, "chute_portable");
+	}
+
+	public IEnumerator LoadNextScene(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		_musicSources[1].Stop();
+		_musicSources[2].Stop();
+		fadeLowPass.Fade("apres_chute_cutoff", 0.35f, 600);
 		GameManager.currentInteractionIndex = 0;
 		setObjective(-1);
 		LoadScene("Seventh Scene");
 	}
 
-	public IEnumerator SendDropPhone(float delay){
+	public IEnumerator SendDropPhone(float delay)
+	{
 		yield return new WaitForSeconds(delay);
 		SendMessage("dropPhone", "{\"from\":\"0\", \"to\":\"0\"}");
 	}
 
-	public IEnumerator SendLiftPhone(float delay){
+	public IEnumerator AtPhoneOn(float delay)
+	{
 		yield return new WaitForSeconds(delay);
 		SendMessage("liftPhone", "{\"from\":\"0\", \"to\":\"0\"}");
+
+		yield return new WaitForSeconds(2f);
+		_musicSources[3].Play();
+		crossfadeMixer.Crossfade("chute_portable", 3f, "apres_chute");
 	}
 
 	public IEnumerator ToggleDelayCamera(bool mode, float delay)

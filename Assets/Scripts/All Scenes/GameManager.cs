@@ -10,6 +10,8 @@ public static class ArrayExtensions
 
 public static class GameManager
 {
+	// public static bool devMode = false;
+	public static bool isIntro = true;
 	public static bool isPhoneConnected = false;
 	public static bool isVoiceLoaded = false;
 	public static bool changedScene = false;
@@ -36,7 +38,6 @@ public static class GameManager
 		"SnowflakeSmasher86",
 		"boggybrendan69",
 		"larryisgood20",
-		"boogie2988",
 		"lobbybobby88",
 		"funkybandit",
 		"lincostinko",
@@ -56,13 +57,11 @@ public static class GameManager
 		"Frenchcorpus2",
 		"uprightrashfluke",
 		"demonichockey",
-		"iamthedevil666",
 		"TheEnragedBrunt",
 		"sackoftongues",
 		"littlefish97",
 		"LividKangaroo",
 		"InsistentDiver",
-		"fertilecoomer",
 		"throwaway38",
 		"2honored4u",
 		"zonkedbonus558",
@@ -282,8 +281,7 @@ public static class GameManager
 
 	public static void seventhScene()
 	{
-		Debug.developerConsoleVisible = true;
-		Debug.LogError("I am an Error");
+		// Debug.developerConsoleVisible = true;
 		introText = "And so they lived.";
 		sceneText = $"“Life is more than food, and the body more than clothes” - thought {name}";
 		moonTexts.SetValue("And this somehow felt like something more, beyond just living.", 0);
@@ -291,7 +289,7 @@ public static class GameManager
 		{
 			moonTexts.SetValue("All of his dreams were now at hand's reach - all of it, everything.", 1);
 			moonTexts.SetValue($"{name} would tell himself: \"Man shall not live by bread alone\".", 2);
-			endTexts.SetValue("And then he died.",0); 
+			endTexts.SetValue("And then he died.", 0);
 			endTexts.SetValue("In his lonely house.", 1);
 			endTexts.SetValue("In his lonely street.", 2);
 			endTexts.SetValue("In that lonely part of the world.", 3);

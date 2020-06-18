@@ -1768,6 +1768,7 @@ GameObject:
   - component: {fileID: 236439494}
   - component: {fileID: 236439496}
   - component: {fileID: 236439498}
+  - component: {fileID: 236439492}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -1788,6 +1789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fade: {fileID: 236439494}
+  fadeLowPass: {fileID: 236439492}
   crossfadeMixer: {fileID: 236439498}
 --- !u!114 &236439488
 MonoBehaviour:
@@ -1859,6 +1861,19 @@ MonoBehaviour:
   HandTarget: {fileID: 0}
   HandPole: {fileID: 0}
   Attraction: {fileID: 0}
+--- !u!114 &236439492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236439486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d4688309da5048cdaf2759e7966cc2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: f39c6b9b058d34381bdbbac87e28466c, type: 2}
 --- !u!4 &236439493
 Transform:
   m_ObjectHideFlags: 0
@@ -1926,6 +1941,7 @@ MonoBehaviour:
   textTyper: {fileID: 236439488}
   textCanvas: {fileID: 1347379117}
   fade: {fileID: 236439494}
+  fadeLowPass: {fileID: 236439492}
   background: {fileID: 1093546823}
   crossfadeMixer: {fileID: 236439498}
   cam2: {fileID: 2123547419}

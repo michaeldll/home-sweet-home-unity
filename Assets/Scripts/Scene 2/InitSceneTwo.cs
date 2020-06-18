@@ -7,7 +7,7 @@ using RedBlueGames.Tools.TextTyper;
 public class InitSceneTwo : MonoBehaviour
 {
 	private WebSocketMessage _message;
-
+	private AudioSource[] _musicSources = new AudioSource[5];
 	[SerializeField] private CinemachineVirtualCamera[] cams; //Start cam, Scene cam
 	[SerializeField] private GameObject[] assets; //appt, phone, phone beam, character,
 	[SerializeField] private GameObject[] lights; //spotlight and beam, point light 1, directional light
@@ -31,6 +31,8 @@ public class InitSceneTwo : MonoBehaviour
 
 	void Start()
 	{
+		GetMusic();
+
 		//black
 		mainCamera.backgroundColor = new Color(0f, 0f, 0f, 1f);
 
@@ -53,9 +55,23 @@ public class InitSceneTwo : MonoBehaviour
 		StartCoroutine(InitPartOne());
 	}
 
-	void Update(){
-		if(GameManager.hasSlid) StartCoroutine(InitPartTwo());
+	void Update()
+	{
+		if (GameManager.hasSlid || Input.GetKey(KeyCode.DownArrow))
+		{
+			StartCoroutine(InitPartTwo());
+		}
 	}
+
+	void GetMusic()
+	{
+		_musicSources[0] = GameObject.FindWithTag("music_intro").GetComponent<AudioSource>();
+		_musicSources[1] = GameObject.FindWithTag("music_avant_chute").GetComponent<AudioSource>();
+		_musicSources[2] = GameObject.FindWithTag("music_chute_portable").GetComponent<AudioSource>();
+		_musicSources[3] = GameObject.FindWithTag("music_apres_chute").GetComponent<AudioSource>();
+		_musicSources[4] = GameObject.FindWithTag("music_fin").GetComponent<AudioSource>();
+	}
+
 	void toggleGameObjects(GameObject[] gObjects, bool toggle)
 	{
 		foreach (var gObject in gObjects)
@@ -103,6 +119,9 @@ public class InitSceneTwo : MonoBehaviour
 		//turn on phone
 		assets[2].SetActive(true);
 		setObjective(-1);
+		//fade music
+		_musicSources[1].Play();
+		crossfadeMixer.Crossfade("intro", 1.5f, "avant_chute");
 
 		yield return new WaitForSeconds(0.6f);
 		//show intro animation
@@ -115,8 +134,6 @@ public class InitSceneTwo : MonoBehaviour
 		assets[0].SetActive(true);
 		//bg yellow
 		mainCamera.backgroundColor = new Color(0.82f, 0.6979567f, 0.51168f, 1f);
-		//fade music
-		// crossfadeMixer.CrossfadeGroups("volPadAll", "volPadLow", 1f);
 		//disable anim
 		titleAnimation.SetActive(false);
 		//show logo
@@ -125,9 +142,13 @@ public class InitSceneTwo : MonoBehaviour
 		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"0\"}");
 		//talk
 		textToSpeechArr[2].enabled = true;
+		//fade
+		crossfadeMixer.Crossfade("avant_chute", 3f, null, 1, 0.65f);
+		GameManager.isIntro = false;
 
 		yield return new WaitForSeconds(8.5f);
 		setObjective(1);
+		_musicSources[0].Stop();
 	}
 
 	void setObjective(int objectiveIndex)

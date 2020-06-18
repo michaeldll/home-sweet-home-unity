@@ -5,40 +5,34 @@ using UnityEngine.Audio;
 public class CrossfadeMixer : MonoBehaviour
 {
 
-	public AudioMixer mixer;
-	public bool fading;
+	[SerializeField] private AudioMixer mixer;
+	[SerializeField] private bool fading;
 
-	public void CrossfadeGroups(string vol1, string vol2, float duration)
+	public void Crossfade(string vol1, float duration, string vol2 = null, float startVolume = 1f, float endVolume = 0.0001f)
 	{
 		if (!fading)
 		{
-			StartCoroutine(Crossfade(vol1, vol2, duration));
+			StartCoroutine(CrossfadeCoroutine(vol1, duration, vol2, startVolume, endVolume));
 		}
 	}
 
-	IEnumerator Crossfade(string vol1, string vol2, float fadeTime)
+	IEnumerator CrossfadeCoroutine(string vol1, float duration, string vol2, float startVolume, float endVolume)
 	{
 		fading = true;
 		float currentTime = 0;
 
-		while (currentTime <= fadeTime)
+		while (currentTime <= duration)
 		{
 			currentTime += Time.deltaTime;
-
-			mixer.SetFloat(vol1, Mathf.Log10(Mathf.Lerp(1, 0.0001f, currentTime / fadeTime)) * 20);
-			if (vol2 == "volPadHigh")
-			{
-				mixer.SetFloat(vol2, Mathf.Log10(Mathf.Lerp(0.0001f, 0.6f, currentTime / fadeTime)) * 20);
-			}
-			else
-			{
-				mixer.SetFloat(vol2, Mathf.Log10(Mathf.Lerp(0.0001f, 1, currentTime / fadeTime)) * 20);
-			}
+			//Debug.Log(vol2);
+			//Debug.Log(endVolume);
+			//Debug.Log(startVolume);
+			mixer.SetFloat(vol1, Mathf.Log10(Mathf.Lerp(startVolume, endVolume, currentTime / duration)) * 20);
+			if (vol2 != null) mixer.SetFloat(vol2, Mathf.Log10(Mathf.Lerp(endVolume, startVolume, currentTime / duration)) * 20);
 
 			yield return null;
 		}
 
 		fading = false;
-
 	}
 }

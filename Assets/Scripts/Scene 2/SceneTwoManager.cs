@@ -12,10 +12,11 @@ public class SceneTwoManager : MonoBehaviour
 	[SerializeField] private CrossfadeMixer crossfadeMixer;
 	[SerializeField] private float crossfadeDuration = 4.0f;
 	[SerializeField] private Fade fade;
+	[SerializeField] private FadeLowPass fadeLowPass;
 	[SerializeField] private GameObject canvasUI = null;
 	[SerializeField] private TextMeshProUGUI objectiveText = null;
 	[SerializeField] private Animator whitePhoneAnimator = null;
-	
+
 	void Awake()
 	{
 		_message = new WebSocketMessage();
@@ -24,15 +25,26 @@ public class SceneTwoManager : MonoBehaviour
 
 	void Update()
 	{
-		if (GameManager.changedScene && !_isLoading) { 
+		if (GameManager.changedScene && !_isLoading || Input.GetMouseButtonDown(1) && !_isLoading)
+		{
 			GameManager.changedScene = false;
 			setObjective(-1);
 			LoadScene("Third Scene");
+			fadeLowPass.Fade("avant_chute_cutoff", 0.35f);
 		}
 
-		if(Input.GetMouseButtonDown(1)){
-			SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"0\"}");
-		}
+		// if (GameManager.changedScene && !_isLoading || Input.GetMouseButtonDown(2) && !_isLoading)
+		// {
+		// 	// GameManager.changedScene = false;
+		// 	// setObjective(-1);
+		// 	// LoadScene("Third Scene");
+		// 	fadeLowPass.Fade("avant_chute_cutoff", 1.0f, 2800, 450);
+		// }
+
+		// if (Input.GetMouseButtonDown(1))
+		// {
+		// 	SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"0\"}");
+		// }
 	}
 
 	void setObjective(int objectiveIndex)

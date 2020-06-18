@@ -1883,6 +1883,7 @@ GameObject:
   - component: {fileID: 534163461}
   - component: {fileID: 534163460}
   - component: {fileID: 534163440}
+  - component: {fileID: 534163441}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -1905,6 +1906,19 @@ MonoBehaviour:
   text: And so they lived.
   delay: 0.064
   textTyperComponent: {fileID: 239775617}
+--- !u!114 &534163441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534163439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d4688309da5048cdaf2759e7966cc2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: f39c6b9b058d34381bdbbac87e28466c, type: 2}
 --- !u!114 &534163443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1923,6 +1937,7 @@ MonoBehaviour:
   _yUpperLimit: 45
   _zLowerLimit: -10
   _zUpperLimit: 40
+  turnBackController: {fileID: 0}
 --- !u!114 &534163444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2054,6 +2069,7 @@ MonoBehaviour:
   whitePhoneAnimator: {fileID: 1520481107}
   whiteUICanvasGroup: {fileID: 27167471}
   greyUICanvasGroup: {fileID: 1829134016}
+  crossfadeMixer: {fileID: 534163452}
 --- !u!114 &534163461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2070,6 +2086,7 @@ MonoBehaviour:
   textTyper: {fileID: 534163440}
   textCanvas: {fileID: 239775615}
   fade: {fileID: 534163444}
+  fadeLowPass: {fileID: 534163441}
   background: {fileID: 1382522675}
   gRotate: {fileID: 534163443}
   crossfadeMixer: {fileID: 534163452}

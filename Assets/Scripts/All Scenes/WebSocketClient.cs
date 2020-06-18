@@ -83,7 +83,8 @@ public class WebSocketClient : MonoBehaviour
 				// Debug.Log(WebSocketMessageContentGyro._y);
 				// Debug.Log(WebSocketMessageContentGyro._z);
 			}
-			if(webSocketMessage.id == GameManager.name){
+			// if(webSocketMessage.id == GameManager.name){
+			if(true){
 				GameManager.isPhoneConnected = true;
 				switch (webSocketMessage.type)
 				{
@@ -107,7 +108,6 @@ public class WebSocketClient : MonoBehaviour
 						break;
 
 					case "tapSheep":
-						Debug.Log("tap");
 						GameManager.sheepTapped += 1;
 						break;
 

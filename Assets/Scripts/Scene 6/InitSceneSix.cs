@@ -16,6 +16,7 @@ public class InitSceneSix : MonoBehaviour
 	[SerializeField] private CrossfadeMixer crossfadeMixer = null;
 	[SerializeField] private TextMeshProUGUI objectiveText = null;
 	[SerializeField] private Animator whitePhoneAnimator = null;
+	[SerializeField] private FadeLowPass fadeLowPass;
 	void Start()
 	{
 		//black
@@ -52,7 +53,7 @@ public class InitSceneSix : MonoBehaviour
 		fade.FadeIn();
 
 		//fade music
-		// crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
+		fadeLowPass.Fade("avant_chute_cutoff", 2.0f, 4000, 451);
 		gRotate.enabled = true;
 
 		//send readyForNextScene

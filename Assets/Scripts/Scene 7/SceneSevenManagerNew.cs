@@ -14,6 +14,7 @@ public class SceneSevenManagerNew : MonoBehaviour
 	private bool _hasJumpedOnce = false;
 	private bool _hasJumpedTwice = false;
 	private bool _hasJumpedThrice = false;
+	private AudioSource[] _musicSources = new AudioSource[5];
 
 	[SerializeField] private TextToSpeechMultiple textToSpeech;
 	[SerializeField] private CinemachineVirtualCamera[] cams;
@@ -29,10 +30,12 @@ public class SceneSevenManagerNew : MonoBehaviour
 	[SerializeField] private Animator whitePhoneAnimator = null;
 	[SerializeField] private CanvasGroup whiteUICanvasGroup = null;
 	[SerializeField] private CanvasGroup greyUICanvasGroup = null;
+	[SerializeField] private CrossfadeMixer crossfadeMixer = null;
 
 	void Awake()
 	{
 		GameManager.seventhScene();
+		GetMusic();
 		foreach (var field in usernameFields)
 		{
 			field.SetText(GameManager.name);
@@ -44,37 +47,38 @@ public class SceneSevenManagerNew : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			_clicks += 1;
+		// if (Input.GetMouseButtonDown(0))
+		// {
+		// 	_clicks += 1;
 
-			switch (_clicks)
-			{
-				case 1:
-					setObjective(7);
-					textToSpeech.text = GameManager.moonTexts[0];
-					textToSpeech.TrySpeak();
-					break;
-				case 2:
-					setObjective(8);
-					textToSpeech.text = GameManager.moonTexts[1];
-					textToSpeech.TrySpeak();	
-					break;
-				case 3:
-					setObjective(-1);
-					textToSpeech.text = GameManager.moonTexts[2];
-					textToSpeech.TrySpeak();
-					StartCoroutine(Die());
-					break;
-				default:
-					break;
-			}
-		}
+		// 	switch (_clicks)
+		// 	{
+		// 		case 1:
+		// 			setObjective(7);
+		// 			textToSpeech.text = GameManager.moonTexts[0];
+		// 			textToSpeech.TrySpeak();
+		// 			break;
+		// 		case 2:
+		// 			setObjective(8);
+		// 			textToSpeech.text = GameManager.moonTexts[1];
+		// 			textToSpeech.TrySpeak();
+		// 			break;
+		// 		case 3:
+		// 			setObjective(-1);
+		// 			textToSpeech.text = GameManager.moonTexts[2];
+		// 			textToSpeech.TrySpeak();
+		// 			StartCoroutine(Die());
+		// 			break;
+		// 		default:
+		// 			break;
+		// 	}
+		// }
 
 		switch (GameManager.jumps)
 		{
 			case 1:
-				if(!_hasJumpedOnce){
+				if (!_hasJumpedOnce)
+				{
 					_hasJumpedOnce = true;
 					setObjective(7);
 					textToSpeech.text = GameManager.moonTexts[0];
@@ -82,15 +86,17 @@ public class SceneSevenManagerNew : MonoBehaviour
 				}
 				break;
 			case 2:
-				if(!_hasJumpedTwice){
+				if (!_hasJumpedTwice)
+				{
 					_hasJumpedTwice = true;
 					setObjective(8);
 					textToSpeech.text = GameManager.moonTexts[1];
-					textToSpeech.TrySpeak();	
+					textToSpeech.TrySpeak();
 				}
 				break;
 			case 3:
-				if(!_hasJumpedThrice){
+				if (!_hasJumpedThrice)
+				{
 					_hasJumpedThrice = true;
 					setObjective(-1);
 					textToSpeech.text = GameManager.moonTexts[2];
@@ -137,6 +143,8 @@ public class SceneSevenManagerNew : MonoBehaviour
 		textToSpeech.text = GameManager.endTexts[0];
 		textToSpeech.TrySpeak();
 		cams[1].m_Priority = 2;
+		_musicSources[4].Play();
+		crossfadeMixer.Crossfade("apres_chute", 1.5f, "fin");
 
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
 		yield return new WaitForSeconds(2.0f);
@@ -147,16 +155,17 @@ public class SceneSevenManagerNew : MonoBehaviour
 		yield return new WaitForSeconds(1.5f);
 		textToSpeech.text = GameManager.endTexts[2];
 		textToSpeech.TrySpeak();
-		
+
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
 		yield return new WaitForSeconds(1.5f);
+		_musicSources[3].Stop();
 		textToSpeech.text = GameManager.endTexts[3];
 		textToSpeech.TrySpeak();
 
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
 		yield return new WaitForSeconds(5f);
 		textToSpeech.text = GameManager.endTexts[4];
-		textToSpeech.TrySpeak(); 
+		textToSpeech.TrySpeak();
 
 		yield return new WaitUntil(() => GameManager.isVoiceLoaded == true);
 		yield return new WaitForSeconds(3f);
@@ -173,6 +182,15 @@ public class SceneSevenManagerNew : MonoBehaviour
 			yield return new WaitForSeconds(4.0f);
 			_showEndingFeed = true;
 		}
+	}
+
+	void GetMusic()
+	{
+		_musicSources[0] = GameObject.FindWithTag("music_intro").GetComponent<AudioSource>();
+		_musicSources[1] = GameObject.FindWithTag("music_avant_chute").GetComponent<AudioSource>();
+		_musicSources[2] = GameObject.FindWithTag("music_chute_portable").GetComponent<AudioSource>();
+		_musicSources[3] = GameObject.FindWithTag("music_apres_chute").GetComponent<AudioSource>();
+		_musicSources[4] = GameObject.FindWithTag("music_fin").GetComponent<AudioSource>();
 	}
 
 	void setObjective(int objectiveIndex)

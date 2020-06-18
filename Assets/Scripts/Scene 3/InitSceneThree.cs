@@ -16,6 +16,7 @@ public class InitSceneThree : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI objectiveText = null;
 	[SerializeField] private Animator whitePhoneAnimator = null;
 	[SerializeField] private GyroRotate gRotate = null;
+	[SerializeField] private FadeLowPass fadeLowPass;
 
 	void Start()
 	{
@@ -53,7 +54,7 @@ public class InitSceneThree : MonoBehaviour
 		fade.FadeIn();
 
 		//fade music
-		// crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
+		fadeLowPass.Fade("avant_chute_cutoff", 2.0f, 4000, 451);
 		//send readyForNextScene
 		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"1\"}");
 		gRotate.enabled = true;

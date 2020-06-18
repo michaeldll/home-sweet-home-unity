@@ -9,6 +9,7 @@ public class SceneThreeManager : MonoBehaviour
 	private Coroutine _loader = null;
 	private WebSocketMessage _message;
 	[SerializeField] private Fade fade;
+	[SerializeField] private FadeLowPass fadeLowPass;
 	[SerializeField] private CrossfadeMixer crossfadeMixer;
 	[SerializeField] private TextMeshProUGUI objectiveText = null;
 	[SerializeField] private Animator whitePhoneAnimator = null;
@@ -23,15 +24,17 @@ public class SceneThreeManager : MonoBehaviour
 		{
 			setObjective(-1);
 			LoadScene("Fourth Scene");
+			fadeLowPass.Fade("avant_chute_cutoff", 0.35f);
 		}
 
-		if(GameManager.changedScene && !_isLoading)
+		if (GameManager.changedScene && !_isLoading)
 		{
 			GameManager.changedScene = false;
 			setObjective(-1);
 			LoadScene("Fourth Scene");
+			fadeLowPass.Fade("avant_chute_cutoff", 0.35f);
 		}
-		
+
 		// if(Input.GetMouseButtonDown(1)){
 		// 	SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"0\"}");
 		// }

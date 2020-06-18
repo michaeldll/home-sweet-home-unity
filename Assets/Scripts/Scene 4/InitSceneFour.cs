@@ -12,6 +12,7 @@ public class InitSceneFour : MonoBehaviour
 	[SerializeField] private TextTyperTalker textTyper = null;
 	[SerializeField] private GameObject textCanvas = null;
 	[SerializeField] private Fade fade = null;
+	[SerializeField] private FadeLowPass fadeLowPass;
 	[SerializeField] private Image background = null;
 	[SerializeField] private CrossfadeMixer crossfadeMixer = null;
 	[SerializeField] private CinemachineVirtualCamera cam2 = null;
@@ -51,7 +52,7 @@ public class InitSceneFour : MonoBehaviour
 		toggleTyper(false);
 		fade.FadeIn();
 		//fade music
-		// crossfadeMixer.CrossfadeGroups("volPadHigh", "volPadLow", 2f);
+		fadeLowPass.Fade("avant_chute_cutoff", 2.0f, 4000, 451);
 		//send readyForNextScene
 		SendMessage("readyForNextScene", "{\"from\":\"0\", \"to\":\"1\"}");
 
